@@ -141,44 +141,6 @@ export default function ProductPage({ params }) {
                 </ReactMarkdown>
             </Prose>
         </div>
-        
-         {/* Community Feedback */}
-         <div className="mb-16">
-             <h2 className="text-2xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-3xl font-mono mb-8 border-b border-zinc-200 dark:border-zinc-700 pb-4">
-                Community Feedback
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {product.feedbacks && product.feedbacks.length > 0 ? (
-                    product.feedbacks.map((feedback, idx) => (
-                         <div key={idx} className="bg-zinc-50 dark:bg-zinc-800/50 p-4 rounded-xl border border-zinc-100 dark:border-zinc-700/50">
-                            <div className="flex items-center gap-2 mb-2 text-yellow-400">
-                                {[...Array(5)].map((_, i) => (
-                                    <FontAwesomeIcon 
-                                        key={i} 
-                                        icon={faStar} 
-                                        className={i < feedback.rating ? "text-yellow-400" : "text-zinc-300 dark:text-zinc-600"}
-                                        size="xs"
-                                    />
-                                ))}
-                            </div>
-                            <p className="text-zinc-600 dark:text-zinc-300 italic mb-4 font-mono text-sm">
-                                &quot;{feedback.comment}&quot;
-                            </p>
-                            <div className="flex items-center gap-3 text-xs text-zinc-500 dark:text-zinc-400 font-bold font-mono">
-                                <div className="w-6 h-6 rounded-full bg-zinc-200 dark:bg-zinc-700 flex items-center justify-center">
-                                     <FontAwesomeIcon icon={faUsers} size="2xs" />
-                                </div>
-                                {feedback.user}
-                            </div>
-                         </div>
-                    ))
-                ): (
-                     <p className="text-zinc-500 dark:text-zinc-400 font-mono italic col-span-full">
-                        No reviews yet. Be the first to try it out!
-                    </p>
-                )}
-            </div>
-         </div>
          
     </Container>
   );
