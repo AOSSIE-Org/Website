@@ -11,6 +11,7 @@ export function CardProduct({ product }) {
   return (
     <Link
           href={`/projects/${product.slug}`}
+          className="block h-full"
     >
     <motion.div 
       initial={{ opacity: 0, y: 30 }}
@@ -18,7 +19,7 @@ export function CardProduct({ product }) {
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
       whileHover={{ y: -5 }}
-      className="group relative flex flex-col items-center p-6 bg-white dark:bg-zinc-800/50 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-zinc-200 dark:border-zinc-700 hover:border-[#00843D] dark:hover:border-yellow-400"
+      className="group relative flex flex-col items-center p-6 bg-white dark:bg-zinc-800/50 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-zinc-200 dark:border-zinc-700 hover:border-[#00843D] dark:hover:border-yellow-400 h-full"
     >
       <div className="relative w-24 h-24 mb-4">
         <Image
