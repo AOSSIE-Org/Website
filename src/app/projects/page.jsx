@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import Grid from '@mui/material/Grid'
 import MuiCard from '@mui/material/Card'
@@ -15,7 +16,8 @@ import projects from '@/helper/projects'
 import { CardProduct } from '@/components/products/CardProduct'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDiscord, faGithub } from '@fortawesome/free-brands-svg-icons'
-import { motion } from 'framer-motion'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { motion, AnimatePresence } from 'framer-motion'
 
 function LinkIcon(props) {
   return (
@@ -168,6 +170,8 @@ const styles = {
 }
 
 export default function Projects() {
+  const [searchQuery, setSearchQuery] = useState('')
+
   const readyToDownload = projects.filter(
     (p) => p.category === 'Ready to download'
   )
@@ -176,9 +180,20 @@ export default function Projects() {
   )
   const ongoing = projects.filter((p) => p.category === 'Ongoing')
 
-  const sortedProjects = [...projects].sort((a, b) =>
-    (a.name || '').localeCompare(b.name || '', undefined, { sensitivity: 'base' })
-  )
+  const sortedProjects = useMemo(() => {
+    return [...projects].sort((a, b) =>
+      (a.name || '').localeCompare(b.name || '', undefined, { sensitivity: 'base' })
+    )
+  }, [])
+
+  const filteredProjects = useMemo(() => {
+    const query = searchQuery.toLowerCase().trim()
+    if (!query) return sortedProjects
+
+    return sortedProjects.filter((project) =>
+      (project.name || '').toLowerCase().includes(query)
+    )
+  }, [searchQuery, sortedProjects])
 
   return (
     <>
@@ -202,12 +217,56 @@ export default function Projects() {
                 Free, open-source, and built by a global community of developers, designers, researchers, and innovators.
               </p>
             </motion.div>
+
+            {/* Search Bar */}
+            <div className="mt-8 mb-12 flex justify-center">
+              <div className="relative w-full max-w-xl group">
+                <label htmlFor="project-search" className="sr-only">
+                  Search projects by name
+                </label>
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-10">
+                  <FontAwesomeIcon icon={faSearch} className="h-4 w-4 text-zinc-400 group-focus-within:text-[#00843D] dark:group-focus-within:text-yellow-400 transition-colors duration-300" />
+                </div>
+                <input
+                  id="project-search"
+                  type="search"
+                  aria-describedby="project-search-status"
+                  className="block w-full pl-11 pr-4 py-3.5 border border-zinc-200 dark:border-zinc-700/50 rounded-2xl leading-5 bg-zinc-50/50 dark:bg-zinc-800/50 text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#00843D] dark:focus:ring-yellow-400/50 focus:border-transparent sm:text-sm transition-all duration-300 shadow-sm hover:shadow-md backdrop-blur-sm"
+                  placeholder="Search for projects..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              </div>
+            </div>
+            <p id="project-search-status" className="sr-only" aria-live="polite">
+              {filteredProjects.length === 0
+                ? `No projects found matching ${searchQuery.trim()}.`
+                : `${filteredProjects.length} project${filteredProjects.length === 1 ? '' : 's'} shown.`}
+            </p>
           </div>
 
           <div className="mb-16 grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-3">
-            {sortedProjects.map((product) => (
-              <CardProduct key={product.slug} product={product} />
-            ))}
+            <AnimatePresence mode="popLayout">
+              {filteredProjects.map((product) => (
+                <motion.div
+                  layout
+                  key={product.slug}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <CardProduct product={product} />
+                </motion.div>
+              ))}
+            </AnimatePresence>
+            {filteredProjects.length === 0 && (
+              <div className="col-span-full py-20 text-center">
+                <p className="text-xl text-zinc-500 dark:text-zinc-400 font-mono">
+                  No projects found matching &quot;{searchQuery}&quot;
+                </p>
+              </div>
+            )}
           </div>
 
           {/* 
