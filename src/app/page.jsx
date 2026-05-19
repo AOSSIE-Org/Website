@@ -42,7 +42,7 @@ export default function Home() {
         <div className="relative">
 
           {/* Background Image */}
-          <div className="hidden absolute md:block z-0 bg-[url('../images/background.png')] dark:bg-[url('../images/background-dark.png')] right-0 top-[-230px] w-full h-[-webkit-fill-available] bg-cover bg-center mb-20 pointer-events-none"></div>
+          <div className="hidden absolute lg:block z-0 bg-[url('../images/background.png')] dark:bg-[url('../images/background-dark.png')] right-0 top-[-230px] w-full h-[-webkit-fill-available] bg-cover bg-center mb-20 pointer-events-none"></div>
 
           {/* Main Content */}
           <div className="flex flex-col lg:flex-row relative z-10 mb-16 gap-12 items-center">
@@ -67,7 +67,7 @@ export default function Home() {
                   initial={{ opacity: 0, x: 50 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
-                  className="font-mono text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-[#00843d] md:text-[#FED41E] dark:text-[#FED41E] md:dark:text-black leading-tight relative lg:-top-[30px] text-center lg:text-left"
+                  className="font-mono text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-[#00843d] md:text-[#FED41E] dark:text-[#FED41E] lg:dark:text-black leading-tight relative lg:-top-[30px] text-center pb-8 lg:text-left"
                 >
                   We Innovate <br /> We Educate
                 </motion.h1>
@@ -75,7 +75,7 @@ export default function Home() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.8, delay: 0.4 }}
-                  className="mt-8 font-mono text-xl leading-8 text-zinc-600 dark:text-zinc-300 md:dark:text-[#FED41E]/90 bg-white/50 md:bg-transparent dark:bg-zinc-900/50 md:dark:bg-transparent backdrop-blur-sm md:backdrop-blur-none rounded-xl p-4 md:p-0 text-center lg:text-left"
+                  className="mt-8 font-mono text-xl leading-8 text-zinc-500 lg:text-zinc-800 dark:text-zinc-300 lg:dark:text-[#FED41E]/90 bg-white/50 md:bg-transparent dark:bg-zinc-900/50 md:dark:bg-transparent backdrop-blur-sm md:backdrop-blur-none rounded-xl p-4 md:p-0 text-center lg:text-left"
                 >
                   We are an Australian not-for-profit umbrella organization for
                   open-source projects. We believe the open-source philosophy
@@ -92,7 +92,7 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Contact by Mail"
-                    className="text-zinc-500 transition hover:text-[#00843D] dark:text-zinc-400 dark:hover:text-yellow-400"
+                    className="text-zinc-500 lg:text-zinc-800 transition hover:text-[#00843D] dark:text-zinc-400 dark:hover:text-yellow-400"
                     href="mailto:aossie.oss@gmail.com"
                   >
                     <FontAwesomeIcon icon={faEnvelope} size="2xl" />
@@ -101,7 +101,7 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Follow on GitHub"
-                    className="text-zinc-500 transition hover:text-[#00843D] dark:text-zinc-400 dark:hover:text-yellow-400"
+                    className="text-zinc-500 lg:text-zinc-800 transition hover:text-[#00843D] dark:text-zinc-400 dark:hover:text-yellow-400"
                     href="https://github.com/AOSSIE-Org"
                   >
                     <FontAwesomeIcon icon={faGithub} size="2xl" />
@@ -110,7 +110,7 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Join on Discord"
-                    className="text-zinc-500 transition hover:text-[#00843D] dark:text-zinc-400 dark:hover:text-yellow-400"
+                    className="text-zinc-500 lg:text-zinc-800 transition hover:text-[#00843D] dark:text-zinc-400 dark:hover:text-yellow-400"
                     href="https://discord.gg/hjUhu33uAn"
                   >
                     <FontAwesomeIcon icon={faDiscord} size="2xl" />
@@ -119,7 +119,7 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Follow on LinkedIn"
-                    className="text-zinc-500 transition hover:text-[#00843D] dark:text-zinc-400 dark:hover:text-yellow-400"
+                    className="text-zinc-500 lg:text-zinc-800 transition hover:text-[#00843D] dark:text-zinc-400 dark:hover:text-yellow-400"
                     href="https://www.linkedin.com/company/aossie/"
                   >
                     <FontAwesomeIcon icon={faLinkedin} size="2xl" />
@@ -128,7 +128,7 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Follow on X (Twitter)"
-                    className="text-zinc-500 transition hover:text-[#00843D] dark:text-zinc-400 dark:hover:text-yellow-400"
+                    className="text-zinc-500 lg:text-zinc-800 transition hover:text-[#00843D] dark:text-zinc-400 dark:hover:text-yellow-400"
                     href="https://x.com/aossie_org"
                   >
                     <FontAwesomeIcon icon={faXTwitter} size="2xl" />
@@ -137,7 +137,7 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Subscribe on YouTube"
-                    className="text-zinc-500 transition hover:text-[#00843D] dark:text-zinc-400 dark:hover:text-yellow-400"
+                    className="text-zinc-500 lg:text-zinc-800 transition hover:text-[#00843D] dark:text-zinc-400 dark:hover:text-yellow-400"
                     href="https://www.youtube.com/@AOSSIE-Org"
                   >
                     <FontAwesomeIcon icon={faYoutube} size="2xl" />
@@ -194,13 +194,13 @@ export default function Home() {
                 </svg>
               </div>
               <div className="col-span-8 mt-3 self-center lg:col-start-2">
-                <h1 className="font-mono pl-3 text-5xl font-black capitalize tracking-tighter text-zinc-800 dark:text-white">
+                <h1 className="font-mono pl-3 text-5xl font-black capitalize tracking-tighter text-zinc-500 lg:text-zinc-800 dark:text-white">
                   Our Projects
                 </h1>
               </div>
             </div>
 
-            <p className=" font-mono text-lg text-zinc-600 dark:text-zinc-400 text-center ">
+            <p className=" font-mono text-lg text-zinc-500 lg:text-zinc-800 dark:text-zinc-400 text-center ">
               Our Projects span a wide range of themes, such as: 
               open money; decentralized economic and financial stability; 
               trust; education; sustainability; communication; governance and management; 
