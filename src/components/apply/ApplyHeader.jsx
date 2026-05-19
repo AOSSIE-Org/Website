@@ -1,9 +1,8 @@
 'use client'
 
 import { useRef, useMemo } from 'react'
-import { useInView } from 'framer-motion'
+import { useInView, motion, useScroll, useTransform } from 'framer-motion'
 import { Container } from '@/components/shared/Container'
-import { motion, useScroll, useTransform } from 'framer-motion'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDiscord, faGithub } from '@fortawesome/free-brands-svg-icons'
 import { faLightbulb, faComments, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
@@ -89,27 +88,27 @@ export function ApplyHeader({ children }) {
                         {/* background track line */}
                         <div className="absolute left-[-1px] top-0 h-full w-[3px] rounded-full bg-zinc-200 dark:bg-zinc-700" />
 
-                        {/* animated yellow fill */}
+                        {/* animated green and yellow fill */}
                         <motion.div
-                            className="absolute left-[-1px] top-0 w-[3px] rounded-full origin-top bg-yellow-400"
+                            className="absolute left-[-1px] top-0 w-[3px] rounded-full origin-top bg-[#00843D] dark:bg-yellow-400"
                             style={{ height: lineProgress }}
                         />
 
                         {/* travelling dot with pulsing rings */}
                         <motion.div
                             ref={dotRef}
-                            className="absolute -left-[7px] w-[15px] h-[15px] rounded-full z-10 bg-yellow-400"
+                            className="absolute -left-[7px] w-[15px] h-[15px] rounded-full z-10 bg-[#00843D] dark:bg-yellow-400"
                             style={{ top: lineProgress }}
                         >
                             <motion.span
                                 animate={isDotInView ? { scale: [1, 2.5, 1], opacity: [0.7, 0, 0.7] } : { scale: 1, opacity: 0 }}
                                 transition={{ duration: 1.6, repeat: isDotInView ? Infinity : 0, ease: "easeOut" }}
-                                className="absolute inset-0 rounded-full bg-yellow-400"
+                                className="absolute inset-0 rounded-full bg-[#00843D] dark:bg-yellow-400"
                             />
                             <motion.span
                                 animate={isDotInView ? { scale: [1, 2, 1], opacity: [0.4, 0, 0.4] } : { scale: 1, opacity: 0 }}
                                 transition={{ duration: 1.6, repeat: isDotInView ? Infinity : 0, ease: "easeOut", delay: 0.5 }}
-                                className="absolute inset-0 rounded-full bg-yellow-300"
+                                className="absolute inset-0 rounded-full bg-[#00843D] dark:bg-yellow-400"
                             />
                         </motion.div>
 
