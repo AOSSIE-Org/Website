@@ -37,8 +37,8 @@ export function IdeaCard({ article, year }) {
         <CardContent sx={{ flexGrow: 1, textAlign: 'center' }}>
           <Typography
             variant="h5"
-            className="font-bold mt-6 text-2xl font-mono text-green-600 dark:text-yellow-400"
-            sx={{ fontFamily: 'Nunito-Bold', color: '#3c982c', textAlign: 'center' }}
+            className="font-bold mt-6 text-2xl font-mono text-green-600 dark:text-yellow-400 text-center"
+            // sx={{color: '#3c982c', textAlign: 'center' }}
           >
             {article.title}
           </Typography>
@@ -67,11 +67,11 @@ export function IdeaCard({ article, year }) {
                 component={motion.a}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                sx={{
-                    color: '#3c982c',
-                    textTransform: 'none',
-                }}
-                className="font-bold font-mono text-green-600 dark:text-yellow-400 text-lg leading-7 text-center"
+                // sx={{
+                //     color: '#3c982c',
+                //     textTransform: 'none',
+                // }}
+                className="font-bold font-mono text-green-600 dark:text-yellow-400 text-lg leading-7 text-center normal-case"
             >
                 Know more <ArrowForwardIcon sx={{ width: 20, height: 20 }} />
             </Button>
