@@ -23,7 +23,7 @@ export function IdeaCard({ article, year }) {
         className="dark:bg-[#2A2A2A] dark:border-white"
         whileHover={{ y: -5, boxShadow: '0 10px 20px rgba(0,0,0,0.2)' }}
         sx={{
-          height: 350,
+          height: 270,
           borderRadius: 2,
           border: '1px solid',
           borderColor: '#3c982c', // Hardcoded color from original
@@ -37,7 +37,7 @@ export function IdeaCard({ article, year }) {
         <CardContent sx={{ flexGrow: 1, textAlign: 'center' }}>
           <Typography
             variant="h5"
-            className="mt-6 text-2xl font-mono text-green-600 dark:text-yellow-400"
+            className="font-bold mt-6 text-2xl font-mono text-green-600 dark:text-yellow-400"
             sx={{ fontFamily: 'Nunito-Bold', color: '#3c982c', textAlign: 'center' }}
           >
             {article.title}
@@ -71,7 +71,7 @@ export function IdeaCard({ article, year }) {
                     color: '#3c982c',
                     textTransform: 'none',
                 }}
-                className="font-Nunito-Bold text-green-600 dark:text-yellow-400 text-lg leading-7 text-center"
+                className="font-bold font-mono text-green-600 dark:text-yellow-400 text-lg leading-7 text-center"
             >
                 Know more <ArrowForwardIcon sx={{ width: 20, height: 20 }} />
             </Button>
