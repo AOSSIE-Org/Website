@@ -38,7 +38,7 @@ export function IdeasDisplay({ ideasData }) {
             whileInView={{ opacity: 1 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="group order-2 mx-auto items-center overflow-hidden rounded-lg bg-zinc-800 px-8 py-3 text-white focus:outline-none dark:bg-white dark:text-black font-mono font-semibold transition-transform"
+            className="group order-2 mx-auto items-center overflow-hidden rounded-lg bg-[#00843D] px-8 py-3 text-white transition-all duration-200 hover:bg-[#006e32] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00843D] focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:bg-yellow-400 dark:text-zinc-900 dark:hover:bg-yellow-500 dark:focus-visible:ring-yellow-400 dark:focus-visible:ring-offset-zinc-950 font-mono font-semibold"
           >
             Show All Ideas
           </motion.button>
