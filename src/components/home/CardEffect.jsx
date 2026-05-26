@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 
-export function CardEffect({ heading, content, logo }) {
+export function CardEffect({ heading, content, logo, href }) {
 
     const wrappedHeading = (heading ?? '')
         .replace(/([a-z])([A-Z])/g, '$1\u200B$2')
@@ -11,6 +11,7 @@ export function CardEffect({ heading, content, logo }) {
 
     return (
         <motion.a
+            href={href}
             initial={{ opacity: 0, rotateY: -90 }}
             whileInView={{ opacity: 1, rotateY: 0 }}
             viewport={{ once: true }}
