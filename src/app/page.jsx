@@ -216,6 +216,7 @@ export default function Home() {
                       heading={project.name}
                       logo={project.logo}
                       content={project.description}
+                      href={`/projects/${project.slug}`}
                     />
                   </div>
                 ))}
