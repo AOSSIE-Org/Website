@@ -58,7 +58,11 @@ export async function GET() {
     // Fetching contributors for ALL repos consumes too much rate limit (N requests).
     // We will proactively fetch contributors for the top 6 most starred/popular repos to get a good estimate.
     // Sorting repos by stargazers_count
-    const topRepos = repos.sort((a, b) => b.stargazers_count - a.stargazers_count).slice(0, 6);
+
+    const topRepos = [...repos]
+    .sort((a, b) => b.stargazers_count - a.stargazers_count)
+    .slice(0, 6);
+    
     
     const contributorIds = new Set();
     
