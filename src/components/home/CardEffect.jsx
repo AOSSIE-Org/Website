@@ -2,19 +2,42 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 
-export function CardEffect({ heading, content, logo }) {
+const MotionLink = motion(Link)
+
+export function CardEffect({ heading, content, logo, href = '#', isHovered = false, isDimmed = false, offSetDirection = 0 }) {
+
+    const isExternalLink = href.startsWith("http")
+    const shouldShift = isDimmed && offSetDirection !== 0
+    const shiftAmount = offSetDirection * 18
 
     const wrappedHeading = (heading ?? '')
         .replace(/([a-z])([A-Z])/g, '$1\u200B$2')
         .replace(/([A-Z])([A-Z][a-z])/g, '$1\u200B$2')
 
     return (
-        <motion.a
+        <MotionLink
+            href={href}
+            target = {isExternalLink ? '_blank': undefined}
+            rel={isExternalLink ? 'noopener noreferrer':undefined}
+            aria-label = {`View ${heading}`}
             initial={{ opacity: 0, rotateY: -90 }}
             whileInView={{ opacity: 1, rotateY: 0 }}
+            animate={{
+            scale: isHovered ? 1.08 : isDimmed ? 0.94 : 1,
+            x: shouldShift ? shiftAmount : 0,
+            y: isDimmed ? 8 : 0,
+            zIndex: isHovered ? 10 : 1,
+            }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            transition={{
+            opacity: { duration: 0.8 },
+            rotateY: { duration: 0.8 },
+            scale: { duration: 0.25, ease: 'easeOut' },
+            x: { duration: 0.25, ease: 'easeOut' },
+            y: { duration: 0.25, ease: 'easeOut' },
+            }}
             className="group relative block h-[22rem] w-full cursor-pointer [perspective:1000px]"
         >
             <div className="relative h-full w-full transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
@@ -49,6 +72,6 @@ export function CardEffect({ heading, content, logo }) {
                 </div>
 
             </div>
-        </motion.a>
+        </MotionLink>
     )
 }
