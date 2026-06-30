@@ -40,8 +40,7 @@ export function CardEffect({ heading, content, logo, href = '#', isHovered = fal
             }}
             className="group relative block h-[22rem] w-full cursor-pointer [perspective:1000px]"
         >
-            <div className="relative h-full w-full transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
-
+            <div className="relative h-full w-full transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] group-focus:[transform:rotateY(180deg)]">
                 {/* Front Face */}
                 <div className="absolute inset-0 h-full w-full shadow-xl flex flex-col items-center justify-center rounded-3xl border-2 border-gray-400 dark:border-gray-200 bg-white dark:bg-gray-800 [backface-visibility:hidden]">
                     <div className="px-8 pb-4 w-full flex flex-col items-center justify-center">
