@@ -24,6 +24,7 @@ import projects from '@/helper/projects'
 export default function Home() {
   const [randomProjects, setRandomProjects] = useState([])
   const [featuredProjects, setFeaturedProjects] = useState([])
+  const[hoveredProjectIndex, setHoveredProjectIndex] = useState(null)
 
   useEffect(() => {
     // Select specific projects as featured
@@ -210,15 +211,31 @@ export default function Home() {
           <div className="mt-10">
             <Container.Inner>
               <div className="grid grid-cols-1 gap-x-12 gap-y-16 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
-                {randomProjects.map((project) => (
-                  <div key={project.name} className="w-full max-w-[18rem] sm:max-w-none">
+                {randomProjects.map((project, index) =>{
+                  
+                  const isHovered = hoveredProjectIndex === index;
+                  const isDimmed = hoveredProjectIndex != null && !isHovered;
+                  const offSetDirection = index<hoveredProjectIndex?-1:1;
+                  
+                  return(
+                  <div key={project.name} className="w-full max-w-[18rem] sm:max-w-none"
+                  onMouseEnter={()=>setHoveredProjectIndex(index)}
+                  onMouseLeave={()=>setHoveredProjectIndex(null)}
+                  onFocus={()=>setHoveredProjectIndex(index)}
+                  onBlur={()=>setHoveredProjectIndex(null)}
+                  >
                     <CardEffect
                       heading={project.name}
                       logo={project.logo}
                       content={project.description}
+                      href = {project.link.href}
+                      isHovered = {isHovered}
+                      isDimmed = {isDimmed}
+                      offSetDirection = {offSetDirection}
                     />
                   </div>
-                ))}
+                )
+                })}
               </div>
             </Container.Inner>
           </div>
