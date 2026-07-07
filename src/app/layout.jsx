@@ -41,6 +41,13 @@ const modeScript = `
 export const metadata = {
   title: 'AOSSIE',
   description: 'AOSSIE Website',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/favicon.svg',
+  },
 }
 
 export default function RootLayout({ children }) {
