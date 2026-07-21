@@ -301,7 +301,9 @@ const projects = [
     },
     logo: AgoraLogo,
     status: 'ongoing',
-    category: 'Ongoing'
+    category: 'Ongoing',
+    githubLink: 'https://github.com/AOSSIE-Org/Agora-Blockchain',
+    discordLink: 'https://discord.gg/xnmAPS7zqB'
   },
   {
   slug: 'eduaid',
@@ -311,7 +313,9 @@ const projects = [
     link: { href: 'https://github.com/AOSSIE-Org/EduAid', label: 'EduAid' },
     logo: DefaultLogo,
     status: 'ongoing',
-    category: 'Ongoing'
+    category: 'Ongoing',
+    githubLink: 'https://github.com/AOSSIE-Org/EduAid',
+    discordLink: 'https://discord.gg/xnmAPS7zqB'
   },
   {
   slug: 'openchat',
@@ -321,7 +325,9 @@ const projects = [
     link: { href: '/projects/openchat', label: 'OpenChat' },
     logo: OpenChatLogo,
     status: 'ongoing',
-    category: 'Ongoing'
+    category: 'Ongoing',
+    githubLink: 'https://github.com/AOSSIE-Org/OpenChat',
+    discordLink: 'https://discord.gg/xnmAPS7zqB'
   },
   
     {
@@ -332,7 +338,9 @@ const projects = [
     link: { href: 'https://github.com/AOSSIE-Org/Resonate', label: 'Resonate' },
     logo: ResonateLogo,
     status: 'ongoing',
-    category: 'Ongoing'
+    category: 'Ongoing',
+    githubLink: 'https://github.com/AOSSIE-Org/Resonate',
+    discordLink: 'https://discord.gg/xnmAPS7zqB'
   },
   {
   slug: 'monumento',
@@ -342,7 +350,9 @@ const projects = [
     link: { href: 'https://github.com/AOSSIE-Org/Monumento', label: 'Monumento' },
     logo: MonumentoLogo,
     status: 'ongoing',
-    category: 'Ongoing'
+    category: 'Ongoing',
+    githubLink: 'https://github.com/AOSSIE-Org/Monumento',
+    discordLink: 'https://discord.gg/xnmAPS7zqB'
   },
   
     {
@@ -356,7 +366,9 @@ const projects = [
     },
     logo: SSSLogo,
     status: 'ongoing',
-    category: 'Ongoing'
+    category: 'Ongoing',
+    githubLink: 'https://github.com/AOSSIE-Org/Social-Street-Smart',
+    discordLink: 'https://discord.gg/xnmAPS7zqB'
   },
 
   // ── Additional AOSSIE-Org projects ──────────────────────────────────────
