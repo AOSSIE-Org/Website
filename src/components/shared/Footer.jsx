@@ -79,7 +79,7 @@ export function Footer() {
             </div>
 
             <div className="mt-16 flex flex-col items-center justify-between gap-6 sm:flex-row border-t border-zinc-100 pt-8 dark:border-zinc-700/40">
-              <p className="text-sm text-zinc-400 dark:text-zinc-500 font-mono">
+              <p className="text-sm text-zinc-400 dark:text-zinc-500 font-mono sm:ml-auto">
                 &copy; 2016-{new Date().getFullYear()} AOSSIE. All rights reserved.
               </p>
               {/*
