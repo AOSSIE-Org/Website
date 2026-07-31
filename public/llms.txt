@@ -1,0 +1,38 @@
+# AOSSIE Webpage
+
+This repository is a high-performance webpage built on **Next.js 16 (App Router)**, **React 19**, and **Tailwind CSS v4**. It is pre-configured with **next-intl** for internationalization (i18n) and **next-themes** for semantic dark/light theme tokens.
+
+---
+
+## 📂 Project Architecture
+
+- **`src/app/[locale]/`**: Localized dynamic route group. All pages and layouts live here.
+- **`src/app/sitemap.ts`**: Dynamically generates localized sitemaps.
+- **`public/brand/`**: Repository branding folder containing the logo, favicon, and brand specifications (`Brand.md`).
+- **`src/config/languages.ts`**: Supported languages configuration list.
+- **`src/i18n/`**: Configurations for translation lookups and custom navigation helpers.
+- **`src/messages/`**: Directory containing translation catalogs (e.g., `en.json`, `hi.json`).
+- **`src/components/`**: Location for reusable, localized UI components.
+- **`src/proxy.ts`**: Next.js 16 Proxy Middleware for automatic locale routing.
+
+---
+
+## 🎨 Theme & Style System
+- Tailwind CSS v4 is configured with a class-based dark mode selector in `src/app/[locale]/globals.css`.
+- Semantic CSS variables (e.g. `--background`, `--foreground`) are bound to Tailwind variables in the `@theme` block.
+- **Guideline:** Avoid inline `dark:*` utility styles. Use semantic token classes like `bg-background-primary` and `text-foreground-primary`.
+
+---
+
+## 🌐 Dynamic Localization
+- All navigation must import `Link`, `useRouter`, or `usePathname` from local `src/i18n/navigation.ts`.
+- Page and Layout props `params` are Promises in Next.js 15/16 and must be awaited:
+  ```typescript
+  const { locale } = await params;
+  ```
+
+---
+
+## 📦 Build Commands
+- **Build:** `npm run build`
+- **Develop:** `npm run dev`

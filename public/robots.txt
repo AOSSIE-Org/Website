@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /_vercel/
+
+Sitemap: https://aossie.org/sitemap.xml
