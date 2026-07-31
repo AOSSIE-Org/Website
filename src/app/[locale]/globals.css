@@ -1,0 +1,218 @@
+@import "tailwindcss";
+
+/* Configure class-based dark mode selector in Tailwind CSS v4 */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* --- BRAND PALETTE --- */
+  --color-brand-dark: #282C33;
+  --color-brand-yellow: var(--heading-highlight);
+  --color-brand-gold: #FFC100;
+  --color-brand-green: #10B981;
+
+  /* Font Configuration */
+  --font-sans: var(--font-inter), var(--font-devanagari), ui-sans-serif, system-ui, sans-serif;
+
+  /* Semantic Utility Mappings for Tailwind CSS v4 */
+  --color-background: var(--background);
+  --color-background-secondary: var(--background-secondary);
+  --color-background-muted: var(--background-muted);
+  --color-nav-bg: var(--nav-background);
+  --color-outer-bg: var(--outer-bg);
+
+  --color-foreground: var(--foreground);
+  --color-foreground-secondary: var(--foreground-secondary);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-heading-highlight: var(--heading-highlight);
+
+  --color-border: var(--border);
+  --color-border-subtle: var(--border-subtle);
+  --color-line-color: var(--line-color);
+  --color-hover: var(--hover-background);
+
+  --color-card-bg: var(--card-bg);
+  --color-card-border: var(--card-border);
+  --shadow-card: var(--card-shadow);
+}
+
+/* --- SEMANTIC COLOR TOKENS --- */
+
+/* LIGHT MODE (Default) */
+:root {
+  /* Surface Colors */
+  --background: #FFFFFF;
+  --background-secondary: #FAFAFA;
+  --background-muted: #F3F4F6;
+  --nav-background: rgba(255, 255, 255, 0.85);
+
+  /* Text Colors (#282C33 as primary dark tone) */
+  --foreground: #282C33;
+  --foreground-secondary: rgba(40, 44, 51, 0.70);
+  --foreground-muted: #6B7280;
+  --heading-highlight: #ffcd00;
+
+  /* Border & Line Colors (#e6e6e6 for light mode) */
+  --border: #e6e6e6;
+  --border-subtle: #e6e6e6;
+  --line-color: #e6e6e6;
+  --outer-bg: #FFFFFF;
+
+  /* Interactive States */
+  --hover-background: #F3F4F6;
+  --active-background: #E5E7EB;
+
+  /* Card Design Tokens */
+  --card-bg: #FFFFFF;
+  --card-border: #E5E7EB;
+  --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.04);
+
+  /* Button Tokens */
+  --button-primary-bg: #FFFFFF;
+  --button-primary-text: #282C33;
+  --button-primary-border: #E5E7EB;
+  --button-primary-hover-bg: #F9FAFB;
+}
+
+/* DARK MODE */
+.dark {
+  /* Surface Colors */
+  --background: #0F1115;
+  --background-secondary: #161920;
+  --background-muted: #1F242D;
+  --nav-background: rgba(15, 17, 21, 0.85);
+
+  /* Text Colors */
+  --foreground: #F3F4F6;
+  --foreground-secondary: #9CA3AF;
+  --foreground-muted: #6B7280;
+  --heading-highlight: #FACC15;
+
+  /* Border & Line Colors */
+  --border: #242831;
+  --border-subtle: #1F242D;
+  --line-color: rgba(255, 255, 255, 0.04);
+  --outer-bg: #0B0C0E;
+
+  /* Interactive States */
+  --hover-background: #1F242D;
+  --active-background: #2C323E;
+
+  /* Card Design Tokens */
+  --card-bg: #161920;
+  --card-border: #242831;
+  --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.4);
+
+  /* Button Tokens */
+  --button-primary-bg: #161920;
+  --button-primary-text: #F3F4F6;
+  --button-primary-border: #242831;
+  --button-primary-hover-bg: #1F242D;
+}
+
+/* --- GLOBAL STYLES & LAYOUT SYSTEM --- */
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+  min-height: 100%;
+}
+
+body {
+  background-color: var(--outer-bg);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  transition: background-color 200ms ease-in-out, color 200ms ease-in-out;
+}
+
+/* Slanted Diagonal Striped Background System for Margins/Gutters */
+.slanted-bg-pattern {
+  background-color: var(--outer-bg);
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 12px,
+    var(--line-color) 12px,
+    var(--line-color) 13px
+  );
+}
+
+/* Utility Classes */
+@utility text-primary { color: var(--foreground); }
+@utility text-secondary { color: var(--foreground-secondary); }
+@utility text-muted { color: var(--foreground-muted); }
+@utility text-brand-dark { color: #282C33; }
+@utility border-default { border-color: var(--border); }
+@utility bg-card { background-color: var(--card-bg); }
+@utility shadow-card { box-shadow: var(--card-shadow); }
+
+/* Theme Icon inversion helper for dark mode */
+.theme-icon-invert {
+  filter: invert(0);
+  transition: filter 0.2s ease-in-out;
+}
+:is(.dark .theme-icon-invert) {
+  filter: invert(1) brightness(200%);
+}
+
+/* --- MODERN SMOOTH ENTRANCE ANIMATIONS --- */
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes navbarFadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroCanvasScale {
+  from {
+    opacity: 0;
+    transform: scale(0.98) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-navbar-entrance {
+  animation: navbarFadeDown 700ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-hero-title {
+  animation: heroFadeUp 800ms cubic-bezier(0.16, 1, 0.3, 1) 150ms forwards;
+  opacity: 0;
+}
+
+.animate-hero-subtext {
+  animation: heroFadeUp 800ms cubic-bezier(0.16, 1, 0.3, 1) 300ms forwards;
+  opacity: 0;
+}
+
+.animate-hero-badge {
+  animation: heroFadeUp 800ms cubic-bezier(0.16, 1, 0.3, 1) 450ms forwards;
+  opacity: 0;
+}
+
+.animate-hero-canvas {
+  animation: heroCanvasScale 900ms cubic-bezier(0.16, 1, 0.3, 1) 550ms forwards;
+  opacity: 0;
+}
+
+.animate-hero-footer {
+  animation: heroFadeUp 800ms cubic-bezier(0.16, 1, 0.3, 1) 700ms forwards;
+  opacity: 0;
+}

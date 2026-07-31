@@ -1,0 +1,50 @@
+{
+  "Home": {
+    "heading": "AOSSIE's Website",
+    "metaTitle": "AOSSIE's Website - Australian Open Source Software Innovation and Education",
+    "metaDescription": "Empowering open-source projects to innovate, educate, and create lasting global impact."
+  },
+  "Navbar": {
+    "about": "About",
+    "projects": "Projects",
+    "ideas": "Ideas",
+    "apply": "Apply",
+    "github": "GitHub",
+    "selectLanguage": "Select Language"
+  },
+  "Hero": {
+    "titleLine1": "We Innovate",
+    "titleLine2": "We Educate",
+    "subtitlePrefix": "Empowering open-source projects to innovate, educate, and create lasting global impact since ",
+    "learnMore": "Learn More",
+    "copyright": "© Australian Open Source Software Innovation and Education",
+    "socialMedia": "Social Media"
+  },
+  "Projects": {
+    "title": "Our Projects",
+    "subtitle": "Building open-source solutions across finance, education, sustainability, governance, communication, and beyond creating trustworthy, user-empowering technologies that drive meaningful impact.",
+    "viewAll": "View all Projects",
+    "view": "View",
+    "details": "Details"
+  },
+  "GSoC": {
+    "title": "Google Summer of Code"
+  },
+  "Error": {
+    "title": "Something went wrong",
+    "description": "An unexpected server or client error occurred while rendering the page.",
+    "retry": "Try again"
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "description": "The page you are looking for does not exist or has been moved.",
+    "home": "Go to Home"
+  },
+  "LanguageSwitcher": {
+    "label": "Language"
+  },
+  "ThemeToggle": {
+    "toggleTheme": "Toggle theme"
+  }
+}
+

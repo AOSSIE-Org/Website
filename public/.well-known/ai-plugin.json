@@ -1,0 +1,18 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "AOSSIE Webpage",
+  "name_for_model": "aossie_webpage",
+  "description_for_human": "Starter template for AOSSIE web portals showing internationalization and custom theme toggles.",
+  "description_for_model": "Retrieve settings, theme configuration, and supported locales from the AOSSIE webpage.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://aossie.org/openapi.yaml",
+    "is_user_authenticated": false
+  },
+  "logo_url": "https://aossie.org/brand/icons/aossie_logo.svg",
+  "contact_email": "admin@aossie.org",
+  "legal_info_url": "https://aossie.org/legal"
+}
