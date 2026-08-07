@@ -21,8 +21,8 @@ export const PROJECTS: ProjectItem[] = [
     src: "/brand/project_svgs/dit_logo.svg",
     repositories: [
       {
-        name: "Decentralized-Information-Trust",
-        url: "https://github.com/AOSSIE-Org/Decentralized-Information-Trust",
+        name: "AOSSIE-Org",
+        url: "https://github.com/AOSSIE-Org",
         description: "Decentralized trust and verification framework",
       },
     ],
@@ -34,8 +34,8 @@ export const PROJECTS: ProjectItem[] = [
     src: "/brand/project_svgs/djed_alliance.svg",
     repositories: [
       {
-        name: "Djed-Solidarity-Protocol",
-        url: "https://github.com/AOSSIE-Org/Djed-Solidarity-Protocol",
+        name: "DjedAlliance",
+        url: "https://github.com/DjedAlliance",
         description: "Formal specification & contracts for Djed algorithmic stablecoin",
       },
     ],
@@ -47,8 +47,8 @@ export const PROJECTS: ProjectItem[] = [
     src: "/brand/project_svgs/fate_logo.svg",
     repositories: [
       {
-        name: "FATE",
-        url: "https://github.com/AOSSIE-Org/FATE",
+        name: "AOSSIE-Org",
+        url: "https://github.com/AOSSIE-Org",
         description: "Fairness, Accountability, Transparency, and Ethics in AI",
       },
     ],
@@ -60,8 +60,8 @@ export const PROJECTS: ProjectItem[] = [
     src: "/brand/project_svgs/skills_logo.svg",
     repositories: [
       {
-        name: "Open-Skills",
-        url: "https://github.com/AOSSIE-Org/Open-Skills",
+        name: "AOSSIE-Org",
+        url: "https://github.com/AOSSIE-Org",
         description: "Open source skills certification platform",
       },
     ],
@@ -73,8 +73,8 @@ export const PROJECTS: ProjectItem[] = [
     src: "/brand/project_svgs/stability_nexus.svg",
     repositories: [
       {
-        name: "Stability-Nexus",
-        url: "https://github.com/AOSSIE-Org/Stability-Nexus",
+        name: "StabilityNexus",
+        url: "https://github.com/StabilityNexus",
         description: "Decentralized stability and financial tools",
       },
     ],
@@ -87,7 +87,7 @@ export const PROJECTS: ProjectItem[] = [
     repositories: [
       {
         name: "StablePay",
-        url: "https://github.com/AOSSIE-Org/StablePay",
+        url: "https://github.com/StabilityNexus/StablePay",
         description: "Decentralized payment widget and payment gateway",
       },
     ],
@@ -99,8 +99,8 @@ export const PROJECTS: ProjectItem[] = [
     src: "/brand/project_svgs/tnt_logo.svg",
     repositories: [
       {
-        name: "Truth-n-Trust",
-        url: "https://github.com/AOSSIE-Org/Truth-n-Trust",
+        name: "AOSSIE-Org",
+        url: "https://github.com/AOSSIE-Org",
         description: "Transparent governance and decision recording platform",
       },
     ],
