@@ -4,7 +4,7 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 import { motion, useTransform, useSpring, useMotionValue, useScroll, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { ProjectItem } from "@/types/project";
+import type { ProjectItem } from "@/types/project";
 import { PROJECTS } from "@/data/projects";
 
 // --- Types ---
@@ -100,6 +100,35 @@ export default function Projects() {
   const [introPhase, setIntroPhase] = useState<AnimationPhase>("scatter");
   const [hoveredProject, setHoveredProject] = useState<ProjectItem | null>(null);
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
+
+  const modalRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const triggerElementRef = useRef<HTMLElement | null>(null);
+
+  // Focus management & Escape key listener for Repository Modal
+  useEffect(() => {
+    if (selectedProject) {
+      triggerElementRef.current = document.activeElement as HTMLElement;
+
+      const timer = requestAnimationFrame(() => {
+        closeButtonRef.current?.focus() || modalRef.current?.focus();
+      });
+
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+          setSelectedProject(null);
+        }
+      };
+
+      window.addEventListener("keydown", handleKeyDown);
+
+      return () => {
+        cancelAnimationFrame(timer);
+        window.removeEventListener("keydown", handleKeyDown);
+        triggerElementRef.current?.focus();
+      };
+    }
+  }, [selectedProject]);
 
   // Track Native Window Scroll progress across sectionRef
   const { scrollYProgress } = useScroll({
@@ -354,12 +383,21 @@ export default function Projects() {
       {/* Multi-Repository Popover / Modal Selector */}
       <AnimatePresence>
         {selectedProject && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs"
+            onClick={() => setSelectedProject(null)}
+          >
             <motion.div
+              ref={modalRef}
+              tabIndex={-1}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="repository-modal-title"
+              onClick={(e) => e.stopPropagation()}
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="relative w-full max-w-md bg-card border border-border rounded-2xl p-6 shadow-2xl flex flex-col gap-5 z-50"
+              className="relative w-full max-w-md bg-card border border-border rounded-2xl p-6 shadow-2xl flex flex-col gap-5 z-50 outline-none"
             >
               <div className="flex items-center justify-between border-b border-border pb-4">
                 <div className="flex items-center gap-3">
@@ -374,7 +412,7 @@ export default function Projects() {
                     />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-foreground leading-tight">
+                    <h3 id="repository-modal-title" className="text-lg font-semibold text-foreground leading-tight">
                       {selectedProject.name}
                     </h3>
                     <p className="text-xs text-foreground-secondary">{selectedProject.category}</p>
@@ -382,6 +420,7 @@ export default function Projects() {
                 </div>
 
                 <button
+                  ref={closeButtonRef}
                   onClick={() => setSelectedProject(null)}
                   className="w-8 h-8 rounded-full border border-border bg-background-secondary hover:bg-hover flex items-center justify-center text-foreground transition-colors cursor-pointer"
                   aria-label="Close modal"
