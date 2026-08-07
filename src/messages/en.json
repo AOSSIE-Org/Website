@@ -25,7 +25,9 @@
     "subtitle": "Building open-source solutions across finance, education, sustainability, governance, communication, and beyond creating trustworthy, user-empowering technologies that drive meaningful impact.",
     "viewAll": "View all Projects",
     "view": "View",
-    "details": "Details"
+    "details": "Details",
+    "viewRepository": "View Repository",
+    "repositories": "Repositories"
   },
   "GSoC": {
     "title": "Google Summer of Code"

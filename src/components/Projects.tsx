@@ -1,25 +1,21 @@
 "use client";
 
 import React, { useState, useEffect, useMemo, useRef } from "react";
-import { motion, useTransform, useSpring, useMotionValue, useScroll } from "framer-motion";
+import { motion, useTransform, useSpring, useMotionValue, useScroll, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { ProjectItem } from "@/types/project";
+import { PROJECTS } from "@/data/projects";
 
 // --- Types ---
 export type AnimationPhase = "scatter" | "line" | "circle" | "bottom-strip";
-
-interface ProjectItem {
-  id: string;
-  name: string;
-  category: string;
-  src: string;
-}
 
 interface ProjectCardProps {
   project: ProjectItem;
   target: { x: number; y: number; rotation: number; scale: number; opacity: number };
   onHoverStart: () => void;
   onHoverEnd: () => void;
+  onSelectProject: (project: ProjectItem) => void;
 }
 
 // --- Card Dimensions (Squarish 76px x 76px) ---
@@ -28,7 +24,16 @@ const CARD_SIZE = 76;
 // --- Custom Cursor Dimensions ---
 const CURSOR_SIZE = 104;
 
-function ProjectCard({ project, target, onHoverStart, onHoverEnd }: ProjectCardProps) {
+function ProjectCard({ project, target, onHoverStart, onHoverEnd, onSelectProject }: ProjectCardProps) {
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (project.repositories.length === 1) {
+      window.open(project.repositories[0].url, "_blank", "noopener,noreferrer");
+    } else {
+      onSelectProject(project);
+    }
+  };
+
   return (
     <motion.div
       animate={{
@@ -45,14 +50,24 @@ function ProjectCard({ project, target, onHoverStart, onHoverEnd }: ProjectCardP
       }}
       onMouseEnter={onHoverStart}
       onMouseLeave={onHoverEnd}
+      onClick={handleClick}
       style={{
         position: "absolute",
         width: CARD_SIZE,
         height: CARD_SIZE,
       }}
-      className="cursor-none group select-none"
+      className="cursor-pointer group select-none pointer-events-auto"
+      tabIndex={0}
+      role="button"
+      aria-label={`View ${project.name} GitHub Repository`}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          handleClick(e as unknown as React.MouseEvent);
+        }
+      }}
     >
-      <div className="relative h-full w-full overflow-hidden rounded-2xl shadow-md border border-border bg-card flex items-center justify-center p-3.5 group-hover:border-foreground/30 transition-colors">
+      <div className="relative h-full w-full overflow-hidden rounded-2xl shadow-md border border-border bg-card flex items-center justify-center p-3.5 group-hover:border-foreground/40 group-hover:shadow-lg transition-all">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={project.src}
@@ -61,22 +76,16 @@ function ProjectCard({ project, target, onHoverStart, onHoverEnd }: ProjectCardP
             project.id === "resonate" ? "theme-icon-invert" : ""
           }`}
         />
+        {/* Subtle GitHub Icon Badge */}
+        <div className="absolute top-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity bg-background-secondary/90 rounded-full p-0.5 border border-border">
+          <svg className="w-2.5 h-2.5 text-foreground" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+          </svg>
+        </div>
       </div>
     </motion.div>
   );
 }
-
-// Official AOSSIE Projects List (Single Non-Repeating Set Sourced directly from brand/project_svgs/)
-const PROJECTS: ProjectItem[] = [
-  { id: "resonate", name: "Resonate", category: "Social & Audio", src: "/brand/project_svgs/resonate_logo.svg" },
-  { id: "dit", name: "DIT", category: "Decentralized Trust", src: "/brand/project_svgs/dit_logo.svg" },
-  { id: "djed", name: "Djed Alliance", category: "Open Money", src: "/brand/project_svgs/djed_alliance.svg" },
-  { id: "fate", name: "FATE", category: "Ethical AI", src: "/brand/project_svgs/fate_logo.svg" },
-  { id: "skills", name: "Open Skills", category: "Education", src: "/brand/project_svgs/skills_logo.svg" },
-  { id: "stability", name: "Stability Nexus", category: "Stability", src: "/brand/project_svgs/stability_nexus.svg" },
-  { id: "stablepay", name: "StablePay", category: "DeFi Payments", src: "/brand/project_svgs/stablepay_logo.svg" },
-  { id: "tnt", name: "Truth-n-Trust", category: "Governance", src: "/brand/project_svgs/tnt_logo.svg" },
-];
 
 const DISPLAY_PROJECTS: ProjectItem[] = PROJECTS;
 const TOTAL_PROJECTS = DISPLAY_PROJECTS.length;
@@ -90,6 +99,7 @@ export default function Projects() {
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
   const [introPhase, setIntroPhase] = useState<AnimationPhase>("scatter");
   const [hoveredProject, setHoveredProject] = useState<ProjectItem | null>(null);
+  const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
 
   // Track Native Window Scroll progress across sectionRef
   const { scrollYProgress } = useScroll({
@@ -237,7 +247,7 @@ export default function Projects() {
             >
               <Link
                 href="/projects"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border-2 border-border bg-background hover:bg-hover text-sm sm:text-base font-semibold text-foreground transition-all shadow-md hover:shadow-lg cursor-none group select-none"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border-2 border-border bg-background hover:bg-hover text-sm sm:text-base font-semibold text-foreground transition-all shadow-md hover:shadow-lg cursor-pointer group select-none"
               >
                 <span>{t("viewAll")}</span>
                 <span className="transform group-hover:translate-x-1 transition-transform">→</span>
@@ -314,6 +324,7 @@ export default function Projects() {
                     target={target}
                     onHoverStart={() => setHoveredProject(project)}
                     onHoverEnd={() => setHoveredProject(null)}
+                    onSelectProject={(proj) => setSelectedProject(proj)}
                   />
                 );
               })}
@@ -339,6 +350,79 @@ export default function Projects() {
           </div>
         </div>
       </div>
+
+      {/* Multi-Repository Popover / Modal Selector */}
+      <AnimatePresence>
+        {selectedProject && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="relative w-full max-w-md bg-card border border-border rounded-2xl p-6 shadow-2xl flex flex-col gap-5 z-50"
+            >
+              <div className="flex items-center justify-between border-b border-border pb-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl border border-border bg-background flex items-center justify-center p-2">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={selectedProject.src}
+                      alt={selectedProject.name}
+                      className={`w-full h-full object-contain ${
+                        selectedProject.id === "resonate" ? "theme-icon-invert" : ""
+                      }`}
+                    />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-foreground leading-tight">
+                      {selectedProject.name}
+                    </h3>
+                    <p className="text-xs text-foreground-secondary">{selectedProject.category}</p>
+                  </div>
+                </div>
+
+                <button
+                  onClick={() => setSelectedProject(null)}
+                  className="w-8 h-8 rounded-full border border-border bg-background-secondary hover:bg-hover flex items-center justify-center text-foreground transition-colors cursor-pointer"
+                  aria-label="Close modal"
+                >
+                  ✕
+                </button>
+              </div>
+
+              <div className="flex flex-col gap-3">
+                <p className="text-xs font-semibold text-foreground-muted uppercase tracking-wider">
+                  {t("repositories")}
+                </p>
+
+                {selectedProject.repositories.map((repo, index) => (
+                  <a
+                    key={index}
+                    href={repo.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between p-3 rounded-xl border border-border bg-background-secondary hover:bg-hover transition-all group"
+                  >
+                    <div className="flex flex-col gap-0.5 max-w-[85%]">
+                      <span className="text-sm font-medium text-foreground group-hover:text-heading-highlight transition-colors flex items-center gap-1.5">
+                        {repo.name}
+                      </span>
+                      {repo.description && (
+                        <span className="text-xs text-foreground-secondary line-clamp-1">
+                          {repo.description}
+                        </span>
+                      )}
+                    </div>
+                    <span className="text-xs text-foreground-muted group-hover:text-foreground transition-colors">
+                      ↗
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
