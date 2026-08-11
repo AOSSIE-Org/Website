@@ -25,9 +25,6 @@ interface ProjectCardProps {
 // --- Card Dimensions (Squarish 76px x 76px) ---
 const CARD_SIZE = 76;
 
-// --- Custom Cursor Dimensions ---
-const CURSOR_SIZE = 104;
-
 function ProjectCard({ project, target, onHoverStart, onHoverEnd }: ProjectCardProps) {
   return (
     <motion.div
@@ -50,15 +47,17 @@ function ProjectCard({ project, target, onHoverStart, onHoverEnd }: ProjectCardP
         width: CARD_SIZE,
         height: CARD_SIZE,
       }}
-      className="cursor-none group select-none"
+      className="cursor-pointer group select-none"
     >
       <div className="relative h-full w-full overflow-hidden rounded-2xl shadow-md border border-border bg-card flex items-center justify-center p-3.5 group-hover:border-foreground/30 transition-colors">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={project.src}
           alt={project.name}
+          loading="lazy"
+          decoding="async"
           className={`w-full h-full object-contain filter drop-shadow-xs ${
-            project.id === "resonate" ? "theme-icon-invert" : ""
+            project.src.endsWith("resonate_logo.svg") ? "theme-icon-invert" : ""
           }`}
         />
       </div>
@@ -70,16 +69,27 @@ function ProjectCard({ project, target, onHoverStart, onHoverEnd }: ProjectCardP
 const PROJECTS: ProjectItem[] = [
   { id: "resonate", name: "Resonate", category: "Social & Audio", src: "/brand/project_svgs/resonate_logo.svg" },
   { id: "dit", name: "DIT", category: "Decentralized Trust", src: "/brand/project_svgs/dit_logo.svg" },
-  { id: "djed", name: "Djed Alliance", category: "Open Money", src: "/brand/project_svgs/djed_alliance.svg" },
+  { id: "djed", name: "Djed Alliance", category: "Open Money", src: "/brand/project_svgs/djed_alliance_logo.svg" },
   { id: "fate", name: "FATE", category: "Ethical AI", src: "/brand/project_svgs/fate_logo.svg" },
   { id: "skills", name: "Open Skills", category: "Education", src: "/brand/project_svgs/skills_logo.svg" },
-  { id: "stability", name: "Stability Nexus", category: "Stability", src: "/brand/project_svgs/stability_nexus.svg" },
+  { id: "stability", name: "Stability Nexus", category: "Stability", src: "/brand/project_svgs/stability_nexus_logo.svg" },
   { id: "stablepay", name: "StablePay", category: "DeFi Payments", src: "/brand/project_svgs/stablepay_logo.svg" },
   { id: "tnt", name: "Truth-n-Trust", category: "Governance", src: "/brand/project_svgs/tnt_logo.svg" },
 ];
 
-const DISPLAY_PROJECTS: ProjectItem[] = PROJECTS;
-const TOTAL_PROJECTS = DISPLAY_PROJECTS.length;
+const ALL_PROJECTS: ProjectItem[] = [
+  ...PROJECTS,
+  { id: "moveyourbody", name: "MoveYourBody", category: "Health & Fitness", src: "/brand/project_svgs/MoveYourBody_logo.svg" },
+  { id: "carbontracker", name: "Carbon Tracker", category: "Sustainability", src: "/brand/project_svgs/carbonTracker_logo.svg" },
+  { id: "chainvoice", name: "Chainvoice", category: "DeFi Invoicing", src: "/brand/project_svgs/chainvoice_logo.svg" },
+  { id: "ellena", name: "Ellena", category: "AI & NLP", src: "/brand/project_svgs/ellena_logo.svg" },
+  { id: "minichain", name: "MiniChain", category: "Micro-Blockchains", src: "/brand/project_svgs/minichain_logo.svg" },
+  { id: "ogh", name: "Open Gift Hub", category: "Open Source Giving", src: "/brand/project_svgs/ogh_logo.svg" },
+  { id: "pictopy", name: "PicToPy", category: "Image Processing", src: "/brand/project_svgs/pictopy_logo.svg" },
+  { id: "rein", name: "REIN", category: "Decentralized Escrow", src: "/brand/project_svgs/rein_logo.svg" },
+  { id: "thrubox", name: "Thrubox", category: "Decentralized Storage", src: "/brand/project_svgs/thrubox_logo.svg" },
+  { id: "zplit", name: "Zplit", category: "DeFi Expense Sharing", src: "/brand/project_svgs/zplit_logo.svg" },
+];
 
 const lerp = (start: number, end: number, t: number) => start * (1 - t) + end * t;
 
@@ -90,6 +100,10 @@ export default function Projects() {
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
   const [introPhase, setIntroPhase] = useState<AnimationPhase>("scatter");
   const [hoveredProject, setHoveredProject] = useState<ProjectItem | null>(null);
+  const [displayProjects] = useState<ProjectItem[]>(() => {
+    return [...ALL_PROJECTS].sort(() => 0.5 - Math.random()).slice(0, 8);
+  });
+  const totalProjects = displayProjects.length;
 
   // Track Native Window Scroll progress across sectionRef
   const { scrollYProgress } = useScroll({
@@ -169,8 +183,9 @@ export default function Projects() {
       const normalizedX = (relativeX / rect.width) * 2 - 1;
       mouseX.set(normalizedX * 100);
 
-      cursorX.set(relativeX - CURSOR_SIZE / 2);
-      cursorY.set(relativeY - CURSOR_SIZE / 2);
+      // Offset slightly down-right to float beautifully near cursor
+      cursorX.set(relativeX + 16);
+      cursorY.set(relativeY + 16);
     };
     container.addEventListener("mousemove", handleMouseMove);
     return () => container.removeEventListener("mousemove", handleMouseMove);
@@ -182,14 +197,14 @@ export default function Projects() {
       return x - Math.floor(x);
     };
 
-    return DISPLAY_PROJECTS.map((_, i) => ({
+    return displayProjects.map((_, i) => ({
       x: (pseudoRandom(i * 3 + 1) - 0.5) * 1200,
       y: (pseudoRandom(i * 3 + 2) - 0.5) * 800,
       rotation: (pseudoRandom(i * 3 + 3) - 0.5) * 180,
       scale: 0.6,
       opacity: 0,
     }));
-  }, []);
+  }, [displayProjects]);
 
   const [morphValue, setMorphValue] = useState(0);
   const [rotateValue, setRotateValue] = useState(0);
@@ -212,7 +227,7 @@ export default function Projects() {
       id="projects"
       className="w-full relative h-[420vh] bg-background border-b border-border"
     >
-      <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center py-10 gap-6 overflow-hidden">
+      <div className="sticky top-0 h-screen w-full flex flex-col items-center pt-24 pb-10 gap-6 overflow-hidden">
         {/* 1. Section Header & Subtitle */}
         <div className="px-4 sm:px-10 lg:px-14 w-full flex flex-col items-center text-center max-w-5xl mx-auto gap-3 z-10 shrink-0">
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-medium tracking-tight text-foreground leading-[1.1]">
@@ -227,7 +242,7 @@ export default function Projects() {
         {/* 2. Page-Scroll Driven Morph Animation Stage */}
         <div
           ref={containerRef}
-          className="w-full relative flex-1 max-h-[550px] sm:max-h-[650px] overflow-hidden flex items-center justify-center cursor-none"
+          className="w-full relative flex-1 max-h-[550px] sm:max-h-[650px] overflow-hidden flex items-center justify-center"
         >
           <div className="flex h-full w-full flex-col items-center justify-center perspective-1000">
             {/* Central "View all Projects →" Button */}
@@ -237,7 +252,7 @@ export default function Projects() {
             >
               <Link
                 href="/projects"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border-2 border-border bg-background hover:bg-hover text-sm sm:text-base font-semibold text-foreground transition-all shadow-md hover:shadow-lg cursor-none group select-none"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border-2 border-border bg-background hover:bg-hover text-sm sm:text-base font-semibold text-foreground transition-all shadow-md hover:shadow-lg cursor-pointer group select-none"
               >
                 <span>{t("viewAll")}</span>
                 <span className="transform group-hover:translate-x-1 transition-transform">→</span>
@@ -246,14 +261,14 @@ export default function Projects() {
 
             {/* Cards Stage */}
             <div className="relative flex items-center justify-center w-full h-full">
-              {DISPLAY_PROJECTS.map((project, i) => {
+              {displayProjects.map((project, i) => {
                 let target = { x: 0, y: 0, rotation: 0, scale: 1, opacity: 1 };
 
                 if (introPhase === "scatter") {
                   target = scatterPositions[i];
                 } else if (introPhase === "line") {
                   const lineSpacing = 85;
-                  const lineTotalWidth = TOTAL_PROJECTS * lineSpacing;
+                  const lineTotalWidth = totalProjects * lineSpacing;
                   const lineX = i * lineSpacing - lineTotalWidth / 2;
                   target = { x: lineX, y: 0, rotation: 0, scale: 1, opacity: 1 };
                 } else {
@@ -261,7 +276,7 @@ export default function Projects() {
                   const minDimension = Math.min(containerSize.width, containerSize.height);
 
                   const circleRadius = Math.min(minDimension * 0.32, 280);
-                  const circleAngle = (i / TOTAL_PROJECTS) * 360;
+                  const circleAngle = (i / totalProjects) * 360;
                   const circleRad = (circleAngle * Math.PI) / 180;
 
                   // Larger squares while resting in the circle formation
@@ -282,7 +297,7 @@ export default function Projects() {
 
                   const spreadAngle = isMobile ? 95 : 125;
                   const startAngle = -90 - spreadAngle / 2;
-                  const step = spreadAngle / (TOTAL_PROJECTS - 1);
+                  const step = spreadAngle / (totalProjects - 1);
 
                   const scrollProgress = Math.min(Math.max(rotateValue / 360, 0), 1);
                   const maxRotation = spreadAngle * 0.75;
@@ -319,14 +334,12 @@ export default function Projects() {
               })}
             </div>
 
-            {/* Custom Sticky Cursor */}
+            {/* Custom Sticky Cursor (Small Sweet Note) */}
             <motion.div
-              className="pointer-events-none absolute top-0 left-0 z-30 flex items-center justify-center rounded-full bg-neutral-500/70 backdrop-blur-sm text-white text-xs font-normal tracking-wide text-center px-2 leading-tight"
+              className="pointer-events-none absolute top-0 left-0 z-30 flex items-center justify-center px-3.5 py-1.5 rounded-xl bg-card/90 backdrop-blur-md border border-border shadow-lg text-foreground text-xs font-medium tracking-wide whitespace-nowrap"
               style={{
                 x: smoothCursorX,
                 y: smoothCursorY,
-                width: CURSOR_SIZE,
-                height: CURSOR_SIZE,
               }}
               animate={{
                 scale: hoveredProject ? 1 : 0,
@@ -334,9 +347,19 @@ export default function Projects() {
               }}
               transition={{ type: "spring", stiffness: 300, damping: 24 }}
             >
-              {hoveredProject && `View ${hoveredProject.name}`}
+              {hoveredProject && (
+                <div className="flex items-center gap-1.5 font-semibold text-foreground-primary">
+                  <span>View {hoveredProject.name}</span>
+                  <span className="text-[10px] font-bold">↗</span>
+                </div>
+              )}
             </motion.div>
           </div>
+        </div>
+
+        {/* 3. Small Hint Note for visitors */}
+        <div className="text-center pb-4 text-xs sm:text-sm text-foreground-secondary/70 font-medium shrink-0 select-none">
+          {t("hint")}
         </div>
       </div>
     </section>

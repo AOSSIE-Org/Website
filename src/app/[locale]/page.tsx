@@ -3,10 +3,49 @@
 import Script from "next/script";
 import { useTranslations } from "next-intl";
 import { use } from "react";
+import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import Projects from "@/components/Projects";
-import GSoC from "@/components/GSoC";
+
+function ProjectsSkeleton() {
+  return (
+    <section className="w-full relative h-[420vh] bg-background border-b border-border">
+      <div className="sticky top-0 h-screen w-full flex flex-col items-center pt-24 pb-10 gap-6 overflow-hidden">
+        <div className="px-4 sm:px-10 lg:px-14 w-full flex flex-col items-center text-center max-w-5xl mx-auto gap-3 z-10 shrink-0">
+          <div className="h-12 w-64 bg-foreground-muted/10 rounded-xl animate-pulse" />
+          <div className="h-6 w-96 max-w-full bg-foreground-muted/10 rounded-lg animate-pulse" />
+        </div>
+        <div className="w-full flex-1 flex items-center justify-center">
+          <div className="w-48 h-48 rounded-2xl bg-card border border-border animate-pulse shadow-md" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function StatsSkeleton() {
+  return (
+    <section className="w-full relative h-[120vh] bg-background border-b border-border">
+      <div className="sticky top-0 h-screen w-full flex flex-col items-center pt-24 pb-10 gap-8 overflow-hidden">
+        <div className="w-full flex flex-col items-center text-center max-w-6xl mx-auto gap-4 px-4 sm:px-10 lg:px-14 shrink-0">
+          <div className="h-12 w-72 bg-foreground-muted/10 rounded-xl animate-pulse" />
+          <div className="h-6 w-80 max-w-full bg-foreground-muted/10 rounded-lg animate-pulse" />
+        </div>
+        <div className="flex-1 w-full flex items-center justify-center relative px-4 sm:px-10 lg:px-14">
+          <div className="w-64 h-56 rounded-2xl bg-card border border-border animate-pulse shadow-md" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const Projects = dynamic(() => import("@/components/Projects"), {
+  loading: () => <ProjectsSkeleton />,
+});
+
+const Stats = dynamic(() => import("@/components/Stats"), {
+  loading: () => <StatsSkeleton />,
+});
 
 export default function Home({
   params,
@@ -70,7 +109,7 @@ export default function Home({
             <main className="flex-1 flex flex-col justify-between min-w-0">
               <Hero />
               <Projects />
-              <GSoC />
+              <Stats />
             </main>
           </div>
 

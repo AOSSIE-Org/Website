@@ -80,7 +80,7 @@ export default function Navbar() {
           className="flex items-center gap-2 cursor-pointer group hover:opacity-85 active:scale-95 transition-all duration-200 select-none"
         >
           <Image
-            src="/brand/icons/aossie_secondary_logo.svg"
+            src="/brand/icons/aossie_secondary_dark_logo.svg"
             alt="aossie logo"
             width={120}
             height={24}
@@ -97,11 +97,8 @@ export default function Navbar() {
           <Link href="/projects" className="hover:text-foreground transition-colors">
             {tNav("projects")}
           </Link>
-          <Link href="/ideas" className="hover:text-foreground transition-colors">
-            {tNav("ideas")}
-          </Link>
-          <Link href="/apply" className="hover:text-foreground transition-colors">
-            {tNav("apply")}
+          <Link href="/programs" className="hover:text-foreground transition-colors">
+            {tNav("programs")}
           </Link>
           <a
             href="https://github.com/AOSSIE-Org"
@@ -126,7 +123,7 @@ export default function Navbar() {
               className="flex items-center gap-2 p-2 rounded-full border border-border bg-background-secondary hover:bg-hover text-xs font-medium text-foreground transition-all shadow-xs cursor-pointer group"
             >
               <Image
-                src="../../brand/icons/globe.svg"
+                src="/brand/icons/globe.svg"
                 alt="Language"
                 width={14}
                 height={14}
@@ -234,18 +231,11 @@ export default function Navbar() {
               {tNav("projects")}
             </Link>
             <Link
-              href="/ideas"
+              href="/programs"
               onClick={() => setIsMobileMenuOpen(false)}
               className="hover:text-foreground transition-colors py-1"
             >
-              {tNav("ideas")}
-            </Link>
-            <Link
-              href="/apply"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="hover:text-foreground transition-colors py-1"
-            >
-              {tNav("apply")}
+              {tNav("programs")}
             </Link>
             <a
               href="https://github.com/AOSSIE-Org"
@@ -266,7 +256,7 @@ export default function Navbar() {
             {/* Mobile Language Selector Pills */}
             <div className="flex items-center gap-2 flex-wrap">
               <Image
-                src="../../brand/icons/globe.svg"
+                src="/brand/icons/globe.svg"
                 alt="Language"
                 width={16}
                 height={16}

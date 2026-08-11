@@ -1,0 +1,99 @@
+# Enables IDE autocompletion for this config file
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+
+# Language for CodeRabbit's review comments
+language: en
+
+# Enable experimental features
+early_access: true
+
+chat:
+  # CodeRabbit will automatically respond to @coderabbitai mentions in PR comments
+  auto_reply: true
+
+reviews:
+  profile: assertive # Options: chill, assertive
+
+  auto_review:
+    # Automatically trigger reviews when PRs are opened or updated
+    enabled: true
+    # Skip auto-review if PR title contains these keywords
+    ignore_title_keywords:
+      - "WIP"
+    # Don't auto-review draft PRs
+    drafts: false
+    # Only auto-review PRs targeting main
+    base_branches:
+      - main
+      - develop
+
+  high_level_summary: true
+  sequence_diagrams: true
+  poem: true
+  review_status: true
+  collapse_walkthrough: false
+  changed_files_summary: true
+  request_changes_workflow: true
+
+  pre_merge_checks:
+    description:
+      mode: warning
+    docstrings:
+      mode: off
+
+  path_filters:
+    - "!**/node_modules/**"
+    - "!**/dist/**"
+    - "!**/.next/**"
+    - "!**/out/**"
+
+  tools:
+    shellcheck:
+      enabled: true
+    ruff:
+      enabled: true
+    markdownlint:
+      enabled: true
+    github-checks:
+      enabled: true
+      timeout_ms: 90000
+    languagetool:
+      enabled: true
+      enabled_only: false
+      level: default
+    biome:
+      enabled: true
+    hadolint:
+      enabled: true
+    yamllint:
+      enabled: true
+    gitleaks:
+      enabled: true
+    checkov:
+      enabled: true
+
+  instructions:
+    - path: "**/*.{ts,tsx,js,jsx}"
+      instructions: |
+        NextJS:
+        - Ensure that "use client" is being used appropriately for interactive components.
+        - Ensure static generation methods (`output: 'export'`) and pure client-side interactivity are followed.
+        - NextJS best practices (including file structure and i18n routing) are followed.
+      
+        TypeScript:
+        - Avoid 'any', use explicit types.
+        - Prefer 'import type' for type imports.
+        - The code adheres to React and Next.js modern best practices.
+
+        Security:
+        - No exposed API keys or sensitive data.
+        - Validate deep linking and external URL configurations.
+
+        Internationalization:
+        - User-visible strings should be externalized to resource files (`src/messages/en.json`, `src/messages/hi.json`).
+
+    - path: "public/brand/**/*"
+      instructions: |
+        Review asset files for:
+        - Image optimization (appropriate size and format).
+        - SVG assets are optimized.

@@ -10,13 +10,15 @@ The AOSSIE color scheme is inspired by Australia's national colors and modern UI
 
 | Color Name | Color Sample | HEX Code | RGB Code | Role |
 | :--- | :--- | :--- | :--- | :--- |
-| **Primary Brand Dark** | ⬛ | `#282C33` | `rgb(40, 44, 51)` | Primary Brand Dark Color (Fonts, Headers, Primary Icons) |
-| **Golden Yellow** | 🟡 | `#EAB308` | `rgb(234, 179, 8)` | Accent & Highlight Color (e.g., "2016" badge) |
-| **Baggy Green** | 🟢 | `#10B981` | `rgb(16, 185, 129)` | Accent & Secondary Brand Color |
+| **Golden Wallet** | 🟡 | `#FFCD00` | `rgb(255, 205, 0)` | Primary Brand Color |
+| **Baggy Green** | 🟢 | `#00843D` | `rgb(0, 132, 61)` | Secondary Brand Color |
+| **Neutral Dark** | ⬛ | `#121212` | `rgb(18, 18, 18)` | Dark Layouts & Text |
+| **Neutral Light** | ⬜ | `#FFFFFF` | `rgb(255, 255, 255)` | Light Layouts & Text |
+| **Neutral Muted** | 🔘 | `#7A7A7A` | `rgb(122, 122, 122)` | Borders & Muted Text |
+| **Primary Dark** | ⬛ | `#282C33` | `rgb(40, 44, 51)` | Primary Brand Dark Color (Fonts, Headers, Primary Icons) |
 | **Light Mode Line & Border** | ◽ | `#E6E6E6` | `rgb(230, 230, 230)` | Light Mode Borders, Dividers & Slanted Frame Lines |
-| **Neutral Light Surface** | ⬜ | `#FFFFFF` | `rgb(255, 255, 255)` | Light Layout Background |
 | **Dark Mode Surface** | ⬛ | `#0F1115` | `rgb(15, 17, 21)` | Dark Mode Background |
-| **Neutral Muted** | 🔘 | `#6B7280` | `rgb(107, 114, 128)` | Subtitles, Borders & Muted Text |
+
 
 ---
 
@@ -37,5 +39,4 @@ All official visual branding assets and icons reside inside [`public/brand/icons
 - **Default Font Family:** **Inter**
 - **Fallback Stack:** `ui-sans-serif, system-ui, sans-serif`
 - **Configuration:** Set globally via Tailwind CSS v4 custom theme bindings inside [`globals.css`](src/app/[locale]/globals.css) and loaded asynchronously in the root layout via Next.js Google Font optimizer.
-
 
