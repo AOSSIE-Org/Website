@@ -26,7 +26,7 @@ The AOSSIE color scheme is inspired by Australia's national colors and modern UI
 All official visual branding assets and icons reside inside [`public/brand/icons/`](../public/brand/icons/):
 
 - **Primary Logo:** [aossie_logo.svg](../public/brand/icons/aossie_logo.svg)
-- **Secondary Logo:** [stability_nexus_logo.svg](../public/brand/icons/stability_nexus_logo.svg)
+- **Secondary Logo:** [aossie_secondary_logo.svg](../public/brand/icons/aossie_secondary_logo.svg)
 - **Favicon:** [favicon.ico](../public/brand/icons/favicon.ico)
 - **UI & Theme Icons:** `sun.svg`, `moon.svg`, `globe.svg`
 

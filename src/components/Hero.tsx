@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
 
 const HubDiagram3D = dynamic(() => import("./HubDiagram3D"), {
   loading: () => (
-    <div className="w-full h-[380px] sm:h-[450px] flex items-center justify-center">
+    <div className="w-full aspect-[1200/450] flex items-center justify-center">
       <div className="w-64 h-64 rounded-full border border-border bg-card/40 animate-pulse flex items-center justify-center">
         <div className="w-24 h-24 rounded-full border border-border bg-background animate-pulse" />
       </div>
@@ -36,13 +36,28 @@ const PROJECT_SVGS = [
   "/brand/project_svgs/zplit_logo.svg",
 ];
 
+function fisherYatesShuffle<T>(array: T[]): T[] {
+  const result = [...array];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+
 /* ------------------------------------------------------------------ */
 
 export default function Hero() {
   const t = useTranslations("Hero");
-  const [randomLogos] = useState<string[]>(() => {
-    return [...PROJECT_SVGS].sort(() => 0.5 - Math.random()).slice(0, 6);
-  });
+  const [randomLogos, setRandomLogos] = useState<string[]>(() => PROJECT_SVGS.slice(0, 6));
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => {
+      const shuffled = fisherYatesShuffle(PROJECT_SVGS);
+      setRandomLogos(shuffled.slice(0, 6));
+    });
+    return () => cancelAnimationFrame(id);
+  }, []);
 
   return (
     <section className="flex flex-col items-center justify-between w-full min-h-[calc(100vh-73px)] py-10 md:py-16 gap-8">

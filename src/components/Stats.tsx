@@ -212,8 +212,19 @@ export default function Stats() {
                           if (isDragging) return;
                           setExpandedCard(isExpanded ? null : card.id);
                         }}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            if (isDragging) return;
+                            setExpandedCard(isExpanded ? null : card.id);
+                          }
+                        }}
+                        tabIndex={0}
+                        role="button"
+                        aria-pressed={isExpanded}
+                        aria-label={t("cardAriaLabel", { title: card.title, value: card.value })}
                         className={cn(
-                          "cursor-pointer rounded-2xl border border-border bg-card overflow-hidden flex flex-col justify-between shadow-md select-none",
+                          "cursor-pointer rounded-2xl border border-border bg-card overflow-hidden flex flex-col justify-between shadow-md select-none focus:outline-none focus:ring-2 focus:ring-foreground/50",
                           "hover:border-brand-yellow/50 transition-colors duration-200",
                           layout === "stack"
                             ? "absolute w-64 h-56 sm:w-68 sm:h-60 p-5 sm:p-6"
@@ -240,7 +251,7 @@ export default function Stats() {
 
                         {isTopCard && (
                           <div className="absolute bottom-2 left-0 right-0 text-center select-none pointer-events-none">
-                            <span className="text-[10px] text-foreground-muted uppercase tracking-wider font-semibold animate-pulse">Swipe to navigate</span>
+                            <span className="text-[10px] text-foreground-muted uppercase tracking-wider font-semibold animate-pulse">{t("swipeHint")}</span>
                           </div>
                         )}
                       </motion.div>

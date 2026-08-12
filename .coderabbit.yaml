@@ -22,7 +22,7 @@ reviews:
       - "WIP"
     # Don't auto-review draft PRs
     drafts: false
-    # Only auto-review PRs targeting main
+    # Only auto-review PRs targeting main or develop
     base_branches:
       - main
       - develop
@@ -95,5 +95,6 @@ reviews:
     - path: "public/brand/**/*"
       instructions: |
         Review asset files for:
-        - Image optimization (appropriate size and format).
+        - Image optimization (appropriate size, format, and density variants including @2x and @3x).
+        - Font licensing and optimization.
         - SVG assets are optimized.

@@ -25,8 +25,9 @@
     "subtitle": "Building open-source solutions across finance, education, sustainability, governance, communication, and beyond creating trustworthy, user-empowering technologies that drive meaningful impact.",
     "viewAll": "View all Projects",
     "view": "View",
+    "viewProject": "View {name}",
     "details": "Details",
-    "hint": "Tip: Hover over the cards to reveal the project names and details."
+    "hint": "Tip: Click or hover over the cards to reveal the project details."
   },
   "Stats": {
     "title": "The numbers speak for us",
@@ -42,7 +43,9 @@
     "stat2Desc": "Join our global developer community to collaborate, share ideas, and grow together.",
     "stat3Value": "202+",
     "stat3Label": "Repositories and increasing",
-    "stat3Desc": "Active repositories hosting cutting-edge frameworks, libraries, and utilities."
+    "stat3Desc": "Active repositories hosting cutting-edge frameworks, libraries, and utilities.",
+    "swipeHint": "Swipe to navigate",
+    "cardAriaLabel": "{title}: {value}"
   },
   "Error": {
     "title": "Something went wrong",

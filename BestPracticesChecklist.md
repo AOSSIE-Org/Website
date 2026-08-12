@@ -15,7 +15,7 @@ This document details the adherence of **AOSSIE-Website** to AOSSIE's standard e
 - [x] **Code Quality & Linting:** Strict ESLint configuration and TypeScript type checking enabled without build warnings.
 - [x] **Clean Configuration:** No magic constants or raw hardcoded values; central constants defined in configuration files (`src/config/languages.ts`, `src/i18n/routing.ts`).
 - [x] **SEO & Metadata:** Semantic HTML elements, proper OpenGraph and Twitter card metadata, dynamically generated sitemaps (`sitemap.ts`), and `robots.txt`.
-- [x] **Automated AI Code Review:** Integration configured via `.coderabbit.yml`.
+- [x] **Automated AI Code Review:** Integration configured via `.coderabbit.yaml`.
 
 ---
 

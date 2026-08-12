@@ -42,12 +42,24 @@ function ProjectCard({ project, target, onHoverStart, onHoverEnd }: ProjectCardP
       }}
       onMouseEnter={onHoverStart}
       onMouseLeave={onHoverEnd}
+      onFocus={onHoverStart}
+      onBlur={onHoverEnd}
+      onClick={onHoverStart}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onHoverStart();
+        }
+      }}
+      tabIndex={0}
+      role="button"
+      aria-label={project.name}
       style={{
         position: "absolute",
         width: CARD_SIZE,
         height: CARD_SIZE,
       }}
-      className="cursor-pointer group select-none"
+      className="cursor-pointer group select-none focus:outline-none focus:ring-2 focus:ring-foreground/50 rounded-2xl"
     >
       <div className="relative h-full w-full overflow-hidden rounded-2xl shadow-md border border-border bg-card flex items-center justify-center p-3.5 group-hover:border-foreground/30 transition-colors">
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -93,6 +105,15 @@ const ALL_PROJECTS: ProjectItem[] = [
 
 const lerp = (start: number, end: number, t: number) => start * (1 - t) + end * t;
 
+function fisherYatesShuffle<T>(array: T[]): T[] {
+  const result = [...array];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+
 export default function Projects() {
   const t = useTranslations("Projects");
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -100,10 +121,16 @@ export default function Projects() {
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
   const [introPhase, setIntroPhase] = useState<AnimationPhase>("scatter");
   const [hoveredProject, setHoveredProject] = useState<ProjectItem | null>(null);
-  const [displayProjects] = useState<ProjectItem[]>(() => {
-    return [...ALL_PROJECTS].sort(() => 0.5 - Math.random()).slice(0, 8);
-  });
+  const [displayProjects, setDisplayProjects] = useState<ProjectItem[]>(() => ALL_PROJECTS.slice(0, 8));
   const totalProjects = displayProjects.length;
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => {
+      const shuffled = fisherYatesShuffle(ALL_PROJECTS);
+      setDisplayProjects(shuffled.slice(0, 8));
+    });
+    return () => cancelAnimationFrame(id);
+  }, []);
 
   // Track Native Window Scroll progress across sectionRef
   const { scrollYProgress } = useScroll({
@@ -349,7 +376,7 @@ export default function Projects() {
             >
               {hoveredProject && (
                 <div className="flex items-center gap-1.5 font-semibold text-foreground-primary">
-                  <span>View {hoveredProject.name}</span>
+                  <span>{t("viewProject", { name: hoveredProject.name })}</span>
                   <span className="text-[10px] font-bold">↗</span>
                 </div>
               )}

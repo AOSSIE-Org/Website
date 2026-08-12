@@ -1,6 +1,7 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
-import React from 'react';
+
+const mockReplace = vi.fn();
 
 vi.mock('next-intl', () => ({
   useLocale: () => 'en',
@@ -9,14 +10,30 @@ vi.mock('next-intl', () => ({
 
 vi.mock('@/i18n/navigation', () => ({
   usePathname: () => '/en',
-  useRouter: () => ({ replace: vi.fn() }),
+  useRouter: () => ({ replace: mockReplace }),
 }));
 
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 describe('LanguageSwitcher Component', () => {
-  it('renders language selector select element with active language', () => {
+  it('renders combobox accessible element and available locale options', () => {
     render(<LanguageSwitcher />);
-    expect(screen.getByRole('combobox')).toBeInTheDocument();
+    
+    const selectElement = screen.getByRole('combobox', { name: /label/i });
+    expect(selectElement).toBeInTheDocument();
+
+    const options = screen.getAllByRole('option');
+    expect(options).toHaveLength(2);
+    expect(options[0]).toHaveTextContent(/English/i);
+    expect(options[1]).toHaveTextContent(/हिन्दी/i);
+  });
+
+  it('triggers router.replace with selected locale when changing selection', () => {
+    render(<LanguageSwitcher />);
+    
+    const selectElement = screen.getByRole('combobox', { name: /label/i });
+    fireEvent.change(selectElement, { target: { value: 'hi' } });
+
+    expect(mockReplace).toHaveBeenCalledWith('/en', { locale: 'hi' });
   });
 });

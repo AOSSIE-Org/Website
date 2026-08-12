@@ -25,7 +25,7 @@ function ProjectsSkeleton() {
 
 function StatsSkeleton() {
   return (
-    <section className="w-full relative h-[120vh] bg-background border-b border-border">
+    <section className="w-full relative h-[140vh] sm:h-[120vh] bg-background border-b border-border">
       <div className="sticky top-0 h-screen w-full flex flex-col items-center pt-24 pb-10 gap-8 overflow-hidden">
         <div className="w-full flex flex-col items-center text-center max-w-6xl mx-auto gap-4 px-4 sm:px-10 lg:px-14 shrink-0">
           <div className="h-12 w-72 bg-foreground-muted/10 rounded-xl animate-pulse" />
