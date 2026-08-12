@@ -1,6 +1,8 @@
 import type { MetadataRoute } from 'next';
 import { routing } from '@/i18n/routing';
 
+export const dynamic = 'force-static';
+
 export default function sitemap(): MetadataRoute.Sitemap {
   /**
    * INSTRUCTIONS FOR PRODUCTION DOMAIN:
@@ -12,10 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
 
   return routing.locales.map((locale) => ({
-    url:
-      locale === routing.defaultLocale
-        ? baseUrl
-        : `${baseUrl}/${locale}`,
+    url: `${baseUrl}/${locale}`,
     changeFrequency: 'monthly',
     priority: 1,
   }));

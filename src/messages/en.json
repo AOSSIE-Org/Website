@@ -7,16 +7,16 @@
   "Navbar": {
     "about": "About",
     "projects": "Projects",
-    "ideas": "Ideas",
-    "apply": "Apply",
+    "programs": "Programs",
     "github": "GitHub",
     "selectLanguage": "Select Language"
   },
   "Hero": {
     "titleLine1": "We Innovate",
     "titleLine2": "We Educate",
-    "subtitlePrefix": "Empowering open-source projects to innovate, educate, and create lasting global impact since ",
+    "subtitlePrefix": "A not-for-profit umbrella organization empowering open-source projects to create lasting global impact since ",
     "learnMore": "Learn More",
+    "joinCommunity": "Join Our Community",
     "copyright": "© Australian Open Source Software Innovation and Education",
     "socialMedia": "Social Media"
   },
@@ -25,10 +25,27 @@
     "subtitle": "Building open-source solutions across finance, education, sustainability, governance, communication, and beyond creating trustworthy, user-empowering technologies that drive meaningful impact.",
     "viewAll": "View all Projects",
     "view": "View",
-    "details": "Details"
+    "viewProject": "View {name}",
+    "details": "Details",
+    "hint": "Tip: Click or hover over the cards to reveal the project details."
   },
-  "GSoC": {
-    "title": "Google Summer of Code"
+  "Stats": {
+    "title": "The numbers speak for us",
+    "subtitle": "Discover our journey and impact in the open-source ecosystem over the years.",
+    "mainStatValue": "10+",
+    "mainStatTitle": "Years of Open Source Innovation",
+    "mainStatDesc": "Empowering developers and students to build trustworthy open-source software solutions since 2016.",
+    "stat1Value": "20+",
+    "stat1Label": "Projects / Year",
+    "stat1Desc": "Building innovative open-source solutions across finance, education, and governance.",
+    "stat2Value": "8K+",
+    "stat2Label": "Discord Members",
+    "stat2Desc": "Join our global developer community to collaborate, share ideas, and grow together.",
+    "stat3Value": "202+",
+    "stat3Label": "Repositories and increasing",
+    "stat3Desc": "Active repositories hosting cutting-edge frameworks, libraries, and utilities.",
+    "swipeHint": "Swipe to navigate",
+    "cardAriaLabel": "{title}: {value}"
   },
   "Error": {
     "title": "Something went wrong",
@@ -45,6 +62,15 @@
   },
   "ThemeToggle": {
     "toggleTheme": "Toggle theme"
+  },
+  "Footer": {
+    "tagline": "Australian Open Source Software Innovation and Education",
+    "description": "Empowering open-source projects to innovate, educate, and create lasting global impact.",
+    "quickLinks": "Quick Links",
+    "community": "Community",
+    "supportUs": "Support Us",
+    "share": "Share on Social",
+    "copyright": "© Australian Open Source Software Innovation and Education (AOSSIE)."
   }
 }
 

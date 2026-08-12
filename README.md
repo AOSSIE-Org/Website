@@ -18,30 +18,37 @@
 
 <!-- Organization/Project Social Handles -->
 <p align="center">
-<!-- Telegram -->
-<a href="https://t.me/+bMWGzaMTMa8xN2Ex">
-<img src="https://img.shields.io/badge/Telegram-black?style=flat&logo=telegram&logoColor=white&logoSize=auto&color=24A1DE" alt="Telegram Badge"/></a>
-&nbsp;&nbsp;
-<!-- X (formerly Twitter) -->
-<a href="https://x.com/aossie_org">
-<img src="https://img.shields.io/twitter/follow/aossie_org" alt="X Badge"/></a>
-&nbsp;&nbsp;
-<!-- Discord AOSSIE-->
-<a href="https://discord.gg/hjUhu33uAn">
-<img src="https://img.shields.io/discord/995968619034984528?style=flat&logo=discord&logoColor=white&logoSize=auto&label=Discord&labelColor=5865F2&color=57F287" alt="Discord AOSSIE"/></a>
-<!-- Discord Stability Nexus-->
-<a href="https://discord.gg/YzDKeEfWtS">
-<img src="https://img.shields.io/discord/995968619034984528?style=flat&logo=discord&logoColor=white&logoSize=auto&label=Discord&labelColor=5865F2&color=57F287" alt="Discord Stability Nexus"/></a>
-&nbsp;&nbsp;
-<!-- LinkedIn -->
-<a href="https://www.linkedin.com/company/aossie/">
-  <img src="https://img.shields.io/badge/LinkedIn-black?style=flat&logo=LinkedIn&logoColor=white&logoSize=auto&color=0A66C2" alt="LinkedIn Badge"></a>
-&nbsp;&nbsp;
-<!-- Youtube AOSSIE-->
-<a href="https://www.youtube.com/@AOSSIE-Org">
-  <img src="https://img.shields.io/youtube/channel/subscribers/UCKVVLbawY7Gej_3o2WKsoiA?style=flat&logo=youtube&logoColor=white%20&logoSize=auto&labelColor=FF0000&color=FF0000" alt="Youtube Badge"></a>
-<a href="https://www.youtube.com/@StabilityNexus">
-  <img src="https://img.shields.io/youtube/channel/subscribers/UCKVVLbawY7Gej_3o2WKsoiA?style=flat&logo=youtube&logoColor=white%20&logoSize=auto&labelColor=FF0000&color=FF0000" alt="Youtube Badge"></a>
+  <a href="https://t.me/+bMWGzaMTMa8xN2Ex">
+    <img src="https://img.shields.io/badge/Telegram_AOSSIE-black?style=flat&logo=telegram&logoColor=white&color=24A1DE" alt="Telegram Badge"/>
+  </a>
+  &nbsp;
+  <a href="https://x.com/aossie_org">
+    <img src="https://img.shields.io/twitter/follow/aossie_org" alt="X Badge"/>
+  </a>
+  &nbsp;
+  <a href="https://discord.gg/hjUhu33uAn">
+    <img src="https://img.shields.io/discord/995968619034984528?style=flat&logo=discord&logoColor=white&label=Discord%20AOSSIE&labelColor=5865F2&color=57F287" alt="Discord AOSSIE"/>
+  </a>
+  &nbsp;
+  <a href="https://discord.gg/YzDKeEfWtS">
+    <img src="https://img.shields.io/discord/995968619034984528?style=flat&logo=discord&logoColor=white&label=Discord%20Stability%20Nexus&labelColor=5865F2&color=57F287" alt="Discord Stability Nexus"/>
+  </a>
+  &nbsp;
+  <a href="https://www.linkedin.com/company/aossie/">
+    <img src="https://img.shields.io/badge/LinkedIn_AOSSIE-black?style=flat&logo=LinkedIn&logoColor=white&color=0A66C2" alt="LinkedIn Badge"/>
+  </a>
+  &nbsp;
+  <a href="https://www.youtube.com/@AOSSIE-Org">
+    <img src="https://img.shields.io/badge/Subscribe_to_AOSSIE-red?style=flat&logo=youtube&logoColor=white" alt="Subscribe to AOSSIE"/>
+  </a>
+  &nbsp;
+  <a href="https://scorecard.dev/viewer/?uri=github.com/AOSSIE-Org/website">
+    <img src="https://api.scorecard.dev/projects/github.com/AOSSIE-Org/website/badge" alt="OpenSSF Scorecard Badge"/>
+  </a>
+  &nbsp;
+  <a href="https://www.youtube.com/@StabilityNexus">
+    <img src="https://img.shields.io/badge/Subscribe_to_Stability_Nexus-red?style=flat&logo=youtube&logoColor=white" alt="Subscribe to Stability Nexus"/>
+  </a>
 </p>
 
 
@@ -154,7 +161,6 @@ Here is a breakdown of the key i18n directories and files:
 │   │   └── providers/
 │   │       ├── theme-provider.tsx # Next-themes client wrapper component
 │   │       └── lenis-provider.tsx # Lenis smooth scrolling provider wrapper
-│   └── proxy.ts                # Next.js 16 Proxy Middleware for route and locale redirection
 ├── .coderabbit.yml         # Automated AI Code Review configuration
 ├── COPYRIGHT.md            # Copyright terms
 ├── Contributors.md         # Project contributors list

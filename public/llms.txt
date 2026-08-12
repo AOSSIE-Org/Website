@@ -13,7 +13,6 @@ This repository is a high-performance webpage built on **Next.js 16 (App Router)
 - **`src/i18n/`**: Configurations for translation lookups and custom navigation helpers.
 - **`src/messages/`**: Directory containing translation catalogs (e.g., `en.json`, `hi.json`).
 - **`src/components/`**: Location for reusable, localized UI components.
-- **`src/proxy.ts`**: Next.js 16 Proxy Middleware for automatic locale routing.
 
 ---
 

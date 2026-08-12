@@ -33,6 +33,12 @@
   --color-card-bg: var(--card-bg);
   --color-card-border: var(--card-border);
   --shadow-card: var(--card-shadow);
+
+  /* 3D Hub Diagram Tokens */
+  --color-hub-bg: var(--hub-bg);
+  --color-hub-grid: var(--hub-grid-stroke);
+  --color-hub-card-top: var(--hub-card-top);
+  --color-hub-card-border: var(--hub-card-border);
 }
 
 /* --- SEMANTIC COLOR TOKENS --- */
@@ -65,6 +71,16 @@
   --card-bg: #FFFFFF;
   --card-border: #E5E7EB;
   --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.04);
+
+  /* 3D Hub Diagram Tokens */
+  --hub-bg: #FFFFFF;
+  --hub-grid-stroke: #E2E2E2;
+  --hub-card-top: #FFFFFF;
+  --hub-card-border: #E4E7EE;
+  --hub-center-border-start: #ffcd00;
+  --hub-center-border-mid1: #A3E635;
+  --hub-center-border-mid2: #22C55E;
+  --hub-center-border-end: #15803D;
 
   /* Button Tokens */
   --button-primary-bg: #FFFFFF;
@@ -101,6 +117,16 @@
   --card-bg: #161920;
   --card-border: #242831;
   --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.4);
+
+  /* 3D Hub Diagram Tokens */
+  --hub-bg: #0F1115;
+  --hub-grid-stroke: rgba(255, 255, 255, 0.04);
+  --hub-card-top: #1F242D;
+  --hub-card-border: #2E3543;
+  --hub-center-border-start: #FFE033;
+  --hub-center-border-mid1: #A3E635;
+  --hub-center-border-mid2: #22C55E;
+  --hub-center-border-end: #15803D;
 
   /* Button Tokens */
   --button-primary-bg: #161920;
