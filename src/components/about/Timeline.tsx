@@ -7,7 +7,7 @@ import { useTranslations } from "next-intl";
 
 export function Timeline() {
   const t = useTranslations("Timeline");
-  const containerRef = useRef<HTMLOListElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start 80%", "end 20%"],
@@ -45,7 +45,7 @@ export function Timeline() {
       </motion.div>
 
       <div className="max-w-3xl mx-auto px-4 relative">
-        <ol ref={containerRef} className="relative border-l-2 border-border ml-4 sm:ml-6">
+        <div ref={containerRef} className="relative border-l-2 border-border ml-4 sm:ml-6">
           {/* Animated line fill */}
           <motion.div
             className="absolute left-[-2px] top-0 w-[2px] rounded-full origin-top bg-heading-highlight"
@@ -64,16 +64,18 @@ export function Timeline() {
             />
           </motion.div>
 
-          {milestones.map((milestone, idx) => (
-            <TimelineElement
-              key={idx}
-              index={idx}
-              title={milestone.title}
-              time={milestone.time}
-              description={milestone.description}
-            />
-          ))}
-        </ol>
+          <ol>
+            {milestones.map((milestone, idx) => (
+              <TimelineElement
+                key={idx}
+                index={idx}
+                title={milestone.title}
+                time={milestone.time}
+                description={milestone.description}
+              />
+            ))}
+          </ol>
+        </div>
       </div>
     </div>
   );

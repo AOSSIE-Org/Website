@@ -28,6 +28,8 @@ export default async function ProjectDetailPage({
   setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: "ProjectDetail" });
+  const tCat = await getTranslations({ locale, namespace: "Categories" });
+  const tStatus = await getTranslations({ locale, namespace: "Status" });
 
   const project = getProjectBySlug(slug);
 
@@ -68,10 +70,10 @@ export default async function ProjectDetailPage({
             <div className="flex flex-col gap-2">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-heading-highlight/10 text-heading-highlight border border-heading-highlight/20 uppercase tracking-wider">
-                  {project.category}
+                  {tCat.has(project.category as Parameters<typeof tCat>[0]) ? tCat(project.category as Parameters<typeof tCat>[0]) : project.category}
                 </span>
                 <span className="px-3 py-1 rounded-full text-xs font-mono font-semibold border border-border bg-background-muted text-foreground-secondary">
-                  {project.status}
+                  {tStatus.has(project.status as Parameters<typeof tStatus>[0]) ? tStatus(project.status as Parameters<typeof tStatus>[0]) : project.status}
                 </span>
               </div>
               <h1 className="text-3xl sm:text-4xl font-extrabold text-foreground tracking-tight">
@@ -98,7 +100,7 @@ export default async function ProjectDetailPage({
                 rel="noopener noreferrer"
                 className="flex-1 md:flex-initial px-5 py-3 rounded-xl border border-heading-highlight/30 bg-heading-highlight/10 hover:bg-heading-highlight/20 text-heading-highlight text-sm font-bold transition-all flex items-center justify-center gap-2 shadow-xs"
               >
-                <span>Download / Releases</span>
+                <span>{t("downloadReleases")}</span>
                 <span className="text-xs">↗</span>
               </a>
             )}

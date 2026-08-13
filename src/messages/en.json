@@ -26,6 +26,7 @@
     "viewAll": "View all Projects",
     "view": "View",
     "viewProject": "View {name}",
+    "viewProjectOnGithub": "View {name} on GitHub",
     "details": "Details",
     "hint": "Tip: Click or hover over the cards to reveal the project details."
   },
@@ -39,12 +40,14 @@
     "noResults": "No projects found matching \"{query}\" in category \"{category}\".",
     "githubRepo": "GitHub",
     "discordChannel": "Discord",
+    "downloadBtn": "Download",
     "detailsBtn": "Details"
   },
   "ProjectDetail": {
     "backLink": "Back to Projects",
     "githubRepo": "GitHub Repository",
     "liveSite": "Live Site",
+    "downloadReleases": "Download / Releases",
     "overviewTitle": "Project Overview",
     "featuresTitle": "Key Architecture & Features",
     "techTitle": "Technologies Used",
@@ -140,7 +143,13 @@
     "Education": "Education",
     "Sustainability": "Sustainability",
     "Health": "Health",
-    "Infrastructure": "Infrastructure"
+    "Infrastructure": "Infrastructure",
+    "Tools & Utilities": "Tools & Utilities"
+  },
+  "Status": {
+    "Ongoing": "Ongoing",
+    "Production Ready": "Production Ready",
+    "Active Development": "Active Development"
   },
   "Stats": {
     "title": "The numbers speak for us",

@@ -28,51 +28,47 @@ const CARD_SIZE = 76;
 
 function ProjectCard({ project, target, onHoverStart, onHoverEnd }: ProjectCardProps) {
   return (
-    <a
+    <motion.a
       href={project.githubLink}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`${project.name} GitHub Repository`}
+      animate={{
+        x: target.x,
+        y: target.y,
+        rotate: target.rotation,
+        scale: target.scale,
+        opacity: target.opacity,
+      }}
+      transition={{
+        type: "spring",
+        stiffness: 40,
+        damping: 15,
+      }}
+      onMouseEnter={onHoverStart}
+      onMouseLeave={onHoverEnd}
+      onFocus={onHoverStart}
+      onBlur={onHoverEnd}
+      style={{
+        position: "absolute",
+        width: CARD_SIZE,
+        height: CARD_SIZE,
+      }}
+      className="cursor-pointer group select-none focus:outline-none focus:ring-2 focus:ring-foreground/50 rounded-2xl"
     >
-      <motion.div
-        animate={{
-          x: target.x,
-          y: target.y,
-          rotate: target.rotation,
-          scale: target.scale,
-          opacity: target.opacity,
-        }}
-        transition={{
-          type: "spring",
-          stiffness: 40,
-          damping: 15,
-        }}
-        onMouseEnter={onHoverStart}
-        onMouseLeave={onHoverEnd}
-        onFocus={onHoverStart}
-        onBlur={onHoverEnd}
-        tabIndex={0}
-        style={{
-          position: "absolute",
-          width: CARD_SIZE,
-          height: CARD_SIZE,
-        }}
-        className="cursor-pointer group select-none focus:outline-none focus:ring-2 focus:ring-foreground/50 rounded-2xl"
-      >
-        <div className="relative h-full w-full overflow-hidden rounded-2xl shadow-md border border-border bg-card flex items-center justify-center p-3.5 group-hover:border-foreground/30 transition-colors">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={project.src}
-            alt={project.name}
-            loading="lazy"
-            decoding="async"
-            className={`w-full h-full object-contain filter drop-shadow-xs ${
-              project.src.endsWith("resonate_logo.svg") ? "theme-icon-invert" : ""
-            }`}
-          />
-        </div>
-      </motion.div>
-    </a>
+      <div className="relative h-full w-full overflow-hidden rounded-2xl shadow-md border border-border bg-card flex items-center justify-center p-3.5 group-hover:border-foreground/30 transition-colors">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={project.src}
+          alt={project.name}
+          loading="lazy"
+          decoding="async"
+          className={`w-full h-full object-contain filter drop-shadow-xs ${
+            project.src.endsWith("resonate_logo.svg") ? "theme-icon-invert" : ""
+          }`}
+        />
+      </div>
+    </motion.a>
   );
 }
 
@@ -93,11 +89,11 @@ const ALL_PROJECTS: ProjectItem[] = [
   { id: "moveyourbody", name: "MoveYourBody", category: "Health & Fitness", src: "/brand/project_svgs/MoveYourBody_logo.svg", githubLink: "https://github.com/AOSSIE-Org/MoveYourBody" },
   { id: "carbontracker", name: "Carbon Tracker", category: "Sustainability", src: "/brand/project_svgs/carbonTracker_logo.svg", githubLink: "https://github.com/AOSSIE-Org/CarbonTracker" },
   { id: "chainvoice", name: "Chainvoice", category: "DeFi Invoicing", src: "/brand/project_svgs/chainvoice_logo.svg", githubLink: "https://github.com/StabilityNexus/Chainvoice" },
-  { id: "ellena", name: "Ellena", category: "AI & NLP", src: "/brand/project_svgs/ellena_logo.svg", githubLink: "https://github.com/AOSSIE-Org/Ellena" },
+  { id: "ellena", name: "Ellena", category: "AI & NLP", src: "/brand/project_svgs/ellena_logo.svg", githubLink: "https://github.com/AOSSIE-Org/Ell-ena" },
   { id: "minichain", name: "MiniChain", category: "Micro-Blockchains", src: "/brand/project_svgs/minichain_logo.svg", githubLink: "https://github.com/AOSSIE-Org/MiniChain" },
   { id: "ogh", name: "Open Gift Hub", category: "Open Source Giving", src: "/brand/project_svgs/ogh_logo.svg", githubLink: "https://github.com/AOSSIE-Org/Ogh" },
   { id: "pictopy", name: "PicToPy", category: "Image Processing", src: "/brand/project_svgs/pictopy_logo.svg", githubLink: "https://github.com/AOSSIE-Org/PicToPy" },
-  { id: "rein", name: "REIN", category: "Decentralized Escrow", src: "/brand/project_svgs/rein_logo.svg", githubLink: "https://github.com/StabilityNexus/REIN" },
+  { id: "rein", name: "REIN", category: "Decentralized Escrow", src: "/brand/project_svgs/rein_logo.svg", githubLink: "https://github.com/AOSSIE-Org/Rein" },
   { id: "thrubox", name: "Thrubox", category: "Decentralized Storage", src: "/brand/project_svgs/thrubox_logo.svg", githubLink: "https://github.com/AOSSIE-Org/Thrubox" },
   { id: "zplit", name: "Zplit", category: "DeFi Expense Sharing", src: "/brand/project_svgs/zplit_logo.svg", githubLink: "https://github.com/StabilityNexus/Zplit" },
 ];
@@ -375,7 +371,7 @@ export default function Projects() {
             >
               {hoveredProject && (
                 <div className="flex items-center gap-1.5 font-semibold text-foreground-primary">
-                  <span>{t("viewProject", { name: hoveredProject.name })} (GitHub)</span>
+                  <span>{t("viewProjectOnGithub", { name: hoveredProject.name })}</span>
                   <span className="text-[10px] font-bold">↗</span>
                 </div>
               )}

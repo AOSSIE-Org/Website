@@ -142,5 +142,6 @@ export function getIdeasByYear(year: string): GSoCIdea[] {
 }
 
 export function getAllIdeaYears(): string[] {
-  return ['2025', '2024', '2023', '2022'];
+  const years = Array.from(new Set(IDEAS_DATA.map((idea) => idea.year)));
+  return years.sort((a, b) => b.localeCompare(a));
 }

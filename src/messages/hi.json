@@ -26,6 +26,7 @@
     "viewAll": "सभी परियोजनाएं देखें",
     "view": "देखें",
     "viewProject": "{name} देखें",
+    "viewProjectOnGithub": "गिटहब पर {name} देखें",
     "details": "विवरण",
     "hint": "संकेत: परियोजनाओं के विवरण देखने के लिए कार्ड पर क्लिक या होवर करें।"
   },
@@ -39,12 +40,14 @@
     "noResults": "\"{category}\" श्रेणी में \"{query}\" से मेल खाती कोई परियोजना नहीं मिली।",
     "githubRepo": "गिटहब",
     "discordChannel": "डिस्कॉर्ड",
+    "downloadBtn": "डाउनलोड",
     "detailsBtn": "विवरण"
   },
   "ProjectDetail": {
     "backLink": "परियोजनाओं पर वापस जाएं",
     "githubRepo": "गिटहब रिपॉजिटरी",
     "liveSite": "लाइव साइट",
+    "downloadReleases": "डाउनलोड / रिलीज़",
     "overviewTitle": "परियोजना का अवलोकन",
     "featuresTitle": "प्रमुख वास्तुकला और विशेषताएं",
     "techTitle": "उपयोग की गई तकनीकें",
@@ -140,7 +143,13 @@
     "Education": "शिक्षा",
     "Sustainability": "स्थिरता",
     "Health": "स्वास्थ्य",
-    "Infrastructure": "इंफ्रास्ट्रक्चर"
+    "Infrastructure": "इंफ्रास्ट्रक्चर",
+    "Tools & Utilities": "टूल्स और उपयोगिताएं"
+  },
+  "Status": {
+    "Ongoing": "चल रहा है",
+    "Production Ready": "उत्पादन के लिए तैयार",
+    "Active Development": "सक्रिय विकास"
   },
   "Stats": {
     "title": "आंकड़े हमारे बारे में बोलते हैं",

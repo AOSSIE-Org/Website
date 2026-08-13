@@ -141,9 +141,18 @@ export function GrowthChart() {
                   fill={activePoint?.year === pt.year ? "#FFCD00" : "#00843D"}
                   stroke="var(--background)"
                   strokeWidth="2"
-                  className="cursor-pointer transition-all"
+                  tabIndex={0}
+                  role="button"
+                  aria-label={`${pt.year}: ${pt.projects} projects`}
+                  className="cursor-pointer transition-all focus:outline-none focus:ring-2 focus:ring-heading-highlight"
                   onMouseEnter={() => setActivePoint(pt)}
                   onClick={() => setActivePoint(pt)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setActivePoint(pt);
+                    }
+                  }}
                 />
               </g>
             ))}

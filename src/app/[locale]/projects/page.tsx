@@ -10,12 +10,17 @@ import { useTranslations } from "next-intl";
 export default function ProjectsPage() {
   const t = useTranslations("ProjectsPage");
   const tCat = useTranslations("Categories");
+  const tStatus = useTranslations("Status");
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const projects = useMemo(() => getAllProjects(), []);
   const rawCategories = useMemo(() => getProjectCategories(), []);
+
+  const categoryLabel = tCat.has(selectedCategory as Parameters<typeof tCat>[0])
+    ? tCat(selectedCategory as Parameters<typeof tCat>[0])
+    : selectedCategory;
 
   const filteredProjects = useMemo(() => {
     return projects.filter((project) => {
@@ -141,7 +146,7 @@ export default function ProjectsPage() {
                       />
                     </div>
                     <span className="px-3 py-1 rounded-full text-[11px] font-mono font-semibold border border-border bg-background-muted text-foreground-secondary">
-                      {project.status}
+                      {tStatus.has(project.status as Parameters<typeof tStatus>[0]) ? tStatus(project.status as Parameters<typeof tStatus>[0]) : project.status}
                     </span>
                   </div>
 
@@ -190,7 +195,7 @@ export default function ProjectsPage() {
                         rel="noopener noreferrer"
                         className="text-heading-highlight font-bold hover:underline transition-colors flex items-center gap-1"
                       >
-                        <span>Download</span>
+                        <span>{t("downloadBtn")}</span>
                         <span className="text-[10px]">↗</span>
                       </a>
                     )}
@@ -222,7 +227,7 @@ export default function ProjectsPage() {
         {filteredProjects.length === 0 && (
           <div className="py-20 text-center flex flex-col items-center justify-center gap-3">
             <p className="text-lg text-foreground-secondary font-medium">
-              {t("noResults", { query: searchQuery, category: selectedCategory })}
+              {t("noResults", { query: searchQuery, category: categoryLabel })}
             </p>
             <button
               onClick={() => {
