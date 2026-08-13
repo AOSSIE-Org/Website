@@ -3,11 +3,18 @@ import { Inter, Noto_Sans_Devanagari } from "next/font/google";
 import { routing } from "@/i18n/routing";
 import { generateLocaleMetadata } from "@/i18n/metadata";
 import { notFound } from "next/navigation";
-import { getMessages, setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
+import enMessages from "@/messages/en.json";
+import hiMessages from "@/messages/hi.json";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { LenisProvider } from "@/components/providers/lenis-provider";
 import "./globals.css";
+
+const messagesMap: Record<string, Record<string, unknown>> = {
+  en: enMessages as Record<string, unknown>,
+  hi: hiMessages as Record<string, unknown>,
+};
 
 const inter = Inter({
   variable: "--font-inter",
@@ -58,8 +65,8 @@ export default async function RootLayout({
   // Enable static rendering
   setRequestLocale(locale);
 
-  // Provide messages to Client Components
-  const messages = await getMessages({ locale });
+  // Provide messages to Client Components directly via messagesMap
+  const messages = messagesMap[locale] || enMessages;
 
   return (
     <html
@@ -68,7 +75,7 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-background text-foreground" suppressHydrationWarning>
-        <NextIntlClientProvider messages={messages}>
+        <NextIntlClientProvider locale={locale} messages={messages} timeZone="UTC">
           <ThemeProvider>
             <LenisProvider>
               {children}
