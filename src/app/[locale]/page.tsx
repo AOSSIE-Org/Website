@@ -6,6 +6,7 @@ import { use } from "react";
 import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import Footer from "@/components/Footer";
 
 function ProjectsSkeleton() {
   return (
@@ -111,6 +112,7 @@ export default function Home({
               <Projects />
               <Stats />
             </main>
+            <Footer />
           </div>
 
           {/* Right Edge Slanted Lines Column (Visible on mobile with w-5) */}
