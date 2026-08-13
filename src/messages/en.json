@@ -29,6 +29,119 @@
     "details": "Details",
     "hint": "Tip: Click or hover over the cards to reveal the project details."
   },
+  "ProjectsPage": {
+    "badge": "Open Source Portfolio",
+    "title": "Projects That Create an Impact",
+    "subtitle": "Free, open-source, and built by a global community of developers, researchers, and innovators across finance, education, AI, and sustainability.",
+    "searchPlaceholder": "Search projects by name, keyword, or tech stack...",
+    "clearSearch": "Clear",
+    "resetFilters": "Reset Filters",
+    "noResults": "No projects found matching \"{query}\" in category \"{category}\".",
+    "githubRepo": "GitHub",
+    "discordChannel": "Discord",
+    "detailsBtn": "Details"
+  },
+  "ProjectDetail": {
+    "backLink": "Back to Projects",
+    "githubRepo": "GitHub Repository",
+    "liveSite": "Live Site",
+    "overviewTitle": "Project Overview",
+    "featuresTitle": "Key Architecture & Features",
+    "techTitle": "Technologies Used",
+    "getInvolvedTitle": "Get Involved",
+    "getInvolvedDesc": "Interested in contributing code, fixing issues, or mentoring students for this project?",
+    "joinDiscord": "Join Discord Discussion",
+    "browseIssues": "Browse Open Issues"
+  },
+  "AboutPage": {
+    "badge": "Not-For-Profit Open Source Organization",
+    "title": "Get to know our Community",
+    "subtitle": "AOSSIE (Australian Open Source Software Innovation and Education) is a registered non-profit organization (ABN: 32 743 493 466) dedicated to project-based, innovation-focused, and research-intensive education. All of our software projects are 100% free and open-source.",
+    "stats": {
+      "years": "Years of Innovation",
+      "projectsPerYear": "Projects / Year",
+      "repositories": "Repositories",
+      "mentors": "Dedicated Mentors",
+      "contributors": "Contributors",
+      "communityMembers": "Community Members"
+    }
+  },
+  "GrowthChart": {
+    "title": "Open Source Growth & Impact",
+    "subtitle": "Completed projects and software initiatives released per year since 2016",
+    "activeLabel": "{year}: {projects} Projects"
+  },
+  "Timeline": {
+    "title": "Our Journey",
+    "subtitle": "Over a decade of empowering developers, students, and researchers through open-source software.",
+    "m1Title": "AOSSIE's First Projects",
+    "m1Desc": "Three of AOSSIE's foundation projects (Skeptik/Scavenger, Carbon Footprint for Google Maps, and Mind the Word) were established by Dr. Bruno Woltzenlogel Paleo and began participating in GSoC under the CSE@TU-Wien organization.",
+    "m2Title": "Official AOSSIE Foundation",
+    "m2Desc": "Dr. Bruno Woltzenlogel Paleo formally established the Australian Open Source Software Innovation and Education (AOSSIE) while serving as a senior researcher at the Australian National University.",
+    "m3Title": "First Autonomous GSoC Participation",
+    "m3Desc": "AOSSIE participated in Google Summer of Code independently for the first time, mentoring students globally. The Agora electronic voting project became AOSSIE's flagship fourth project.",
+    "m4Title": "Not-For-Profit Charity Status",
+    "m4Desc": "AOSSIE was legally registered as an independent non-profit organization in Australia (ABN: 32 743 493 466), dedicated to open-source innovation and education.",
+    "m5Title": "Innovation Acceleration & Web3",
+    "m5Desc": "AOSSIE expanded its project ecosystem into decentralized finance, zero-knowledge proofs, emerging AI models, and peer-to-peer communication technologies.",
+    "m6Title": "Stability Nexus Sub-Organization",
+    "m6Desc": "AOSSIE's blockchain and decentralized finance projects were consolidated under the Stability Nexus sub-organization to accelerate protocol development.",
+    "m7Title": "AI-Powered Open Source Education",
+    "m7Desc": "AOSSIE evolved into an AI-ready open-source umbrella organization, leveraging modern LLMs and automated workflows while preserving open academic research integrity."
+  },
+  "Team": {
+    "title": "Our Community & Team",
+    "subtitle": "AOSSIE is autonomously run by a dedicated, diverse global group of volunteers comprising admins, mentors, students, maintainers, and open-source evangelists.",
+    "r1Title": "Admins & Maintainers",
+    "r1Desc": "Guiding project direction, architecture reviews, and open-source infrastructure.",
+    "r2Title": "Dedicated Mentors",
+    "r2Desc": "Guiding students through GSoC, code reviews, proposal writing, and technical growth.",
+    "r3Title": "Active Contributors",
+    "r3Desc": "Submitting pull requests, squashing bugs, implementing features, and building docs.",
+    "r4Title": "Community Members",
+    "r4Desc": "Collaborating across Discord, Telegram, and GitHub to foster open software innovation."
+  },
+  "ProgramsPage": {
+    "badge": "Google Summer of Code & Programs",
+    "title": "Project Ideas & Programs",
+    "subtitle": "AOSSIE participates in Google Summer of Code (GSoC) and open-source mentorship programs. Browse project ideas proposed by our maintainers and community.",
+    "yearLabel": "Year:",
+    "applyGuideBtn": "How to Apply Guide",
+    "fullSpecBtn": "Full Proposal Spec",
+    "mentorsLabel": "Mentors:",
+    "noIdeas": "No project ideas listed for GSoC {year} yet. Check back soon!"
+  },
+  "ApplyPage": {
+    "badge": "Contributor & GSoC Guide",
+    "title": "How to Apply & Contribute",
+    "subtitle": "Follow our step-by-step roadmap to get involved with AOSSIE open-source projects and prepare a competitive GSoC proposal.",
+    "s1Title": "Join us on Discord",
+    "s1Desc": "Join the AOSSIE community on Discord and connect with developers, mentors, and maintainers. Our Discord server is the central hub to ask questions, share project ideas, and get support throughout the Google Summer of Code application process.",
+    "s1Action": "Join Discord Server",
+    "s2Title": "Start Contributing (Make Your First PR)",
+    "s2Desc": "Explore AOSSIE GitHub repositories and pick beginner-friendly or good-first-issues. Submitting code or documentation pull requests showcases your technical understanding and willingness to collaborate with project maintainers.",
+    "s2Action": "Explore GitHub Repositories",
+    "s3Title": "Write a Draft Proposal",
+    "s3Desc": "Select a project idea from our GSoC Ideas List or propose your own innovative feature. Expand the idea into a detailed proposal detailing your technical approach, implementation architecture, timeline milestones, and deliverables.",
+    "s3Action": "Browse GSoC Ideas",
+    "s4Title": "Discuss with Mentors & Refine",
+    "s4Desc": "Share your proposal draft with our dedicated mentors on Discord or GitHub. Experienced mentors will review your implementation timeline, provide architectural feedback, and help you refine your application to maximize your selection chances.",
+    "s4Action": "Connect with Mentors",
+    "s5Title": "Submit Final Application",
+    "s5Desc": "Submit your finalized PDF application to the official Google Summer of Code portal before the deadline. Double-check all required deliverables, milestone breakdowns, and contact information. Good luck!",
+    "s5Action": "GSoC Official Portal"
+  },
+  "Categories": {
+    "All": "All",
+    "Social": "Social",
+    "Decentralized": "Decentralized",
+    "DeFi": "DeFi",
+    "AI & NLP": "AI & NLP",
+    "Education": "Education",
+    "Sustainability": "Sustainability",
+    "Health": "Health",
+    "Infrastructure": "Infrastructure"
+  },
   "Stats": {
     "title": "The numbers speak for us",
     "subtitle": "Discover our journey and impact in the open-source ecosystem over the years.",
@@ -70,7 +183,13 @@
     "community": "Community",
     "supportUs": "Support Us",
     "share": "Share on Social",
-    "copyright": "© Australian Open Source Software Innovation and Education (AOSSIE)."
+    "copyright": "© Australian Open Source Software Innovation and Education (AOSSIE).",
+    "orgName": "Australian Open Source Software Innovation and Education (AOSSIE)",
+    "abnLabel": "ABN:",
+    "addressText": "AOSSIE, Hackett ACT 2602, Australia",
+    "aboutLink": "About Us",
+    "projectsLink": "Projects",
+    "programsLink": "Programs & GSoC",
+    "applyLink": "How to Apply"
   }
 }
-

@@ -13,6 +13,7 @@ interface ProjectItem {
   name: string;
   category: string;
   src: string;
+  githubLink: string;
 }
 
 interface ProjectCardProps {
@@ -27,80 +28,78 @@ const CARD_SIZE = 76;
 
 function ProjectCard({ project, target, onHoverStart, onHoverEnd }: ProjectCardProps) {
   return (
-    <motion.div
-      animate={{
-        x: target.x,
-        y: target.y,
-        rotate: target.rotation,
-        scale: target.scale,
-        opacity: target.opacity,
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 40,
-        damping: 15,
-      }}
-      onMouseEnter={onHoverStart}
-      onMouseLeave={onHoverEnd}
-      onFocus={onHoverStart}
-      onBlur={onHoverEnd}
-      onClick={onHoverStart}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          onHoverStart();
-        }
-      }}
-      tabIndex={0}
-      role="button"
-      aria-label={project.name}
-      style={{
-        position: "absolute",
-        width: CARD_SIZE,
-        height: CARD_SIZE,
-      }}
-      className="cursor-pointer group select-none focus:outline-none focus:ring-2 focus:ring-foreground/50 rounded-2xl"
+    <a
+      href={project.githubLink}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${project.name} GitHub Repository`}
     >
-      <div className="relative h-full w-full overflow-hidden rounded-2xl shadow-md border border-border bg-card flex items-center justify-center p-3.5 group-hover:border-foreground/30 transition-colors">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={project.src}
-          alt={project.name}
-          loading="lazy"
-          decoding="async"
-          className={`w-full h-full object-contain filter drop-shadow-xs ${
-            project.src.endsWith("resonate_logo.svg") ? "theme-icon-invert" : ""
-          }`}
-        />
-      </div>
-    </motion.div>
+      <motion.div
+        animate={{
+          x: target.x,
+          y: target.y,
+          rotate: target.rotation,
+          scale: target.scale,
+          opacity: target.opacity,
+        }}
+        transition={{
+          type: "spring",
+          stiffness: 40,
+          damping: 15,
+        }}
+        onMouseEnter={onHoverStart}
+        onMouseLeave={onHoverEnd}
+        onFocus={onHoverStart}
+        onBlur={onHoverEnd}
+        tabIndex={0}
+        style={{
+          position: "absolute",
+          width: CARD_SIZE,
+          height: CARD_SIZE,
+        }}
+        className="cursor-pointer group select-none focus:outline-none focus:ring-2 focus:ring-foreground/50 rounded-2xl"
+      >
+        <div className="relative h-full w-full overflow-hidden rounded-2xl shadow-md border border-border bg-card flex items-center justify-center p-3.5 group-hover:border-foreground/30 transition-colors">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={project.src}
+            alt={project.name}
+            loading="lazy"
+            decoding="async"
+            className={`w-full h-full object-contain filter drop-shadow-xs ${
+              project.src.endsWith("resonate_logo.svg") ? "theme-icon-invert" : ""
+            }`}
+          />
+        </div>
+      </motion.div>
+    </a>
   );
 }
 
-// Official AOSSIE Projects List (Single Non-Repeating Set Sourced directly from brand/project_svgs/)
+// Official AOSSIE Projects List with Direct GitHub Links
 const PROJECTS: ProjectItem[] = [
-  { id: "resonate", name: "Resonate", category: "Social & Audio", src: "/brand/project_svgs/resonate_logo.svg" },
-  { id: "dit", name: "DIT", category: "Decentralized Trust", src: "/brand/project_svgs/dit_logo.svg" },
-  { id: "djed", name: "Djed Alliance", category: "Open Money", src: "/brand/project_svgs/djed_alliance_logo.svg" },
-  { id: "fate", name: "FATE", category: "Ethical AI", src: "/brand/project_svgs/fate_logo.svg" },
-  { id: "skills", name: "Open Skills", category: "Education", src: "/brand/project_svgs/skills_logo.svg" },
-  { id: "stability", name: "Stability Nexus", category: "Stability", src: "/brand/project_svgs/stability_nexus_logo.svg" },
-  { id: "stablepay", name: "StablePay", category: "DeFi Payments", src: "/brand/project_svgs/stablepay_logo.svg" },
-  { id: "tnt", name: "Truth-n-Trust", category: "Governance", src: "/brand/project_svgs/tnt_logo.svg" },
+  { id: "resonate", name: "Resonate", category: "Social & Audio", src: "/brand/project_svgs/resonate_logo.svg", githubLink: "https://github.com/AOSSIE-Org/Resonate" },
+  { id: "dit", name: "DIT", category: "Decentralized Trust", src: "/brand/project_svgs/dit_logo.svg", githubLink: "https://github.com/AOSSIE-Org/DIT" },
+  { id: "djed", name: "Djed Alliance", category: "Open Money", src: "/brand/project_svgs/djed_alliance_logo.svg", githubLink: "https://github.com/DjedAlliance" },
+  { id: "fate", name: "FATE", category: "Ethical AI", src: "/brand/project_svgs/fate_logo.svg", githubLink: "https://github.com/AOSSIE-Org/FATE" },
+  { id: "skills", name: "Open Skills", category: "Education", src: "/brand/project_svgs/skills_logo.svg", githubLink: "https://github.com/AOSSIE-Org/Skills" },
+  { id: "stability", name: "Stability Nexus", category: "Stability", src: "/brand/project_svgs/stability_nexus_logo.svg", githubLink: "https://github.com/StabilityNexus" },
+  { id: "stablepay", name: "StablePay", category: "DeFi Payments", src: "/brand/project_svgs/stablepay_logo.svg", githubLink: "https://github.com/DjedAlliance/StablePay" },
+  { id: "tnt", name: "Truth-n-Trust", category: "Governance", src: "/brand/project_svgs/tnt_logo.svg", githubLink: "https://github.com/StabilityNexus/TNT" },
 ];
 
 const ALL_PROJECTS: ProjectItem[] = [
   ...PROJECTS,
-  { id: "moveyourbody", name: "MoveYourBody", category: "Health & Fitness", src: "/brand/project_svgs/MoveYourBody_logo.svg" },
-  { id: "carbontracker", name: "Carbon Tracker", category: "Sustainability", src: "/brand/project_svgs/carbonTracker_logo.svg" },
-  { id: "chainvoice", name: "Chainvoice", category: "DeFi Invoicing", src: "/brand/project_svgs/chainvoice_logo.svg" },
-  { id: "ellena", name: "Ellena", category: "AI & NLP", src: "/brand/project_svgs/ellena_logo.svg" },
-  { id: "minichain", name: "MiniChain", category: "Micro-Blockchains", src: "/brand/project_svgs/minichain_logo.svg" },
-  { id: "ogh", name: "Open Gift Hub", category: "Open Source Giving", src: "/brand/project_svgs/ogh_logo.svg" },
-  { id: "pictopy", name: "PicToPy", category: "Image Processing", src: "/brand/project_svgs/pictopy_logo.svg" },
-  { id: "rein", name: "REIN", category: "Decentralized Escrow", src: "/brand/project_svgs/rein_logo.svg" },
-  { id: "thrubox", name: "Thrubox", category: "Decentralized Storage", src: "/brand/project_svgs/thrubox_logo.svg" },
-  { id: "zplit", name: "Zplit", category: "DeFi Expense Sharing", src: "/brand/project_svgs/zplit_logo.svg" },
+  { id: "moveyourbody", name: "MoveYourBody", category: "Health & Fitness", src: "/brand/project_svgs/MoveYourBody_logo.svg", githubLink: "https://github.com/AOSSIE-Org/MoveYourBody" },
+  { id: "carbontracker", name: "Carbon Tracker", category: "Sustainability", src: "/brand/project_svgs/carbonTracker_logo.svg", githubLink: "https://github.com/AOSSIE-Org/CarbonTracker" },
+  { id: "chainvoice", name: "Chainvoice", category: "DeFi Invoicing", src: "/brand/project_svgs/chainvoice_logo.svg", githubLink: "https://github.com/StabilityNexus/Chainvoice" },
+  { id: "ellena", name: "Ellena", category: "AI & NLP", src: "/brand/project_svgs/ellena_logo.svg", githubLink: "https://github.com/AOSSIE-Org/Ellena" },
+  { id: "minichain", name: "MiniChain", category: "Micro-Blockchains", src: "/brand/project_svgs/minichain_logo.svg", githubLink: "https://github.com/AOSSIE-Org/MiniChain" },
+  { id: "ogh", name: "Open Gift Hub", category: "Open Source Giving", src: "/brand/project_svgs/ogh_logo.svg", githubLink: "https://github.com/AOSSIE-Org/Ogh" },
+  { id: "pictopy", name: "PicToPy", category: "Image Processing", src: "/brand/project_svgs/pictopy_logo.svg", githubLink: "https://github.com/AOSSIE-Org/PicToPy" },
+  { id: "rein", name: "REIN", category: "Decentralized Escrow", src: "/brand/project_svgs/rein_logo.svg", githubLink: "https://github.com/StabilityNexus/REIN" },
+  { id: "thrubox", name: "Thrubox", category: "Decentralized Storage", src: "/brand/project_svgs/thrubox_logo.svg", githubLink: "https://github.com/AOSSIE-Org/Thrubox" },
+  { id: "zplit", name: "Zplit", category: "DeFi Expense Sharing", src: "/brand/project_svgs/zplit_logo.svg", githubLink: "https://github.com/StabilityNexus/Zplit" },
 ];
 
 const lerp = (start: number, end: number, t: number) => start * (1 - t) + end * t;
@@ -376,7 +375,7 @@ export default function Projects() {
             >
               {hoveredProject && (
                 <div className="flex items-center gap-1.5 font-semibold text-foreground-primary">
-                  <span>{t("viewProject", { name: hoveredProject.name })}</span>
+                  <span>{t("viewProject", { name: hoveredProject.name })} (GitHub)</span>
                   <span className="text-[10px] font-bold">↗</span>
                 </div>
               )}
