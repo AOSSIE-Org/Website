@@ -143,7 +143,7 @@ export function GrowthChart() {
                   strokeWidth="2"
                   tabIndex={0}
                   role="button"
-                  aria-label={`${pt.year}: ${pt.projects} projects`}
+                  aria-label={t("activeLabel", { year: pt.year, projects: pt.projects })}
                   className="cursor-pointer transition-all focus:outline-none focus:ring-2 focus:ring-heading-highlight"
                   onMouseEnter={() => setActivePoint(pt)}
                   onClick={() => setActivePoint(pt)}
