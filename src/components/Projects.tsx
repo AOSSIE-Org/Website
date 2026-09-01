@@ -75,7 +75,7 @@ function ProjectCard({ project, target, onHoverStart, onHoverEnd }: ProjectCardP
 // Official AOSSIE Projects List with Direct GitHub Links
 const PROJECTS: ProjectItem[] = [
   { id: "resonate", name: "Resonate", category: "Social & Audio", src: "/brand/project_svgs/resonate_logo.svg", githubLink: "https://github.com/AOSSIE-Org/Resonate" },
-  { id: "dit", name: "DIT", category: "Decentralized Trust", src: "/brand/project_svgs/dit_logo.svg", githubLink: "https://github.com/AOSSIE-Org/DIT" },
+  { id: "dit", name: "DIT", category: "Decentralized Trust", src: "/brand/project_svgs/dit_logo.svg", githubLink: "https://github.com/StabilityNexus/IdentityTokens-EVM-Contracts" },
   { id: "djed", name: "Djed Alliance", category: "Open Money", src: "/brand/project_svgs/djed_alliance_logo.svg", githubLink: "https://github.com/DjedAlliance" },
   { id: "fate", name: "FATE", category: "Ethical AI", src: "/brand/project_svgs/fate_logo.svg", githubLink: "https://github.com/AOSSIE-Org/FATE" },
   { id: "skills", name: "Open Skills", category: "Education", src: "/brand/project_svgs/skills_logo.svg", githubLink: "https://github.com/AOSSIE-Org/Skills" },
