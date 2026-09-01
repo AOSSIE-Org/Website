@@ -31,9 +31,9 @@ export const PROJECTS_DATA: Project[] = [
     keyFeatures: ['Self-Sovereign Identity (SSI) Standards', 'Zero-Knowledge Proof Credential Verification', 'Interoperable Decentralized Identifiers (DIDs)', 'Tamper-Proof Audit Trails'],
     techStack: ['TypeScript', 'Solidity', 'Rust', 'Cryptographic Primitives'],
     logo: '/brand/project_svgs/dit_logo.svg',
-    githubLink: 'https://github.com/AOSSIE-Org/DIT',
+    githubLink: 'https://github.com/StabilityNexus/IdentityTokens-EVM-Contracts',
     discordLink: 'https://discord.gg/xnmAPS7zqB',
-    link: { href: 'https://github.com/AOSSIE-Org/DIT', label: 'DIT' }
+    link: { href: 'https://github.com/StabilityNexus/IdentityTokens-EVM-Contracts', label: 'IdentityTokens-EVM-Contracts' }
   },
   {
     slug: 'fate',
