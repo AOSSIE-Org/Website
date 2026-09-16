@@ -54,7 +54,8 @@ export default function AboutPage() {
           </motion.p>
         </div>
 
-        {/* Stats Grid */}
+        
+        {/* Stats Grid 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -76,8 +77,9 @@ export default function AboutPage() {
             </div>
           ))}
         </motion.div>
+        */}
 
-        {/* Interactive Growth Chart Section */}
+        {/* Interactive Growth Chart Section
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -86,6 +88,7 @@ export default function AboutPage() {
         >
           <GrowthChart />
         </motion.div>
+        */}
 
         {/* Timeline Section */}
         <Timeline />

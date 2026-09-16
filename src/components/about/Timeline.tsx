@@ -22,9 +22,8 @@ export function Timeline() {
     { title: t("m2Title"), time: "2016", description: t("m2Desc") },
     { title: t("m3Title"), time: "2016", description: t("m3Desc") },
     { title: t("m4Title"), time: "2017", description: t("m4Desc") },
-    { title: t("m5Title"), time: "2020", description: t("m5Desc") },
-    { title: t("m6Title"), time: "2022", description: t("m6Desc") },
-    { title: t("m7Title"), time: "2025–2026", description: t("m7Desc") },
+    { title: t("m5Title"), time: "2018", description: t("m5Desc") },
+    { title: t("m6Title"), time: "2025", description: t("m6Desc") },
   ];
 
   return (

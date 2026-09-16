@@ -8,9 +8,9 @@ export function Team() {
   const t = useTranslations("Team");
 
   const roles = [
-    { title: t("r1Title"), count: "15+", description: t("r1Desc") },
-    { title: t("r2Title"), count: "88+", description: t("r2Desc") },
-    { title: t("r3Title"), count: "450+", description: t("r3Desc") },
+    { title: t("r1Title"), count: "10", description: t("r1Desc") },
+    { title: t("r2Title"), count: "70", description: t("r2Desc") },
+    { title: t("r3Title"), count: "160+", description: t("r3Desc") },
     { title: t("r4Title"), count: "8,000+", description: t("r4Desc") },
   ];
 
