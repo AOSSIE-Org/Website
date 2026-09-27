@@ -17,12 +17,14 @@ const repos = [...new Set([...source.matchAll(/fullName: "([^"]+)"/g)].map((m) =
 const headers = { Accept: "application/vnd.github+json", "User-Agent": "aossie-website" };
 if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
 
+let failed = 0;
 const stats = {};
 for (const repo of repos) {
   const res = await fetch(`https://api.github.com/repos/${repo}`, { headers });
   if (!res.ok) {
+    failed++;
     console.error(`✗ ${repo}: ${res.status} ${res.statusText}`);
-    if (res.status === 403) {
+    if (res.status === 403 || res.status === 429) {
       console.error("Rate limited. Set GITHUB_TOKEN and try again.");
       process.exit(1);
     }
@@ -31,6 +33,11 @@ for (const repo of repos) {
   const data = await res.json();
   stats[repo] = { stars: data.stargazers_count, pushedAt: data.pushed_at.slice(0, 10) };
   console.log(`✓ ${repo}: ${data.stargazers_count}★`);
+}
+
+if (failed > 0) {
+  console.error(`\nEncountered ${failed} failed lookup(s). Aborting without updating src/lib/repoStats.ts.`);
+  process.exit(1);
 }
 
 const today = new Date().toISOString().slice(0, 10);
