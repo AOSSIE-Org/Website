@@ -3,20 +3,26 @@ import { routing } from '@/i18n/routing';
 
 export const dynamic = 'force-static';
 
+/** Localized pages, relative to the locale root. */
+const PAGES = [
+  { path: '', priority: 1 },
+  { path: '/projects', priority: 0.9 },
+  { path: '/programs', priority: 0.8 },
+  { path: '/about', priority: 0.7 },
+];
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  /**
-   * INSTRUCTIONS FOR PRODUCTION DOMAIN:
-   * 1. Define the `NEXT_PUBLIC_SITE_URL` environment variable in your hosting environment (e.g. Vercel, Docker).
-   * 2. Replace the fallback domain 'https://aossie.org' below with your project's target production domain.
-   */
-  const rawBaseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://aossie.org';
-  const baseUrl = rawBaseUrl.replace(/\/$/, '');
+  // Set NEXT_PUBLIC_SITE_URL in the hosting environment to override the production domain.
+  const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://aossie.org').replace(/\/$/, '');
 
-
-  return routing.locales.map((locale) => ({
-    url: `${baseUrl}/${locale}`,
-    changeFrequency: 'monthly',
-    priority: 1,
-  }));
+  return routing.locales.flatMap((locale) =>
+    PAGES.map(({ path, priority }) => ({
+      url: `${baseUrl}/${locale}${path}`,
+      changeFrequency: 'monthly' as const,
+      priority,
+      alternates: {
+        languages: Object.fromEntries(routing.locales.map((l) => [l, `${baseUrl}/${l}${path}`])),
+      },
+    }))
+  );
 }
-

@@ -120,52 +120,64 @@ In the checklist below, mark the items that have been completed for your project
 
 ## 📂 Project Structure
 
-Here is a breakdown of the key i18n directories and files:
-
 ```text
-├── .github/
-│   └── workflows/          # GitHub Actions (CI, GitHub Pages deployment, merge conflict checks)
-├── next.config.ts          # Alias-wrapped Next configuration
-├── public/                 # Static assets, robots.txt, assetlinks.json, llms.txt
-│   ├── .well-known/
-│   ├── llms.txt
-│   ├── robots.txt
+├── .github/workflows/          # CI, GitHub Pages deployment, merge-conflict checks
+├── next.config.ts              # Next.js config (static export, next-intl plugin)
+├── scripts/
+│   └── update-repo-stats.mjs   # Refreshes GitHub stars / activity used to rank projects
+├── public/
+│   ├── llms.txt, robots.txt, .well-known/
 │   └── brand/
-│       ├── Brand.md            # Official AOSSIE brand guidelines document
-│       └── icons/             
-│           ├── aossie_logo.svg              # AOSSIE Vector logo
-│           ├── stability_nexus_logo.svg     # Vector logo
-│           └── favicon.ico                  # Browser tab icon
-├── src/
-│   ├── config/
-│   │   └── languages.ts        # Central registry of supported languages & locales
-│   ├── i18n/
-│   │   ├── routing.ts          # Core i18n routing parameters (locales, defaults)
-│   │   ├── request.ts          # Server-side translation dictionary loading configuration
-│   │   ├── metadata.ts         # Configuration data, SEO values, or reflection data for a project
-│   │   └── navigation.ts       # Type-safe navigation helpers (Link, useRouter, etc.)
-│   ├── messages/
-│   │   ├── en.json             # English translation dictionary
-│   │   └── hi.json             # Hindi translation dictionary
-│   ├── app/
-│   │   ├── sitemap.ts          # Dynamically generated localized sitemaps
-│   │   └── [locale]/           # Localized route group
-│   │       ├── layout.tsx      # Multi-lingual layout injecting client context & translations
-│   │       ├── page.tsx        # Localized Landing Page ("use client")
-│   │       ├── globals.css     # Global styles for the app segment
-│   │       ├── error.tsx       # Localized Error Boundary page fallback
-│   │       └── not-found.tsx   # Localized 404 page fallback
-│   ├── components/
-│   │   ├── LanguageSwitcher.tsx # Dropdown element to switch interface locales interactively
-│   │   ├── ThemeToggle.tsx      # Multi-state theme switch with micro-animations
-│   │   └── providers/
-│   │       ├── theme-provider.tsx # Next-themes client wrapper component
-│   │       └── lenis-provider.tsx # Lenis smooth scrolling provider wrapper
-├── .coderabbit.yml         # Automated AI Code Review configuration
-├── COPYRIGHT.md            # Copyright terms
-├── Contributors.md         # Project contributors list
-└── DCO.md                  # Developer Certificate of Origin
+│       ├── Brand.md            # Official AOSSIE brand guidelines
+│       ├── icons/              # AOSSIE, partner and social icons
+│       ├── project_svgs/       # Official project logos (from AOSSIE-Org/Info)
+│       └── project_logos/      # Project logos collected from each project's repository
+└── src/
+    ├── app/
+    │   ├── sitemap.ts          # Localized sitemap for every page
+    │   └── [locale]/           # Localized routes
+    │       ├── layout.tsx      # Fonts, theme, smooth scrolling, translations
+    │       ├── page.tsx        # Home: hero, projects, partners, impact numbers
+    │       ├── about/          # About page
+    │       ├── projects/       # Projects catalogue (search, filters, sorting, grouping)
+    │       ├── programs/       # GSoC, internships, Australian Winter of Code
+    │       └── globals.css     # Theme tokens and global styles
+    ├── components/             # Navbar, Footer, Hero, Stats, Sponsors, ProjectLogo, ...
+    ├── i18n/                   # Routing, request config, navigation helpers, metadata
+    ├── lib/
+    │   ├── projectsData.ts     # Every project: text, logo, topics, themes, repos, links
+    │   ├── projectTranslations.ts # Project descriptions in other languages
+    │   ├── repoStats.ts        # Generated GitHub stats snapshot (do not edit by hand)
+    │   └── links.ts            # Shared external links
+    ├── messages/               # UI translations (en.json, hi.json)
+    └── __tests__/              # Vitest suites, including content checks
 ```
+
+---
+
+## 🗂️ Managing Content
+
+### Adding or editing a project
+
+Projects live in [`src/lib/projectsData.ts`](src/lib/projectsData.ts), one entry per project (not per repository):
+
+- `description` is shown on the card; the optional `about` appears when a visitor opens **Details**.
+- `topics` (Blockchain, Artificial Intelligence, Mobile) and `themes` (Communication, Education, Finance, Sustainability, Infrastructure) can each hold several values.
+- `repositories` lists every repository of the project; the first one is the primary GitHub link.
+- `discordUrl` should point to the project's own channel when it has one; otherwise use the server invite.
+- Set `archived: true` for projects that are no longer maintained.
+- Add the logo to `public/brand/project_logos/`. Projects without a logo show a monogram.
+
+Then:
+
+1. Add the Hindi description (and `about`, if any) to [`src/lib/projectTranslations.ts`](src/lib/projectTranslations.ts).
+2. Run `npm run update:stats` so the new repositories get star counts (set `GITHUB_TOKEN` to avoid rate limits).
+3. Run `npm test`. The content tests check that every project has a translation and GitHub stats, and that both locales have the same keys.
+
+### Writing copy
+
+- Every user-facing string goes in `src/messages/*.json`, in every locale.
+- Keep sentences plain; avoid em dashes (the content tests enforce this).
 
 ---
 

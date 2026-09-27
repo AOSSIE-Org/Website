@@ -1,73 +1,98 @@
 {
   "Home": {
-    "heading": "AOSSIE's Website",
     "metaTitle": "AOSSIE's Website - Australian Open Source Software Innovation and Education",
     "metaDescription": "Empowering open-source projects to innovate, educate, and create lasting global impact."
   },
   "Navbar": {
+    "home": "Home",
     "about": "About",
     "projects": "Projects",
     "programs": "Programs",
     "github": "GitHub",
-    "selectLanguage": "Select Language"
+    "selectLanguage": "Select Language",
+    "toggleTheme": "Toggle theme",
+    "toggleMenu": "Toggle navigation menu",
+    "logoAlt": "AOSSIE logo"
   },
   "Hero": {
     "titleLine1": "A Fair Go",
     "titleLine2": "Through Open Source",
     "subtitlePrefix": "Innovating and creating free software to empower people for a better world since ",
-    "learnMore": "Learn More",
     "joinCommunity": "Join Our Community",
-    "copyright": "© Australian Open Source Software Innovation and Education",
-    "socialMedia": "Social Media"
+    "emailLabel": "Email"
   },
   "Projects": {
     "title": "Our Projects",
     "subtitle": "Interdisciplinary tech and apps for lasting and meaningful social impact.",
     "viewAll": "View all Projects",
-    "view": "View",
-    "viewProject": "View {name}",
-    "viewProjectOnGithub": "View {name} on GitHub",
-    "details": "Details",
-    "hint": "Tip: Click or hover over the cards to reveal project details."
+    "viewProjectOnGithub": "View {name} on GitHub"
+  },
+  "Sponsors": {
+    "title": "Our Sponsors, Supporters and Partners",
+    "subtitle": "Organizations that help us mentor contributors and build open-source software.",
+    "visit": "Visit {name} (opens in a new tab)"
   },
   "ProjectsPage": {
-    "badge": "Portfolio",
     "title": "Our Projects",
-    "subtitle": "Free and open-source.",
-    "searchPlaceholder": "Search projects by name, keyword, or tech stack...",
+    "subtitle": "Free and open-source software, built in the open by a global community.",
+    "searchPlaceholder": "Search projects or repositories…",
     "clearSearch": "Clear",
-    "resetFilters": "Reset Filters",
-    "noResults": "No projects found matching \"{query}\" in category \"{category}\".",
+    "resetFilters": "Reset filters",
+    "organizationsLabel": "Organizations",
+    "topicsLabel": "Topics",
+    "themesLabel": "Themes",
+    "all": "All",
+    "showArchived": "Show archived",
+    "archived": "Archived",
+    "resultsCount": "{count, plural, one {# project} other {# projects}}",
+    "noResults": "No projects match these filters.",
     "githubRepo": "GitHub",
+    "reposCount": "{count, plural, one {# repo} other {# repos}}",
     "discordChannel": "Discord",
-    "downloadBtn": "Download",
-    "detailsBtn": "Details"
-  },
-  "ProjectDetail": {
-    "backLink": "Back to Projects",
-    "githubRepo": "GitHub Repository",
-    "liveSite": "Live Site",
-    "downloadReleases": "Download / Releases",
-    "overviewTitle": "Project Overview",
-    "featuresTitle": "Key Architecture & Features",
-    "techTitle": "Technologies Used",
-    "getInvolvedTitle": "Get Involved",
-    "getInvolvedDesc": "Interested in contributing code, fixing issues, or mentoring students for this project?",
-    "joinDiscord": "Join Discord Discussion",
-    "browseIssues": "Browse Open Issues"
+    "website": "Website",
+    "sortBy": "Sort",
+    "sortStars": "Most starred",
+    "sortActivity": "Recently active",
+    "sortName": "Name",
+    "sortRepos": "Repositories",
+    "sortDirection": "Sort direction",
+    "directionDesc": "High → Low",
+    "directionAsc": "Low → High",
+    "groupBy": "Group",
+    "groupNone": "No grouping",
+    "otherGroup": "Other",
+    "expandAll": "Expand all",
+    "collapseAll": "Collapse all",
+    "expandGroup": "Expand {name}",
+    "collapseGroup": "Collapse {name}",
+    "showMore": "Details",
+    "showLess": "Less",
+    "starsTitle": "{count} GitHub stars"
   },
   "AboutPage": {
-    "badge": "Our Organization",
     "title": "Who We Are",
     "subtitle": "AOSSIE (Australian Open Source Software Innovation and Education) is a registered not-for-profit organization (ABN: 32 743 493 466) dedicated to the research and development of free and open-source software as well as to the education of the principles and methods of open-source software development. Our projects are always innovation-focused and frequently research-intensive. All of our software libraries and applications are 100% free and open-source.",
-    "stats": {
-      "years": "Years of Innovation",
-      "projectsPerYear": "Projects / Year",
-      "repositories": "Repositories",
-      "mentors": "Dedicated Mentors",
-      "contributors": "Contributors",
-      "communityMembers": "Community Members"
-    }
+    "foundedLabel": "Founded",
+    "statusLabel": "Status",
+    "statusValue": "Registered not-for-profit",
+    "baseLabel": "Based in",
+    "baseValue": "Canberra, Australia",
+    "licenseLabel": "Software",
+    "licenseValue": "100% free & open source",
+    "pillarsTitle": "What We Stand For",
+    "p1Title": "Innovation",
+    "p1Desc": "Our projects are innovation-focused and frequently research-intensive, from formally verified stablecoins to privacy-first AI that runs on your own device.",
+    "p2Title": "Education",
+    "p2Desc": "We teach the principles and methods of open-source development by mentoring contributors through real projects and programs such as Google Summer of Code.",
+    "p3Title": "Openness",
+    "p3Desc": "Every library and application we build is 100% free and open-source, developed in public together with our community.",
+    "ecosystemTitle": "One Umbrella, Three Homes",
+    "ecosystemSubtitle": "AOSSIE's projects are hosted across three GitHub organizations.",
+    "ecosystemProjects": "Projects",
+    "orgAossie": "Our home organization: AI, mobile, communication, education and developer-tooling projects.",
+    "orgStability": "Blockchain projects for economic and financial stability, including oracles, exchanges and fundraising.",
+    "orgDjed": "The formally verified Djed stablecoin protocol and the StablePay payment widget.",
+    "viewProjects": "View projects"
   },
   "GrowthChart": {
     "title": "Open Source Growth & Impact",
@@ -103,51 +128,30 @@
     "r4Desc": "Collaborating across Discord, Telegram, and GitHub to foster open software innovation."
   },
   "ProgramsPage": {
-    "badge": "Open-Source Mentorship Programs",
-    "title": "Google Summer of Code",
-    "subtitle": "Browse project ideas proposed by us in recent previous years.",
-    "yearLabel": "Year:",
-    "applyGuideBtn": "How to Apply Guide",
-    "fullSpecBtn": "Full Proposal Spec",
-    "mentorsLabel": "Mentors:",
-    "noIdeas": "No project ideas listed for GSoC {year} yet. Check back soon!"
+    "title": "Programs",
+    "subtitle": "Ways to learn, contribute and grow with AOSSIE.",
+    "gsocTitle": "Google Summer of Code",
+    "gsocDesc": "Google Summer of Code is a global program that brings new contributors into open-source software development. Contributors work on a project under the guidance of mentors from an open-source organization. AOSSIE has participated as a mentoring organization since 2016 and is among the largest GSoC organizations in the world.",
+    "gsocApply": "How to apply with AOSSIE",
+    "internTitle": "Internships",
+    "internDesc": "We are open to mentoring interns on any of our projects. Tell us on Discord which project you would like to work on, and we will connect you with its mentors.",
+    "internCta": "Join our Discord",
+    "awocTitle": "Australian Winter of Code",
+    "awocBadge": "Seeking sponsors",
+    "awocDesc": "We are seeking sponsors and partners to organize an Australian Winter of Code, a mentored open-source program in the spirit of GSoC. If your organization would like to help make it happen, get in touch with us.",
+    "awocCta": "contact@aossie.org"
   },
-  "ApplyPage": {
-    "badge": "Contributor & GSoC Guide",
-    "title": "How to Apply & Contribute",
-    "subtitle": "Follow our step-by-step roadmap to get involved with AOSSIE open-source projects and prepare a competitive GSoC proposal.",
-    "s1Title": "Join us on Discord",
-    "s1Desc": "Join the AOSSIE community on Discord and connect with developers, mentors, and maintainers. Our Discord server is the central hub to ask questions, share project ideas, and get support throughout the Google Summer of Code application process.",
-    "s1Action": "Join Discord Server",
-    "s2Title": "Start Contributing (Make Your First PR)",
-    "s2Desc": "Explore AOSSIE GitHub repositories and pick beginner-friendly or good-first-issues. Submitting code or documentation pull requests showcases your technical understanding and willingness to collaborate with project maintainers.",
-    "s2Action": "Explore GitHub Repositories",
-    "s3Title": "Write a Draft Proposal",
-    "s3Desc": "Select a project idea from our GSoC Ideas List or propose your own innovative feature. Expand the idea into a detailed proposal detailing your technical approach, implementation architecture, timeline milestones, and deliverables.",
-    "s3Action": "Browse GSoC Ideas",
-    "s4Title": "Discuss with Mentors & Refine",
-    "s4Desc": "Share your proposal draft with our dedicated mentors on Discord or GitHub. Experienced mentors will review your implementation timeline, provide architectural feedback, and help you refine your application to maximize your selection chances.",
-    "s4Action": "Connect with Mentors",
-    "s5Title": "Submit Final Application",
-    "s5Desc": "Submit your finalized PDF application to the official Google Summer of Code portal before the deadline. Double-check all required deliverables, milestone breakdowns, and contact information. Good luck!",
-    "s5Action": "GSoC Official Portal"
+  "Topics": {
+    "Blockchain": "Blockchain",
+    "Artificial Intelligence": "Artificial Intelligence",
+    "Mobile": "Mobile"
   },
-  "Categories": {
-    "All": "All",
-    "Social": "Social",
-    "Decentralized": "Decentralized",
-    "DeFi": "DeFi",
-    "AI & NLP": "AI & NLP",
+  "Themes": {
+    "Communication": "Communication",
     "Education": "Education",
+    "Finance": "Finance",
     "Sustainability": "Sustainability",
-    "Health": "Health",
-    "Infrastructure": "Infrastructure",
-    "Tools & Utilities": "Tools & Utilities"
-  },
-  "Status": {
-    "Ongoing": "Ongoing",
-    "Production Ready": "Production Ready",
-    "Active Development": "Active Development"
+    "Infrastructure": "Infrastructure"
   },
   "Stats": {
     "title": "Our Positive Impact in Numbers",
@@ -165,7 +169,7 @@
     "stat3Label": "Repositories",
     "stat3Desc": "Active repositories hosting cutting-edge frameworks, libraries, and utilities.",
     "swipeHint": "Swipe to navigate",
-    "cardAriaLabel": "{title}: {value}"
+    "goToCard": "Go to card {index}"
   },
   "Error": {
     "title": "Something went wrong",
@@ -184,19 +188,27 @@
     "toggleTheme": "Toggle theme"
   },
   "Footer": {
-    "tagline": "Australian Open Source Software Innovation and Education",
     "description": "Australian Open Source Software Innovation and Education",
-    "quickLinks": "Quick Links",
     "community": "Community",
-    "supportUs": "Support Us",
-    "share": "Share on Social",
     "copyright": "© Australian Open Source Software Innovation and Education (AOSSIE).",
-    "orgName": "",
     "abnLabel": "ABN:",
     "addressText": "Canberra, ACT, Australia",
     "aboutLink": "About Us",
     "projectsLink": "Projects",
-    "programsLink": "GSoC",
-    "applyLink": "How to Apply"
+    "programsLink": "Programs",
+    "applyLink": "How to Apply",
+    "ctaTitle": "Let's build a fair go, together.",
+    "ctaSubtitle": "Join a global community of contributors and mentors building free and open-source software.",
+    "ctaDiscord": "Join our Discord",
+    "ctaProjects": "Explore projects",
+    "organization": "Organization",
+    "contribute": "Contribute",
+    "ecosystem": "Ecosystem",
+    "brandKit": "Brand kit",
+    "contributing": "Contribution guidelines",
+    "communication": "Communication rules",
+    "aiPolicy": "AI usage policy",
+    "codeOfConduct": "Code of Conduct",
+    "email": "Email"
   }
 }

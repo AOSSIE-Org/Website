@@ -6,8 +6,16 @@ import { Link, useRouter, usePathname } from "@/i18n/navigation";
 import { useTheme } from "next-themes";
 import { useEffect, useState, useRef, useSyncExternalStore } from "react";
 import { languages } from "@/config/languages";
+import { motion } from "framer-motion";
 
 const emptySubscribe = () => () => {};
+
+const NAV_LINKS = [
+  { href: "/", key: "home" },
+  { href: "/about", key: "about" },
+  { href: "/projects", key: "projects" },
+  { href: "/programs", key: "programs" },
+] as const;
 
 export default function Navbar() {
   const locale = useLocale();
@@ -68,6 +76,9 @@ export default function Navbar() {
     }
   };
 
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" || pathname === "" : pathname === href || pathname.startsWith(`${href}/`);
+
   const currentLang = languages.find((lang) => lang.code === locale) || languages[0];
 
   return (
@@ -81,7 +92,7 @@ export default function Navbar() {
         >
           <Image
             src="/brand/icons/aossie_secondary_dark_logo.svg"
-            alt="aossie logo"
+            alt={tNav("logoAlt")}
             width={120}
             height={24}
             priority
@@ -90,21 +101,35 @@ export default function Navbar() {
         </Link>
 
         {/* Center Desktop: Nav Links */}
-        <div className="hidden md:flex items-center space-x-8 text-sm font-medium text-foreground-secondary">
-          <Link href="/about" className="hover:text-foreground transition-colors">
-            {tNav("about")}
-          </Link>
-          <Link href="/projects" className="hover:text-foreground transition-colors">
-            {tNav("projects")}
-          </Link>
-          <Link href="/programs" className="hover:text-foreground transition-colors">
-            {tNav("programs")}
-          </Link>
+        <div className="hidden md:flex isolate items-center gap-2 lg:gap-4 text-sm font-medium text-foreground-secondary">
+          {NAV_LINKS.map((link) => {
+            const active = isActive(link.href);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                aria-current={active ? "page" : undefined}
+                className={`relative px-3.5 py-1.5 rounded-full transition-colors ${
+                  active ? "text-foreground font-semibold" : "hover:text-foreground"
+                }`}
+              >
+                {active && (
+                  <motion.span
+                    layoutId="nav-active-pill"
+                    aria-hidden
+                    className="absolute inset-0 -z-10 rounded-full border border-foreground/15 bg-foreground/10"
+                    transition={{ type: "spring", stiffness: 420, damping: 34 }}
+                  />
+                )}
+                {tNav(link.key)}
+              </Link>
+            );
+          })}
           <a
             href="https://github.com/AOSSIE-Org"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-foreground transition-colors inline-flex items-center gap-1 group"
+            className="px-3.5 py-1.5 hover:text-foreground transition-colors inline-flex items-center gap-1 group"
           >
             <span>{tNav("github")}</span>
             <span className="text-[14px] leading-none text-foreground-muted group-hover:text-foreground transition-colors">↗</span>
@@ -119,12 +144,12 @@ export default function Navbar() {
               onClick={() => setIsLangOpen(!isLangOpen)}
               aria-expanded={isLangOpen}
               aria-haspopup="true"
-              aria-label="Select Language"
+              aria-label={tNav("selectLanguage")}
               className="flex items-center gap-2 p-2 rounded-full border border-border bg-background-secondary hover:bg-hover text-xs font-medium text-foreground transition-all shadow-xs cursor-pointer group"
             >
               <Image
                 src="/brand/icons/globe.svg"
-                alt="Language"
+                alt=""
                 width={14}
                 height={14}
                 className="w-4 h-4 theme-icon-invert"
@@ -176,12 +201,12 @@ export default function Navbar() {
           {mounted && (
             <button
               onClick={toggleTheme}
-              aria-label="Toggle Theme"
+              aria-label={tNav("toggleTheme")}
               className="flex items-center justify-center w-8 h-8 rounded-full border border-border bg-background-secondary hover:bg-hover text-foreground transition-all shadow-xs cursor-pointer"
             >
               <Image
                 src={theme === "dark" ? "/brand/icons/sun.svg" : "/brand/icons/moon.svg"}
-                alt="Theme Toggle"
+                alt=""
                 width={16}
                 height={16}
                 className={theme === "dark" ? "w-4 h-4" : "w-4 h-4 theme-icon-invert"}
@@ -195,7 +220,7 @@ export default function Navbar() {
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-expanded={isMobileMenuOpen}
-            aria-label="Toggle Navigation Menu"
+            aria-label={tNav("toggleMenu")}
             className="flex items-center justify-center w-9 h-9 rounded-full border border-border bg-background-secondary text-foreground hover:bg-hover transition-all cursor-pointer shadow-xs"
           >
             {isMobileMenuOpen ? (
@@ -216,36 +241,36 @@ export default function Navbar() {
         <div className="md:hidden border-t border-border bg-background-secondary/95 backdrop-blur-xl px-6 py-6 flex flex-col gap-6 shadow-xl animate-in slide-in-from-top-2 duration-200">
           {/* Mobile Navigation Links */}
           <div className="flex flex-col space-y-4 text-base font-medium text-foreground-secondary">
-            <Link
-              href="/about"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="hover:text-foreground transition-colors py-1"
-            >
-              {tNav("about")}
-            </Link>
-            <Link
-              href="/projects"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="hover:text-foreground transition-colors py-1"
-            >
-              {tNav("projects")}
-            </Link>
-            <Link
-              href="/programs"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="hover:text-foreground transition-colors py-1"
-            >
-              {tNav("programs")}
-            </Link>
+            {NAV_LINKS.map((link) => {
+              const active = isActive(link.href);
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  aria-current={active ? "page" : undefined}
+                  className={`flex items-center gap-3 py-1 transition-colors ${
+                    active ? "text-foreground font-semibold" : "hover:text-foreground"
+                  }`}
+                >
+                  <span
+                    aria-hidden
+                    className={`h-4 w-1 rounded-full transition-colors ${active ? "bg-heading-highlight" : "bg-transparent"}`}
+                  />
+                  {tNav(link.key)}
+                </Link>
+              );
+            })}
             <a
               href="https://github.com/AOSSIE-Org"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="hover:text-foreground transition-colors py-1 flex items-center justify-between"
+              className="hover:text-foreground transition-colors py-1 flex items-center gap-3"
             >
+              <span aria-hidden className="h-4 w-1 rounded-full bg-transparent" />
               <span>{tNav("github")}</span>
-              <span className="text-xs text-foreground-muted">↗</span>
+              <span className="ml-auto text-xs text-foreground-muted">↗</span>
             </a>
           </div>
 
@@ -257,7 +282,7 @@ export default function Navbar() {
             <div className="flex items-center gap-2 flex-wrap">
               <Image
                 src="/brand/icons/globe.svg"
-                alt="Language"
+                alt=""
                 width={16}
                 height={16}
                 className="w-4 h-4 theme-icon-invert mr-1"
@@ -281,12 +306,12 @@ export default function Navbar() {
             {mounted && (
               <button
                 onClick={toggleTheme}
-                aria-label="Toggle Theme"
+                aria-label={tNav("toggleTheme")}
                 className="flex items-center justify-center w-10 h-10 rounded-full border border-border bg-background hover:bg-hover text-foreground transition-all shadow-xs cursor-pointer shrink-0 ml-2"
               >
                 <Image
                   src={theme === "dark" ? "/brand/icons/sun.svg" : "/brand/icons/moon.svg"}
-                  alt="Theme Toggle"
+                  alt=""
                   width={18}
                   height={18}
                   className={theme === "dark" ? "w-4.5 h-4.5" : "w-4.5 h-4.5 theme-icon-invert"}

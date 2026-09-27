@@ -4,6 +4,7 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 import { motion, useTransform, useSpring, useMotionValue, useScroll } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { PROJECTS_DATA, githubUrl } from "@/lib/projectsData";
 
 // --- Types ---
 export type AnimationPhase = "scatter" | "line" | "circle" | "bottom-strip";
@@ -11,8 +12,8 @@ export type AnimationPhase = "scatter" | "line" | "circle" | "bottom-strip";
 interface ProjectItem {
   id: string;
   name: string;
-  category: string;
   src: string;
+  invertOnDark: boolean;
   githubLink: string;
 }
 
@@ -64,7 +65,7 @@ function ProjectCard({ project, target, onHoverStart, onHoverEnd }: ProjectCardP
           loading="lazy"
           decoding="async"
           className={`w-full h-full object-contain filter drop-shadow-xs ${
-            project.src.endsWith("resonate_logo.svg") ? "theme-icon-invert" : ""
+            project.invertOnDark ? "theme-icon-invert" : ""
           }`}
         />
       </div>
@@ -72,31 +73,14 @@ function ProjectCard({ project, target, onHoverStart, onHoverEnd }: ProjectCardP
   );
 }
 
-// Official AOSSIE Projects List with Direct GitHub Links
-const PROJECTS: ProjectItem[] = [
-  { id: "resonate", name: "Resonate", category: "Social & Audio", src: "/brand/project_svgs/resonate_logo.svg", githubLink: "https://github.com/AOSSIE-Org/Resonate" },
-  { id: "dit", name: "DIT", category: "Decentralized Trust", src: "/brand/project_svgs/dit_logo.svg", githubLink: "https://github.com/AOSSIE-Org/DIT" },
-  { id: "djed", name: "Djed Alliance", category: "Open Money", src: "/brand/project_svgs/djed_alliance_logo.svg", githubLink: "https://github.com/DjedAlliance" },
-  { id: "fate", name: "FATE", category: "Ethical AI", src: "/brand/project_svgs/fate_logo.svg", githubLink: "https://github.com/AOSSIE-Org/FATE" },
-  { id: "skills", name: "Open Skills", category: "Education", src: "/brand/project_svgs/skills_logo.svg", githubLink: "https://github.com/AOSSIE-Org/Skills" },
-  { id: "stability", name: "Stability Nexus", category: "Stability", src: "/brand/project_svgs/stability_nexus_logo.svg", githubLink: "https://github.com/StabilityNexus" },
-  { id: "stablepay", name: "StablePay", category: "DeFi Payments", src: "/brand/project_svgs/stablepay_logo.svg", githubLink: "https://github.com/DjedAlliance/StablePay" },
-  { id: "tnt", name: "Truth-n-Trust", category: "Governance", src: "/brand/project_svgs/tnt_logo.svg", githubLink: "https://github.com/StabilityNexus/TNT" },
-];
-
-const ALL_PROJECTS: ProjectItem[] = [
-  ...PROJECTS,
-  { id: "moveyourbody", name: "MoveYourBody", category: "Health & Fitness", src: "/brand/project_svgs/MoveYourBody_logo.svg", githubLink: "https://github.com/AOSSIE-Org/MoveYourBody" },
-  { id: "carbontracker", name: "Carbon Tracker", category: "Sustainability", src: "/brand/project_svgs/carbonTracker_logo.svg", githubLink: "https://github.com/AOSSIE-Org/CarbonTracker" },
-  { id: "chainvoice", name: "Chainvoice", category: "DeFi Invoicing", src: "/brand/project_svgs/chainvoice_logo.svg", githubLink: "https://github.com/StabilityNexus/Chainvoice" },
-  { id: "ellena", name: "Ellena", category: "AI & NLP", src: "/brand/project_svgs/ellena_logo.svg", githubLink: "https://github.com/AOSSIE-Org/Ell-ena" },
-  { id: "minichain", name: "MiniChain", category: "Micro-Blockchains", src: "/brand/project_svgs/minichain_logo.svg", githubLink: "https://github.com/AOSSIE-Org/MiniChain" },
-  { id: "ogh", name: "Open Gift Hub", category: "Open Source Giving", src: "/brand/project_svgs/ogh_logo.svg", githubLink: "https://github.com/AOSSIE-Org/Ogh" },
-  { id: "pictopy", name: "PicToPy", category: "Image Processing", src: "/brand/project_svgs/pictopy_logo.svg", githubLink: "https://github.com/AOSSIE-Org/PicToPy" },
-  { id: "rein", name: "REIN", category: "Decentralized Escrow", src: "/brand/project_svgs/rein_logo.svg", githubLink: "https://github.com/AOSSIE-Org/Rein" },
-  { id: "thrubox", name: "Thrubox", category: "Decentralized Storage", src: "/brand/project_svgs/thrubox_logo.svg", githubLink: "https://github.com/AOSSIE-Org/Thrubox" },
-  { id: "zplit", name: "Zplit", category: "DeFi Expense Sharing", src: "/brand/project_svgs/zplit_logo.svg", githubLink: "https://github.com/StabilityNexus/Zplit" },
-];
+// Active projects that have their own logo, linking to their primary repository
+const ALL_PROJECTS: ProjectItem[] = PROJECTS_DATA.filter((p) => p.logo && !p.archived).map((p) => ({
+  id: p.slug,
+  name: p.name,
+  src: p.logo as string,
+  invertOnDark: Boolean(p.logoInvertOnDark),
+  githubLink: githubUrl(p.repositories[0]),
+}));
 
 const lerp = (start: number, end: number, t: number) => start * (1 - t) + end * t;
 
@@ -249,14 +233,14 @@ export default function Projects() {
       id="projects"
       className="w-full relative h-[420vh] bg-background border-b border-border"
     >
-      <div className="sticky top-0 h-screen w-full flex flex-col items-center pt-24 pb-10 gap-6 overflow-hidden">
+      <div className="sticky top-0 h-screen w-full flex flex-col items-center pt-16 sm:pt-20 lg:pt-24 pb-4 sm:pb-8 gap-3 sm:gap-6 overflow-hidden">
         {/* 1. Section Header & Subtitle */}
         <div className="px-4 sm:px-10 lg:px-14 w-full flex flex-col items-center text-center max-w-5xl mx-auto gap-3 z-10 shrink-0">
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-medium tracking-tight text-foreground leading-[1.1]">
             {t("title")}
           </h2>
 
-          <p className="text-base sm:text-lg text-foreground-secondary font-normal max-w-4xl text-center leading-relaxed">
+          <p className="text-sm sm:text-base lg:text-lg text-foreground-secondary font-normal max-w-4xl text-center leading-relaxed">
             {t("subtitle")}
           </p>
         </div>
@@ -289,20 +273,29 @@ export default function Projects() {
                 if (introPhase === "scatter") {
                   target = scatterPositions[i];
                 } else if (introPhase === "line") {
-                  const lineSpacing = 85;
+                  const availableWidth = containerSize.width > 0 ? containerSize.width - 40 : 800;
+                  const maxLineSpacing = 85;
+                  const lineSpacing = Math.min(maxLineSpacing, availableWidth / totalProjects);
+                  const lineScale = Math.min(1.0, lineSpacing / maxLineSpacing);
                   const lineTotalWidth = totalProjects * lineSpacing;
-                  const lineX = i * lineSpacing - lineTotalWidth / 2;
-                  target = { x: lineX, y: 0, rotation: 0, scale: 1, opacity: 1 };
+                  const lineX = i * lineSpacing - lineTotalWidth / 2 + lineSpacing / 2;
+                  target = { x: lineX, y: 0, rotation: 0, scale: lineScale, opacity: 1 };
                 } else {
                   const isMobile = containerSize.width < 768;
-                  const minDimension = Math.min(containerSize.width, containerSize.height);
+                  const minDimension = Math.min(
+                    containerSize.width || 800,
+                    containerSize.height || 500
+                  );
 
-                  const circleRadius = Math.min(minDimension * 0.32, 280);
+                  // Dynamic radius capped to fit within available container dimensions safely
+                  const circleRadius = Math.max(90, Math.min(minDimension * 0.33, 260));
                   const circleAngle = (i / totalProjects) * 360;
                   const circleRad = (circleAngle * Math.PI) / 180;
 
-                  // Larger squares while resting in the circle formation
-                  const circleScale = isMobile ? 1.1 : 1.8;
+                  // Maximum scale to ensure adjacent cards never overlap each other or crowd center button
+                  const maxScaleForNoOverlap = (circleRadius * 0.765 - 12) / CARD_SIZE;
+                  const baseScale = isMobile ? 1.0 : Math.min(1.7, Math.max(1.0, minDimension / 380));
+                  const circleScale = Math.min(baseScale, Math.max(0.85, maxScaleForNoOverlap));
 
                   const circlePos = {
                     x: Math.cos(circleRad) * circleRadius,
@@ -328,11 +321,13 @@ export default function Projects() {
                   const currentArcAngle = startAngle + i * step + boundedRotation;
                   const arcRad = (currentArcAngle * Math.PI) / 180;
 
+                  const arcScale = isMobile ? 1.1 : Math.min(1.5, Math.max(0.9, minDimension / 380));
+
                   const arcPos = {
                     x: Math.cos(arcRad) * arcRadius + parallaxValue,
                     y: Math.sin(arcRad) * arcRadius + arcCenterY,
                     rotation: currentArcAngle + 90,
-                    scale: isMobile ? 1.3 : 1.6,
+                    scale: arcScale,
                   };
 
                   target = {
@@ -377,11 +372,6 @@ export default function Projects() {
               )}
             </motion.div>
           </div>
-        </div>
-
-        {/* 3. Small Hint Note for visitors */}
-        <div className="text-center pb-4 text-xs sm:text-sm text-foreground-secondary/70 font-medium shrink-0 select-none">
-          {t("hint")}
         </div>
       </div>
     </section>

@@ -13,6 +13,10 @@ vi.mock('next-intl', () => ({
       programs: 'Programs',
       github: 'GitHub',
       selectLanguage: 'Select Language',
+      home: 'Home',
+      toggleTheme: 'Toggle theme',
+      toggleMenu: 'Toggle navigation menu',
+      logoAlt: 'AOSSIE logo',
     };
     return translations[key] || key;
   },
