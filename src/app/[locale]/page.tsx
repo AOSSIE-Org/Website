@@ -6,6 +6,7 @@ import { use } from "react";
 import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import Sponsors from "@/components/Sponsors";
 import Footer from "@/components/Footer";
 
 function ProjectsSkeleton() {
@@ -26,15 +27,10 @@ function ProjectsSkeleton() {
 
 function StatsSkeleton() {
   return (
-    <section className="w-full relative h-[140vh] sm:h-[120vh] bg-background border-b border-border">
-      <div className="sticky top-0 h-screen w-full flex flex-col items-center pt-24 pb-10 gap-8 overflow-hidden">
-        <div className="w-full flex flex-col items-center text-center max-w-6xl mx-auto gap-4 px-4 sm:px-10 lg:px-14 shrink-0">
-          <div className="h-12 w-72 bg-foreground-muted/10 rounded-xl animate-pulse" />
-          <div className="h-6 w-80 max-w-full bg-foreground-muted/10 rounded-lg animate-pulse" />
-        </div>
-        <div className="flex-1 w-full flex items-center justify-center relative px-4 sm:px-10 lg:px-14">
-          <div className="w-64 h-56 rounded-2xl bg-card border border-border animate-pulse shadow-md" />
-        </div>
+    <section className="w-full relative h-[160vh] sm:h-[140vh] bg-background border-b border-border">
+      <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center gap-8 px-4">
+        <div className="h-12 w-72 bg-foreground-muted/10 rounded-xl animate-pulse" />
+        <div className="w-[min(78vw,18rem)] aspect-square rounded-3xl bg-card border border-border animate-pulse" />
       </div>
     </section>
   );
@@ -110,6 +106,7 @@ export default function Home({
             <main className="flex-1 flex flex-col justify-between min-w-0">
               <Hero />
               <Projects />
+              <Sponsors />
               <Stats />
             </main>
             <Footer />

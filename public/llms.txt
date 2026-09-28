@@ -13,6 +13,9 @@ This repository is a high-performance webpage built on **Next.js 16 (App Router)
 - **`src/i18n/`**: Configurations for translation lookups and custom navigation helpers.
 - **`src/messages/`**: Directory containing translation catalogs (e.g., `en.json`, `hi.json`).
 - **`src/components/`**: Location for reusable, localized UI components.
+- **`src/lib/projectsData.ts`**: The project catalogue (one entry per project, grouped repositories, topics, themes, links).
+- **`src/lib/projectTranslations.ts`**: Project descriptions in non-English locales.
+- **`src/lib/repoStats.ts`**: Generated GitHub stars/activity snapshot; refresh with `npm run update:stats`.
 
 ---
 

@@ -100,7 +100,7 @@ const LOGO_THEMES: Record<string, LogoTheme> = {
     rimBottomColor: "#1A1C20",
     nodeColor: "#2D3037",
   },
-  "skills_logo.svg": {
+  "skills_logo.png": {
     rimTopColor: "#E37A4B",
     rimBottomColor: "#AD4A1E",
     nodeColor: "#C96033",
@@ -361,7 +361,7 @@ export default function HubDiagram3D({ logos = [], centerLogo }: HubDiagram3DPro
         }
       `}</style>
 
-      {/* 3D Scene Wrapper tilted gently towards the screen (28deg tilt) */}
+      {/* 3D Scene Wrapper tilted gently towards the screen (30deg tilt) */}
       <div
         style={{
           width: "100%",
@@ -369,7 +369,7 @@ export default function HubDiagram3D({ logos = [], centerLogo }: HubDiagram3DPro
           position: "relative",
           transformStyle: "preserve-3d",
           WebkitTransformStyle: "preserve-3d",
-          transform: "rotateX(28deg)",
+          transform: "rotateX(30deg)",
           transformOrigin: "50% 50%",
         }}
       >

@@ -10,7 +10,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "vitest run"
+    "test": "vitest run",
+    "update:stats": "node scripts/update-repo-stats.mjs"
   },
   "dependencies": {
     "@swc/helpers": "^0.5.23",

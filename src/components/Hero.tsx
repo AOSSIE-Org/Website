@@ -28,8 +28,7 @@ const PROJECT_SVGS = [
   "/brand/project_svgs/pictopy_logo.svg",
   "/brand/project_svgs/rein_logo.svg",
   "/brand/project_svgs/resonate_logo.svg",
-  "/brand/project_svgs/skills_logo.svg",
-  "/brand/project_svgs/stability_nexus_logo.svg",
+  "/brand/project_logos/skills_logo.png",
   "/brand/project_svgs/stablepay_logo.svg",
   "/brand/project_svgs/thrubox_logo.svg",
   "/brand/project_svgs/tnt_logo.svg",
@@ -60,10 +59,10 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="flex flex-col items-center justify-between w-full min-h-[calc(100vh-73px)] py-10 md:py-16 gap-8">
+    <section className="flex flex-col items-center w-full min-h-[calc(100svh-69px)] md:min-h-[calc(100svh-66.4px)] pt-10 md:pt-14 [@media(max-height:54rem)]:pt-6">
       {/* 1. Main Title, Subtitle & Join Our Community Button */}
-      <div className="px-4 sm:px-10 lg:px-14 w-full flex flex-col items-center text-center max-w-6xl mx-auto gap-4">
-        <h1 className="text-4xl sm:text-6xl md:text-7xl font-medium tracking-tight text-foreground leading-[1.1] break-words animate-hero-title">
+      <div className="px-4 sm:px-10 lg:px-14 w-full flex flex-col items-center text-center max-w-6xl mx-auto gap-4 mb-6 [@media(max-height:54rem)]:mb-4">
+        <h1 className="text-4xl sm:text-6xl md:text-7xl [@media(min-width:48rem)_and_(max-height:54rem)]:text-6xl font-medium tracking-tight text-foreground leading-[1.1] break-words animate-hero-title">
           {t("titleLine1")}
           <br />
           {t("titleLine2")}
@@ -75,7 +74,7 @@ export default function Hero() {
         </p>
 
         {/* Floating "Join Our Community →" Pill Button (positioned close to title & subtitle) */}
-        <div className="z-20 mt-2 animate-hero-badge">
+        <div className="relative z-20 mt-2 animate-hero-badge">
           <a
             href="https://discord.gg/hjUhu33uAn"
             target="_blank"
@@ -88,86 +87,74 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* 2. Reserved Canvas Container */}
-      <div className="lg:px-2 xl:px-14 w-full relative flex flex-col items-center">
+      {/* 2. Reserved Canvas Container (absorbs spare height, keeping the diagram centred) */}
+      <div className="flex-1 lg:px-2 xl:px-14 w-full max-w-[max(36rem,calc((100svh-31rem)*3.1))] [@media(min-width:48rem)_and_(max-height:54rem)]:max-w-[max(40rem,calc((100svh-25rem)*3.1))] [@media(min-width:48rem)_and_(max-height:54rem)]:-mt-[4.5rem] mx-auto relative z-0 flex flex-col items-center justify-center md:justify-end">
         {/* Canvas: central 3D hub diagram connecting AOSSIE to its projects */}
-        <div className="w-full flex items-center justify-center relative overflow-hidden animate-hero-canvas">
+        <div className="w-full -mt-[1.5%] -mb-[1.5%] flex items-center justify-center relative overflow-hidden animate-hero-canvas">
           <HubDiagram3D logos={randomLogos} />
         </div>
       </div>
 
-      {/* 3. Hero Bottom Bar (Copyright & Social Media aligned to content boundary) */}
-      <div className="px-4 sm:px-10 lg:px-14 w-full flex flex-col sm:flex-row items-top xl:items-center justify-between pb-4 pt-6 gap-4 text-foreground-secondary animate-hero-footer">
-        {/* Social Media Icon Buttons (Above copyright on mobile, right-aligned on desktop; on sm to xl sizes, label sits on top line and icons on row below without wrapping) */}
-        <div className="flex flex-col items-center gap-2 sm:order-2 sm:items-start xl:flex-row xl:items-center xl:gap-3">
-          <span className="text-[16px] font-medium whitespace-nowrap text-center sm:text-right xl:text-left">
-            {t("socialMedia")}
-          </span>
+      {/* 3. Hero Bottom Bar: social media icons, centred with equal space above and below */}
+      <div className="px-4 sm:px-10 lg:px-14 w-full flex items-center justify-center py-6 animate-hero-footer">
+        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+          <a
+            href="https://discord.gg/hjUhu33uAn"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Discord"
+            className="w-9 h-9 rounded-lg border border-border bg-background hover:bg-hover hover:scale-105 flex items-center justify-center transition-all shadow-xs"
+          >
+            <Image src="/brand/icons/discord.svg" alt="" width={20} height={20} className="theme-icon-invert" />
+          </a>
+          <a
+            href="https://x.com/aossie_org"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="X (Twitter)"
+            className="w-9 h-9 rounded-lg border border-border bg-background hover:bg-hover hover:scale-105 flex items-center justify-center transition-all shadow-xs"
+          >
+            <Image src="/brand/icons/twitter.svg" alt="" width={14} height={14} className="theme-icon-invert" />
+          </a>
 
-          <div className="flex items-center flex-nowrap justify-center sm:justify-end gap-2 sm:gap-3 shrink-0">
-            <a
-              href="https://discord.gg/hjUhu33uAn"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Discord"
-              className="w-9 h-9 rounded-lg border border-border bg-background hover:bg-hover hover:scale-105 flex items-center justify-center transition-all shadow-xs"
-            >
-              <Image src="/brand/icons/discord.svg" alt="Discord" width={20} height={20} className="theme-icon-invert" />
-            </a>
-            <a
-              href="https://x.com/aossie_org"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="X (Twitter)"
-              className="w-9 h-9 rounded-lg border border-border bg-background hover:bg-hover hover:scale-105 flex items-center justify-center transition-all shadow-xs"
-            >
-              <Image src="/brand/icons/twitter.svg" alt="X" width={14} height={14} className="theme-icon-invert" />
-            </a>
+          <a
+            href="https://www.linkedin.com/company/aossie/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            className="w-9 h-9 rounded-lg border border-border bg-background hover:bg-hover hover:scale-105 flex items-center justify-center transition-all shadow-xs"
+          >
+            <Image src="/brand/icons/linkedin.svg" alt="" width={18} height={18} className="theme-icon-invert" />
+          </a>
 
-            <a
-              href="https://www.linkedin.com/company/aossie/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="w-9 h-9 rounded-lg border border-border bg-background hover:bg-hover hover:scale-105 flex items-center justify-center transition-all shadow-xs"
-            >
-              <Image src="/brand/icons/linkedin.svg" alt="LinkedIn" width={18} height={18} className="theme-icon-invert" />
-            </a>
+          <a
+            href="https://github.com/AOSSIE-Org"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            className="w-9 h-9 rounded-lg border border-border bg-background hover:bg-hover hover:scale-105 flex items-center justify-center transition-all shadow-xs"
+          >
+            <Image src="/brand/icons/github.svg" alt="" width={18} height={18} className="theme-icon-invert" />
+          </a>
 
-            <a
-              href="https://github.com/AOSSIE-Org"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub"
-              className="w-9 h-9 rounded-lg border border-border bg-background hover:bg-hover hover:scale-105 flex items-center justify-center transition-all shadow-xs"
-            >
-              <Image src="/brand/icons/github.svg" alt="GitHub" width={18} height={18} className="theme-icon-invert" />
-            </a>
+          <a
+            href="https://www.youtube.com/@AOSSIE-Org"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="YouTube"
+            className="w-9 h-9 rounded-lg border border-border bg-background hover:bg-hover hover:scale-105 flex items-center justify-center transition-all shadow-xs"
+          >
+            <Image src="/brand/icons/youtube.svg" alt="" width={20} height={20} className="theme-icon-invert" />
+          </a>
 
-            <a
-              href="https://www.youtube.com/@AOSSIE-Org"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="YouTube"
-              className="w-9 h-9 rounded-lg border border-border bg-background hover:bg-hover hover:scale-105 flex items-center justify-center transition-all shadow-xs"
-            >
-              <Image src="/brand/icons/youtube.svg" alt="YouTube" width={20} height={20} className="theme-icon-invert" />
-            </a>
-
-            <a
-              href="mailto:aossie.osst@gmail.com"
-              aria-label="Email"
-              className="w-9 h-9 rounded-lg border border-border bg-background hover:bg-hover hover:scale-105 flex items-center justify-center transition-all shadow-xs"
-            >
-              <Image src="/brand/icons/mail.svg" alt="Mail" width={20} height={20} className="theme-icon-invert" />
-            </a>
-          </div>
+          <a
+            href="mailto:aossie.oss@gmail.com"
+            aria-label={t("emailLabel")}
+            className="w-9 h-9 rounded-lg border border-border bg-background hover:bg-hover hover:scale-105 flex items-center justify-center transition-all shadow-xs"
+          >
+            <Image src="/brand/icons/mail.svg" alt="" width={20} height={20} className="theme-icon-invert" />
+          </a>
         </div>
-
-        {/* Left: Copyright (16px) */}
-        <p className="text-center sm:text-left text-[16px] font-medium leading-normal sm:order-1">
-          {t("copyright")}
-        </p>
       </div>
 
       {/* Bottom Horizontal Divider Line (Extends touch-to-touch up to the slanted boundary frames!) */}

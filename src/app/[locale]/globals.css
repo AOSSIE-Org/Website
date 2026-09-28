@@ -45,6 +45,8 @@
 
 /* LIGHT MODE (Default) */
 :root {
+  color-scheme: light;
+
   /* Surface Colors */
   --background: #FFFFFF;
   --background-secondary: #FAFAFA;
@@ -91,6 +93,8 @@
 
 /* DARK MODE */
 .dark {
+  color-scheme: dark;
+
   /* Surface Colors */
   --background: #0F1115;
   --background-secondary: #161920;
