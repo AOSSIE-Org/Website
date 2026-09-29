@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { GSOC_APPLY_URL } from "@/lib/links";
+import FooterCta from "@/components/FooterCta";
 
 const INFO_REPO = "https://github.com/AOSSIE-Org/Info/blob/main";
 
@@ -111,59 +112,26 @@ export default function Footer() {
         { label: t("codeOfConduct"), href: `${INFO_REPO}/CODE_OF_CONDUCT.md` },
       ],
     },
-    {
-      title: t("ecosystem"),
-      links: [
-        { label: "Stability Nexus", href: "https://stability.nexus/" },
-        { label: "Djed Alliance", href: "https://djed.one/" },
-        { label: "Google Summer of Code", href: "https://summerofcode.withgoogle.com/" },
-      ],
-    },
   ];
 
   return (
     <footer className="w-full bg-background border-t border-border transition-colors duration-200">
-      {/* 1. Call to action */}
-      <div className="px-4 sm:px-10 lg:px-14 py-12 sm:py-14 flex flex-col lg:flex-row lg:items-end justify-between gap-8 border-b border-border">
-        <div className="flex flex-col gap-3 max-w-2xl">
-          <p className="text-3xl sm:text-4xl font-medium tracking-tight text-foreground leading-[1.15] text-balance">
-            {t("ctaTitle")}
-          </p>
-          <p className="text-sm sm:text-base text-foreground-secondary leading-relaxed">{t("ctaSubtitle")}</p>
-        </div>
-        <div className="flex flex-wrap gap-3">
-          <a
-            href="https://discord.gg/hjUhu33uAn"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group inline-flex items-center gap-2 rounded-xl bg-foreground px-5 py-3 text-sm font-semibold text-background transition-opacity hover:opacity-90"
-          >
-            <span>{t("ctaDiscord")}</span>
-            <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
-          </a>
-          <Link
-            href="/projects"
-            className="group inline-flex items-center gap-2 rounded-xl border border-border bg-background px-5 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-hover"
-          >
-            <span>{t("ctaProjects")}</span>
-            <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
-          </Link>
-        </div>
-      </div>
+      {/* 1. Call to action: one path for contributors, one for organizations */}
+      <FooterCta />
 
       {/* 2. Brand, links and socials */}
       <div className="px-4 sm:px-10 lg:px-14 py-12 flex flex-col lg:flex-row lg:justify-between gap-10 lg:gap-12">
-        <div className="flex flex-col gap-5 lg:max-w-sm">
+        <div className="flex flex-col gap-5">
           <Link href="/" className="inline-flex w-fit" aria-label="AOSSIE">
             <Image
-              src="/brand/icons/aossie_secondary_dark_logo.svg"
+              src="/brand/icons/aossie_logo.svg"
               alt="AOSSIE"
-              width={130}
-              height={26}
-              className="h-7 w-auto theme-icon-invert transition-opacity hover:opacity-80"
+              width={336}
+              height={360}
+              className="h-20 w-auto transition-opacity hover:opacity-80"
             />
           </Link>
-          <p className="text-sm text-foreground-secondary leading-relaxed max-w-sm">{t("description")}</p>
+          <p className="text-sm text-foreground-secondary leading-relaxed text-pretty">{t("description")}</p>
 
           <ul className="flex flex-wrap gap-2" aria-label={t("community")}>
             {SOCIALS.map((social) => {
@@ -185,7 +153,7 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-[5%] gap-y-10 lg:flex lg:gap-x-[clamp(2.5rem,5vw,5.5rem)]">
+        <div className="grid grid-cols-2 gap-x-[5%] gap-y-10 lg:flex lg:gap-x-[clamp(2.5rem,5vw,5.5rem)]">
           {columns.map((column) => (
             <FooterColumn key={column.title} title={column.title} links={column.links} />
           ))}
@@ -197,8 +165,19 @@ export default function Footer() {
         className="group select-none overflow-hidden border-t border-border px-4 sm:px-10 lg:px-14 py-8 sm:py-10"
         aria-hidden
       >
+        {/*
+          Outline drawn from the letters' silhouette (dilated glyph minus the glyph).
+          text-stroke would trace every contour of the variable font, including the
+          overlapping ones inside the "A", so it is not used here.
+        */}
+        <svg width="0" height="0" className="absolute">
+          <filter id="footer-wordmark-outline" colorInterpolationFilters="sRGB">
+            <feMorphology in="SourceGraphic" operator="dilate" radius="1.5" result="grown" />
+            <feComposite in="grown" in2="SourceAlpha" operator="out" />
+          </filter>
+        </svg>
         <div className="relative" onPointerMove={trackPointer}>
-          <p className="text-[clamp(4.5rem,22vw,19rem)] font-semibold leading-[0.8] tracking-[-0.06em] text-transparent [-webkit-text-stroke:1.5px_color-mix(in_srgb,var(--foreground)_16%,transparent)] text-center">
+          <p className="text-[clamp(4.5rem,22vw,19rem)] font-semibold leading-[0.8] tracking-[-0.06em] text-foreground opacity-[0.16] [filter:url(#footer-wordmark-outline)] text-center">
             AOSSIE
           </p>
           <p

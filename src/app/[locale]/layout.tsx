@@ -1,31 +1,44 @@
 import type { Metadata } from "next";
-import { Inter, Noto_Sans_Devanagari } from "next/font/google";
+import { Inter, Noto_Sans_Arabic, Noto_Sans_Bengali, Noto_Sans_Devanagari } from "next/font/google";
 import { routing } from "@/i18n/routing";
 import { generateLocaleMetadata } from "@/i18n/metadata";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
-import enMessages from "@/messages/en.json";
-import hiMessages from "@/messages/hi.json";
+import { getMessages } from "@/i18n/messages";
+import { getLanguage } from "@/config/languages";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { LenisProvider } from "@/components/providers/lenis-provider";
 import "./globals.css";
 
-const messagesMap: Record<string, Record<string, unknown>> = {
-  en: enMessages as Record<string, unknown>,
-  hi: hiMessages as Record<string, unknown>,
-};
-
+// Latin extended covers Hausa and te reo Māori; Cyrillic covers Russian.
 const inter = Inter({
   variable: "--font-inter",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext", "cyrillic"],
   display: "swap",
 });
 
+// Script fonts are not preloaded: the browser fetches them only when a page uses their characters.
 const devanagari = Noto_Sans_Devanagari({
   variable: "--font-devanagari",
   subsets: ["devanagari"],
   display: "swap",
+  preload: false,
+});
+
+const bengali = Noto_Sans_Bengali({
+  variable: "--font-bengali",
+  subsets: ["bengali"],
+  display: "swap",
+  preload: false,
+});
+
+// Used for both Arabic and Urdu
+const arabic = Noto_Sans_Arabic({
+  variable: "--font-arabic",
+  subsets: ["arabic"],
+  display: "swap",
+  preload: false,
 });
 
 export const dynamicParams = false;
@@ -65,13 +78,14 @@ export default async function RootLayout({
   // Enable static rendering
   setRequestLocale(locale);
 
-  // Provide messages to Client Components directly via messagesMap
-  const messages = messagesMap[locale] || enMessages;
+  // Provide messages to Client Components
+  const messages = getMessages(locale);
 
   return (
     <html
       lang={locale}
-      className={`${inter.variable} ${devanagari.variable} h-full antialiased`}
+      dir={getLanguage(locale).dir}
+      className={`${inter.variable} ${devanagari.variable} ${bengali.variable} ${arabic.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-background text-foreground" suppressHydrationWarning>

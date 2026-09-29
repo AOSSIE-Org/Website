@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import en from '../messages/en.json';
-import hi from '../messages/hi.json';
+import { languages, defaultLanguage } from '../config/languages';
+import { MESSAGES } from '../i18n/messages';
 import { PROJECTS_DATA, TOPICS, THEMES } from '../lib/projectsData';
 import { getProjectText } from '../lib/projectTranslations';
 import { REPO_STATS } from '../lib/repoStats';
@@ -19,25 +19,47 @@ function flatValues(obj: Messages): string[] {
   );
 }
 
-describe('Translations', () => {
-  it('has the same keys in every locale', () => {
-    expect(flatKeys(hi).sort()).toEqual(flatKeys(en).sort());
+const en = MESSAGES[defaultLanguage];
+const otherLocales = languages.map((lang) => lang.code).filter((code) => code !== defaultLanguage);
+
+/** ICU placeholders such as `{count}` or `{count, plural`, and rich-text tags such as `<mark>`, in a message. */
+function placeholders(message: string): string[] {
+  const args = [...message.matchAll(/\{(\w+)(?:\}|,\s*(\w+))/g)].map((m) => m.slice(1).filter(Boolean).join(','));
+  const tags = [...message.matchAll(/<\/?(\w+)>/g)].map((m) => m[0]);
+  return [...args, ...tags].sort();
+}
+
+describe.each(otherLocales)('Translations (%s)', (locale) => {
+  const messages = MESSAGES[locale];
+
+  it('has the same keys as English', () => {
+    expect(flatKeys(messages).sort()).toEqual(flatKeys(en).sort());
   });
 
-  it('has Hindi text for every project', () => {
+  it('keeps the same ICU placeholders as English', () => {
+    for (const [section, keys] of Object.entries(en)) {
+      for (const [key, value] of Object.entries(keys)) {
+        const translated = (messages as Record<string, Record<string, string>>)[section][key];
+        expect(placeholders(translated), `${section}.${key}`).toEqual(placeholders(value));
+      }
+    }
+  });
+
+  it('has translated text for every project', () => {
     for (const project of PROJECTS_DATA) {
-      const text = getProjectText(project, 'hi');
+      const text = getProjectText(project, locale);
       expect(text.description, project.slug).not.toBe(project.description);
       if (project.about) expect(text.about, project.slug).not.toBe(project.about);
     }
   });
+});
 
-  it('does not use em dashes in site copy', () => {
+describe('Site copy', () => {
+  it('does not use em dashes', () => {
     const copy = [
-      ...flatValues(en),
-      ...flatValues(hi),
+      ...Object.values(MESSAGES).flatMap((messages) => flatValues(messages)),
       ...PROJECTS_DATA.flatMap((p) => [p.description, p.about ?? '']),
-      ...PROJECTS_DATA.flatMap((p) => Object.values(getProjectText(p, 'hi'))),
+      ...otherLocales.flatMap((locale) => PROJECTS_DATA.flatMap((p) => Object.values(getProjectText(p, locale)))),
     ];
     expect(copy.filter((s) => s?.includes('—'))).toEqual([]);
   });

@@ -36,4 +36,6 @@ Project specific context and directives for AI agents.
 
 - **Config Alias Map:** Turbopack and Webpack alias resolvers map `"next-intl/config"` to our local request setup inside [`next.config.ts`](next.config.ts) using `createNextIntlPlugin("./src/i18n/request.ts")`.
 - **Branding Assets:** The official branding logo, favicon, and style specifications reside inside [`public/brand/`](public/brand/).
+- **Skills:** Automated skill workflows for synchronizing translations and project metadata live in [`.agents/skills/manage-project-translations/`](.agents/skills/manage-project-translations/SKILL.md).
+
 

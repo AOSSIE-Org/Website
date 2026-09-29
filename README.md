@@ -146,38 +146,81 @@ In the checklist below, mark the items that have been completed for your project
     ├── i18n/                   # Routing, request config, navigation helpers, metadata
     ├── lib/
     │   ├── projectsData.ts     # Every project: text, logo, topics, themes, repos, links
-    │   ├── projectTranslations.ts # Project descriptions in other languages
+    │   ├── projectTranslations/ # Project descriptions per locale (hi.ts, zh.ts, ...)
     │   ├── repoStats.ts        # Generated GitHub stats snapshot (do not edit by hand)
     │   └── links.ts            # Shared external links
-    ├── messages/               # UI translations (en.json, hi.json)
+    ├── messages/               # UI translations, one JSON file per locale (en.json is the source)
     └── __tests__/              # Vitest suites, including content checks
 ```
 
 ---
 
-## 🗂️ Managing Content
+## 🗂️ Managing Projects & Content
 
-### Adding or editing a project
+All projects displayed on the website are managed through structured data files. Modifying projects involves a few coordinated files to ensure full translations, asset linkage, and GitHub statistics.
 
-Projects live in [`src/lib/projectsData.ts`](src/lib/projectsData.ts), one entry per project (not per repository):
+---
 
-- `description` is shown on the card; the optional `about` appears when a visitor opens **Details**.
-- `topics` (Blockchain, Artificial Intelligence, Mobile) and `themes` (Communication, Education, Finance, Sustainability, Infrastructure) can each hold several values.
-- `repositories` lists every repository of the project; the first one is the primary GitHub link.
-- `discordUrl` should point to the project's own channel when it has one; otherwise use the server invite.
-- Set `archived: true` for projects that are no longer maintained.
-- Add the logo to `public/brand/project_logos/`. Projects without a logo show a monogram.
+### 1. Adding a New Project
 
-Then:
+1. **Add the project metadata in [`src/lib/projectsData.ts`](src/lib/projectsData.ts):**
+   Add a new entry to the `PROJECTS_DATA` array:
+   ```typescript
+   {
+     slug: "my-project",
+     name: "My Project",
+     description: "One or two sentences summarizing the project for cards.",
+     about: "Optional longer overview shown in the Details modal.",
+     logo: "/brand/project_logos/my_project_logo.png", // or project_svgs/
+     logoInvertOnDark: false, // Set true if single-dark logo needs inverting in dark mode
+     topics: ["Artificial Intelligence"], // "Blockchain" | "Artificial Intelligence" | "Mobile"
+     themes: ["Education"], // "Communication" | "Education" | "Finance" | "Sustainability" | "Infrastructure"
+     repositories: [
+       { fullName: "AOSSIE-Org/My-Project", language: "TypeScript" },
+     ],
+     discordUrl: aossieChannel("DISCORD_CHANNEL_ID"), // or AOSSIE_DISCORD_INVITE
+     websiteUrl: "https://myproject.aossie.org", // optional
+   }
+   ```
+2. **Add the logo asset (Optional):**
+   - Place image or SVG in [`public/brand/project_logos/`](public/brand/project_logos/) or [`public/brand/project_svgs/`](public/brand/project_svgs/).
+   - Projects without a logo automatically display a fallback monogram.
+3. **Add translations in [`src/lib/projectTranslations/`](src/lib/projectTranslations/):**
+   - Add the matching `slug` entry to every locale file (`hi.ts`, `zh.ts`, `es.ts`, ...) with translated `description` (and `about`, if provided in English).
+4. **Fetch GitHub statistics:**
+   - Run `npm run update:stats` (set `GITHUB_TOKEN` environment variable if needed to avoid API rate limits) to automatically update [`src/lib/repoStats.ts`](src/lib/repoStats.ts) with star counts and commit activity.
+5. **Verify with tests:**
+   - Run `npm test` to validate that all required fields, translations, and repository stats pass CI checks.
 
-1. Add the Hindi description (and `about`, if any) to [`src/lib/projectTranslations.ts`](src/lib/projectTranslations.ts).
-2. Run `npm run update:stats` so the new repositories get star counts (set `GITHUB_TOKEN` to avoid rate limits).
-3. Run `npm test`. The content tests check that every project has a translation and GitHub stats, and that both locales have the same keys.
+---
 
-### Writing copy
+### 2. Changing / Updating an Existing Project
 
-- Every user-facing string goes in `src/messages/*.json`, in every locale.
-- Keep sentences plain; avoid em dashes (the content tests enforce this).
+- **Copy or Links:** Update the relevant fields (`name`, `description`, `about`, `discordUrl`, `websiteUrl`, `topics`, `themes`) in [`src/lib/projectsData.ts`](src/lib/projectsData.ts).
+- **Translations:** If you updated `description` or `about`, make sure to update the corresponding translations in every file under [`src/lib/projectTranslations/`](src/lib/projectTranslations/).
+- **Repositories:** If you added or changed repositories, run `npm run update:stats` to refresh [`src/lib/repoStats.ts`](src/lib/repoStats.ts).
+- **Run validation:** Execute `npm test` to ensure all consistency checks pass.
+
+---
+
+### 3. Archiving vs. Removing a Project
+
+- **Archiving a project (Recommended for inactive/historical projects):**
+  - Set `archived: true` on the project entry in [`src/lib/projectsData.ts`](src/lib/projectsData.ts).
+  - The project will remain catalogued with an *Archived* badge.
+- **Removing a project completely:**
+  1. Delete the project entry from `PROJECTS_DATA` in [`src/lib/projectsData.ts`](src/lib/projectsData.ts).
+  2. Remove its translated entries from every file under [`src/lib/projectTranslations/`](src/lib/projectTranslations/).
+  3. (Optional) Remove unused logo assets from `public/brand/project_logos/` or `public/brand/project_svgs/`.
+  4. Run `npm run update:stats` to prune repository stats from [`src/lib/repoStats.ts`](src/lib/repoStats.ts).
+  5. Run `npm test` to verify no broken references remain.
+
+---
+
+### Writing Copy Guidelines
+
+- Every user-facing UI string goes in `src/messages/*.json` in all supported locales.
+- Keep sentences plain and concise; avoid em dashes `—` (content tests enforce this rule).
 
 ---
 
@@ -185,27 +228,20 @@ Then:
 
 ### 1. Adding a New Language
 
-To add support for a new language (e.g., French - `fr`):
+The site currently supports English, Simplified Chinese, Hindi, Spanish, French, Arabic, Bengali, Portuguese, Russian, Urdu, Swahili, Hausa and te reo Māori. To add another language (e.g., Japanese - `ja`):
 
-1. **Register the language:** Open [`src/config/languages.ts`](src/config/languages.ts) and add your new language to the `languages` array:
+1. **Register the language:** Add it to the `languages` array in [`src/config/languages.ts`](src/config/languages.ts), including its text direction and Open Graph locale:
    ```typescript
-   export const languages: Language[] = [
-     { code: 'en', name: 'English', localName: 'English' },
-     { code: 'hi', name: 'Hindi', localName: 'हिन्दी' },
-     { code: 'fr', name: 'French', localName: 'Français' } // Add this line
-   ];
+   { code: 'ja', name: 'Japanese', localName: '日本語', dir: 'ltr', ogLocale: 'ja_JP' },
    ```
 
-2. **Create the translation catalog:** Under `src/messages/`, create a new file named `fr.json`:
-   ```json
-   {
-     "Home": {
-       "heading": "Bienvenue sur AOSSIE Webpage"
-     }
-   }
-   ```
+2. **Create the translation catalog:** Copy `src/messages/en.json` to `src/messages/ja.json`, translate every value, and register it in [`src/i18n/messages.ts`](src/i18n/messages.ts). Keep ICU placeholders such as `{count}` and `{count, plural, ...}` intact.
 
-3. That's it! Next.js and `next-intl` will automatically register the locale, add it to the routing tables, and handle redirection for visitors matching `fr` browser preferences.
+3. **Translate project text:** Create `src/lib/projectTranslations/ja.ts` (same shape as `hi.ts`) and register it in [`src/lib/projectTranslations/index.ts`](src/lib/projectTranslations/index.ts).
+
+4. **Check the font:** Latin, Cyrillic, Devanagari, Bengali and Arabic script are covered by the fonts in [`src/app/[locale]/layout.tsx`](src/app/[locale]/layout.tsx); Chinese uses the visitor's system fonts. Add a Noto font there if the new script needs one.
+
+5. Run `npm test`. The content tests check that every locale has the same keys and placeholders as English and a translation for every project.
 
 ---
 
@@ -332,7 +368,7 @@ Start the development server:
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view it. The application will automatically detect your browser's language preferences and route you to `/en` or `/hi` (or fall back to the default language, English).
+Open [http://localhost:3000](http://localhost:3000) to view it. The application will automatically detect your browser's language preferences and route you to the matching locale, such as `/en` or `/hi` (or fall back to the default language, English).
 
 ### Building for Production
 
@@ -372,7 +408,7 @@ When bootstrapping a new project from this starter repository, update the follow
 
 ### 4. SEO & i18n Localization Metadata
 - **Schema.org JSON-LD ([`src/app/[locale]/page.tsx`](src/app/[locale]/page.tsx))**: Locate the `jsonLd` object inside the `Home` component and update `publisher.name`, `publisher.url`, and `publisher.logo`.
-- **Translation Catalogs ([`src/messages/en.json`](src/messages/en.json), [`src/messages/hi.json`](src/messages/hi.json))**: Update the `heading`, `metaTitle`, and `metaDescription` keys with localized titles and descriptions.
+- **Translation Catalogs ([`src/messages/`](src/messages/))**: Update the `heading`, `metaTitle`, and `metaDescription` keys with localized titles and descriptions.
 
 ### 5. Mobile & AI Platform Configurations
 - **Android App Links ([`public/.well-known/assetlinks.json`](public/.well-known/assetlinks.json))**: Configure package name and Android application certificate SHA-256 fingerprint if applicable.

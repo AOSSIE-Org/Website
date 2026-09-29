@@ -14,6 +14,7 @@ vi.mock('@/i18n/navigation', () => ({
 }));
 
 import LanguageSwitcher from '@/components/LanguageSwitcher';
+import { languages } from '@/config/languages';
 
 describe('LanguageSwitcher Component', () => {
   it('renders combobox accessible element and available locale options', () => {
@@ -23,9 +24,10 @@ describe('LanguageSwitcher Component', () => {
     expect(selectElement).toBeInTheDocument();
 
     const options = screen.getAllByRole('option');
-    expect(options).toHaveLength(2);
+    expect(options).toHaveLength(languages.length);
     expect(options[0]).toHaveTextContent(/English/i);
-    expect(options[1]).toHaveTextContent(/हिन्दी/i);
+    expect(screen.getByRole('option', { name: /हिन्दी/ })).toBeInTheDocument();
+    expect(screen.getByRole('option', { name: /Te Reo Māori/ })).toBeInTheDocument();
   });
 
   it('triggers router.replace with selected locale when changing selection', () => {
