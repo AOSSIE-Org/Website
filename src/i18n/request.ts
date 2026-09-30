@@ -1,12 +1,6 @@
 import { getRequestConfig } from 'next-intl/server';
-import enMessages from '../messages/en.json';
-import hiMessages from '../messages/hi.json';
+import { getMessages } from './messages';
 import { routing } from './routing';
-
-const messagesMap: Record<string, Record<string, unknown>> = {
-  en: enMessages as Record<string, unknown>,
-  hi: hiMessages as Record<string, unknown>,
-};
 
 export default getRequestConfig(async ({ requestLocale }) => {
   let locale = await requestLocale;
@@ -17,6 +11,6 @@ export default getRequestConfig(async ({ requestLocale }) => {
 
   return {
     locale,
-    messages: messagesMap[locale] || enMessages,
+    messages: getMessages(locale),
   };
 });

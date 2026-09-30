@@ -40,7 +40,7 @@ const SORT_KEYS = ["stars", "activity", "name", "repos"] as const;
 type SortKey = (typeof SORT_KEYS)[number];
 type SortDirection = "desc" | "asc";
 
-const GROUP_KEYS = ["organization", "topic", "theme", "none"] as const;
+const GROUP_KEYS = ["none", "organization", "topic", "theme"] as const;
 type GroupKey = (typeof GROUP_KEYS)[number];
 
 const DEFAULT_FILTERS: Filters = { organization: "All", topic: "All", theme: "All" };
@@ -131,7 +131,7 @@ export default function ProjectsPage() {
   const [showArchived, setShowArchived] = useState(true);
   const [sortKey, setSortKey] = useState<SortKey>("stars");
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
-  const [groupBy, setGroupBy] = useState<GroupKey>("organization");
+  const [groupBy, setGroupBy] = useState<GroupKey>("none");
   const [collapsed, setCollapsed] = useState<Set<string>>(new Set());
 
   const setFilter = <K extends Dimension>(key: K) => (value: Filters[K]) =>

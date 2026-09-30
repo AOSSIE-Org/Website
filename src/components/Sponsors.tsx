@@ -1,6 +1,8 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
+import { PARTNER_MAILTO } from "@/lib/links";
 
 interface Partner {
   name: string;
@@ -99,6 +101,30 @@ export default function Sponsors() {
           </li>
         ))}
       </ul>
+
+      {/* Call to action for organizations that would like to support AOSSIE */}
+      <div className="px-4 sm:px-10 lg:px-14 py-10 sm:py-12 border-t border-border flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+        <div className="flex flex-col gap-2 max-w-3xl">
+          <h3 className="text-xl sm:text-2xl font-medium tracking-tight text-foreground text-balance">{t("ctaTitle")}</h3>
+          <p className="text-sm sm:text-base text-foreground-secondary leading-relaxed text-pretty">{t("ctaText")}</p>
+        </div>
+        <div className="flex flex-wrap gap-3 shrink-0">
+          <a
+            href={PARTNER_MAILTO}
+            className="group inline-flex items-center gap-2 rounded-xl bg-foreground px-5 py-3 text-sm font-semibold text-background transition-opacity hover:opacity-90"
+          >
+            <span>{t("ctaButton")}</span>
+            <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
+          </a>
+          <Link
+            href={{ pathname: "/about", hash: "partners" }}
+            className="group inline-flex items-center gap-2 rounded-xl border border-border bg-background px-5 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-hover"
+          >
+            <span>{t("ctaLearnMore")}</span>
+            <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
+          </Link>
+        </div>
+      </div>
     </section>
   );
 }

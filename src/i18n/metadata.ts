@@ -1,32 +1,24 @@
 import type { Metadata } from 'next';
-import enMessages from '../messages/en.json';
-import hiMessages from '../messages/hi.json';
-
-const messagesMap: Record<string, typeof enMessages> = {
-  en: enMessages,
-  hi: hiMessages,
-};
+import { languages, defaultLanguage, getLanguage } from '@/config/languages';
+import { getMessages, type Messages } from './messages';
 
 export async function generateLocaleMetadata(
   locale: string,
-  namespace: keyof typeof enMessages = 'Home'
+  namespace: keyof Messages = 'Home'
 ): Promise<Metadata> {
-  const messages = messagesMap[locale] || enMessages;
-  const meta = (messages[namespace] as typeof enMessages.Home) || enMessages.Home;
+  const meta = getMessages(locale)[namespace] as Messages['Home'];
 
   const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://aossie.org';
   const siteUrl = rawSiteUrl.replace(/\/$/, '');
-  const localeUrl = locale === 'en' ? siteUrl : `${siteUrl}/${locale}`;
+  const urlFor = (code: string) => (code === defaultLanguage ? siteUrl : `${siteUrl}/${code}`);
+  const localeUrl = urlFor(locale);
 
   return {
     title: meta.metaTitle,
     description: meta.metaDescription,
     alternates: {
       canonical: localeUrl,
-      languages: {
-        en: siteUrl,
-        hi: `${siteUrl}/hi`,
-      },
+      languages: Object.fromEntries(languages.map((lang) => [lang.code, urlFor(lang.code)])),
     },
     openGraph: {
       title: meta.metaTitle,
@@ -41,7 +33,7 @@ export async function generateLocaleMetadata(
           alt: 'AOSSIE Logo',
         },
       ],
-      locale: locale === 'en' ? 'en_US' : 'hi_IN',
+      locale: getLanguage(locale).ogLocale,
       type: 'website',
     },
     twitter: {

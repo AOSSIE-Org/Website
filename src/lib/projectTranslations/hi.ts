@@ -1,12 +1,7 @@
-import type { Project } from "./projectsData";
+import type { ProjectText } from "./types";
 
-/**
- * Translations of project card text, keyed by locale and project slug.
- * English lives in `projectsData.ts`; any missing entry falls back to it.
- */
-type ProjectText = { description: string; about?: string };
-
-const HI: Record<string, ProjectText> = {
+/** Hindi project text, keyed by project slug. */
+const hi: Record<string, ProjectText> = {
   resonate: {
     description: "एक ओपन-सोर्स, समुदाय-संचालित सोशल वॉइस प्लेटफ़ॉर्म, Clubhouse या Twitter Spaces की तरह।",
     about: "Resonate आवाज़ को सामाजिक बातचीत के केंद्र में रखता है: चर्चाओं और कार्यक्रमों के लिए लाइव ऑडियो रूम, रैंडम पेयर चैट और वॉइस कॉल। Flutter ऐप रियल-टाइम ऑडियो के लिए Appwrite क्लाउड फ़ंक्शंस और LiveKit पर चलता है।",
@@ -268,13 +263,4 @@ const HI: Record<string, ProjectText> = {
   },
 };
 
-const TRANSLATIONS: Record<string, Record<string, ProjectText>> = { hi: HI };
-
-/** The project's description and overview in the given locale, falling back to English. */
-export function getProjectText(project: Project, locale: string): ProjectText {
-  const localized = TRANSLATIONS[locale]?.[project.slug];
-  return {
-    description: localized?.description ?? project.description,
-    about: localized?.about ?? project.about,
-  };
-}
+export default hi;

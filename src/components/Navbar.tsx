@@ -175,7 +175,7 @@ export default function Navbar() {
 
             {/* Dropdown Options Menu */}
             {isLangOpen && (
-              <div className="absolute right-0 mt-2 w-44 rounded-2xl border border-border bg-background-secondary shadow-xl py-2 z-50 animate-in fade-in-0 zoom-in-95">
+              <div className="absolute end-0 mt-2 w-52 max-h-[min(70vh,32rem)] overflow-y-auto overscroll-contain rounded-2xl border border-border bg-background-secondary shadow-xl py-2 z-50 animate-in fade-in-0 zoom-in-95" data-lenis-prevent>
                 <div className="px-3 py-1 text-[10px] font-semibold text-foreground-muted uppercase tracking-wider border-b border-border mb-1">
                   {tNav("selectLanguage")}
                 </div>
@@ -183,7 +183,8 @@ export default function Navbar() {
                   <button
                     key={lang.code}
                     onClick={() => selectLanguage(lang.code)}
-                    className={`w-full flex items-center justify-between p-2 text-xs font-medium transition-colors text-left cursor-pointer ${
+                    lang={lang.code}
+                    className={`w-full flex items-center justify-between gap-3 p-2 text-xs font-medium transition-colors text-start cursor-pointer ${
                       locale === lang.code
                         ? "text-heading-highlight font-semibold"
                         : "text-foreground-secondary hover:bg-hover"

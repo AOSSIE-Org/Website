@@ -69,8 +69,10 @@ export default function Hero() {
         </h1>
 
         <p className="text-base sm:text-lg text-foreground-secondary font-normal leading-relaxed mt-2 animate-hero-subtext">
-          {t("subtitlePrefix")}
-          <span className="font-semibold text-brand-yellow">2016</span>
+          {t.rich("subtitle", {
+            year: "2016",
+            highlight: (chunks) => <span className="font-semibold text-brand-yellow">{chunks}</span>,
+          })}
         </p>
 
         {/* Floating "Join Our Community →" Pill Button (positioned close to title & subtitle) */}

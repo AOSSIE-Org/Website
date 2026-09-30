@@ -11,7 +11,7 @@
   --color-brand-green: #10B981;
 
   /* Font Configuration */
-  --font-sans: var(--font-inter), var(--font-devanagari), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), var(--font-devanagari), var(--font-bengali), var(--font-arabic), "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", ui-sans-serif, system-ui, sans-serif;
 
   /* Semantic Utility Mappings for Tailwind CSS v4 */
   --color-background: var(--background);

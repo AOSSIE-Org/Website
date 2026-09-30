@@ -2,16 +2,10 @@
 
 import React, { useEffect, useRef, useState, type ReactNode } from "react";
 import PageWrapper from "@/components/PageWrapper";
-import { Link } from "@/i18n/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
-import {
-  getAllProjects,
-  getOrganization,
-  ORGANIZATIONS,
-  ORGANIZATION_GITHUB,
-  type Organization,
-} from "@/lib/projectsData";
+import { getAllProjects, getOrganization, ORGANIZATION_GITHUB, type Organization } from "@/lib/projectsData";
+import { CONTACT_EMAIL, PARTNER_MAILTO } from "@/lib/links";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -295,69 +289,198 @@ function Journey() {
 }
 
 /* ------------------------------------------------------------------ */
-/* Ecosystem                                                           */
+/* Sponsors, partners and supporters                                   */
 /* ------------------------------------------------------------------ */
 
-const ORGANIZATION_LOGOS: Record<Organization, string> = {
-  AOSSIE: "/brand/icons/aossie_logomark.svg",
-  "Stability Nexus": "/brand/icons/stability.svg",
-  "Djed Alliance": "/brand/project_svgs/djed_alliance_logo.svg",
-};
+interface Supporter {
+  name: string;
+  /** Translation keys under AboutPage: `${key}Role` and `${key}Desc`. */
+  key: "gsoc" | "stability" | "djed";
+  logo: string;
+  /** Variant for dark mode, for logos whose wordmark is dark. */
+  logoDark?: string;
+  website: string;
+  github?: string;
+  /** Partner organization whose repositories hold AOSSIE projects, used for the project count. */
+  organization?: Organization;
+  since?: string;
+}
 
-function Ecosystem() {
+const SUPPORTERS: Supporter[] = [
+  {
+    name: "Google Summer of Code",
+    key: "gsoc",
+    logo: "/brand/icons/gsoc_full_logo_light.svg",
+    logoDark: "/brand/icons/gsoc_full_logo.svg",
+    website: "https://summerofcode.withgoogle.com/",
+    since: "2016",
+  },
+  {
+    name: "Stability Nexus",
+    key: "stability",
+    logo: "/brand/icons/stability_nexus_full_logo.svg",
+    website: "https://stability.nexus/",
+    github: ORGANIZATION_GITHUB["Stability Nexus"],
+    organization: "Stability Nexus",
+  },
+  {
+    name: "Djed Alliance",
+    key: "djed",
+    logo: "/brand/project_svgs/djed_alliance_logo.svg",
+    website: "https://djed.one/",
+    github: ORGANIZATION_GITHUB["Djed Alliance"],
+    organization: "Djed Alliance",
+  },
+];
+
+const supportIcon = { ...pillarIcon, width: 20, height: 20 };
+
+function Partners() {
   const t = useTranslations("AboutPage");
-  const counts = ORGANIZATIONS.map((org) => getAllProjects().filter((p) => getOrganization(p) === org).length);
-  const descriptions: Record<Organization, string> = {
-    AOSSIE: t("orgAossie"),
-    "Stability Nexus": t("orgStability"),
-    "Djed Alliance": t("orgDjed"),
-  };
+  const projectCount = (org: Organization) => getAllProjects().filter((p) => getOrganization(p) === org).length;
+
+  const ways: { title: string; description: string; icon: ReactNode }[] = [
+    {
+      title: t("way1Title"),
+      description: t("way1Desc"),
+      icon: (
+        <svg {...supportIcon}>
+          <path d="M12 21s-7-4.35-7-10a4 4 0 0 1 7-2.65A4 4 0 0 1 19 11c0 5.65-7 10-7 10Z" />
+        </svg>
+      ),
+    },
+    {
+      title: t("way2Title"),
+      description: t("way2Desc"),
+      icon: (
+        <svg {...supportIcon}>
+          <circle cx="9" cy="12" r="6" />
+          <circle cx="15" cy="12" r="6" />
+        </svg>
+      ),
+    },
+    {
+      title: t("way3Title"),
+      description: t("way3Desc"),
+      icon: (
+        <svg {...supportIcon}>
+          <rect x="3" y="4" width="18" height="6" rx="1.5" />
+          <rect x="3" y="14" width="18" height="6" rx="1.5" />
+          <path d="M7 7h.01M7 17h.01" />
+        </svg>
+      ),
+    },
+  ];
 
   return (
-    <section className="flex flex-col gap-10">
-      <SectionHeading title={t("ecosystemTitle")} subtitle={t("ecosystemSubtitle")} />
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
-        {ORGANIZATIONS.map((org, i) => (
-          <motion.article
-            key={org}
-            {...reveal}
-            transition={{ ...reveal.transition, delay: i * 0.08 }}
-            className="group flex flex-col gap-6 rounded-3xl border border-border bg-card p-7 shadow-card transition-colors hover:border-foreground/20"
-          >
-            <div className="flex items-start justify-between gap-4">
-              <span className="flex h-16 w-16 items-center justify-center rounded-2xl border border-border bg-background transition-transform duration-500 ease-out group-hover:-rotate-6 group-hover:scale-105">
+    <section id="partners" className="flex flex-col gap-10 scroll-mt-32">
+      <SectionHeading title={t("partnersTitle")} subtitle={t("partnersSubtitle")} />
+
+      <ul className="flex flex-col gap-4 sm:gap-5">
+        {SUPPORTERS.map((supporter, i) => {
+          const count = supporter.organization ? projectCount(supporter.organization) : 0;
+          return (
+            <motion.li
+              key={supporter.name}
+              {...reveal}
+              transition={{ ...reveal.transition, delay: i * 0.08 }}
+              className="group grid grid-cols-1 md:grid-cols-12 overflow-hidden rounded-3xl border border-border bg-card shadow-card transition-colors hover:border-foreground/20"
+            >
+              <div className="md:col-span-4 flex items-center justify-center border-b md:border-b-0 md:border-r border-border bg-background px-8 py-10">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={ORGANIZATION_LOGOS[org]} alt="" className="h-10 w-10 object-contain" />
+                <img
+                  src={supporter.logo}
+                  alt={supporter.name}
+                  loading="lazy"
+                  className={`h-16 sm:h-20 w-auto max-w-[240px] object-contain transition-transform duration-500 ease-out group-hover:scale-[1.04] ${supporter.logoDark ? "dark:hidden" : ""}`}
+                />
+                {supporter.logoDark && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={supporter.logoDark}
+                    alt={supporter.name}
+                    loading="lazy"
+                    className="hidden dark:block h-16 sm:h-20 w-auto max-w-[240px] object-contain transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+                  />
+                )}
+              </div>
+
+              <div className="md:col-span-8 flex flex-col gap-4 p-6 sm:p-8">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="rounded-full border border-heading-highlight/40 bg-heading-highlight/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-foreground">
+                    {t(`${supporter.key}Role`)}
+                  </span>
+                  {supporter.since && (
+                    <span className="rounded-full border border-border px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-foreground-muted">
+                      {t("partnerSince", { year: supporter.since })}
+                    </span>
+                  )}
+                  {count > 0 && (
+                    <span className="rounded-full border border-border px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-foreground-muted">
+                      {t("partnerProjects", { count })}
+                    </span>
+                  )}
+                </div>
+                <h3 className="text-xl sm:text-2xl font-semibold tracking-tight text-foreground">{supporter.name}</h3>
+                <p className="text-sm sm:text-base leading-relaxed text-foreground-secondary">{t(`${supporter.key}Desc`)}</p>
+                <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-2 pt-2 text-sm font-semibold">
+                  <a
+                    href={supporter.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-foreground hover:opacity-80 transition-opacity"
+                  >
+                    <span>{t("partnerWebsite")}</span>
+                    <span aria-hidden className="text-[10px]">↗</span>
+                  </a>
+                  {supporter.github && (
+                    <a
+                      href={supporter.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-foreground-secondary hover:text-foreground transition-colors"
+                    >
+                      <span>GitHub</span>
+                      <span aria-hidden className="text-[10px]">↗</span>
+                    </a>
+                  )}
+                </div>
+              </div>
+            </motion.li>
+          );
+        })}
+      </ul>
+
+      {/* How organizations can get involved */}
+      <motion.div {...reveal} className="flex flex-col gap-8 rounded-3xl border border-border bg-background-secondary p-6 sm:p-10">
+        <div className="flex flex-col gap-2">
+          <h3 className="text-2xl sm:text-3xl font-medium tracking-tight text-foreground text-balance">{t("waysTitle")}</h3>
+          <p className="text-sm sm:text-base leading-relaxed text-foreground-secondary text-pretty">{t("waysSubtitle")}</p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {ways.map((way) => (
+            <div key={way.title} className="flex flex-col gap-3 rounded-2xl border border-border bg-card p-5">
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-background-secondary text-foreground">
+                {way.icon}
               </span>
-              <span className="text-right">
-                <span className="block text-4xl font-medium tracking-tight text-foreground tabular-nums">{counts[i]}</span>
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-foreground-muted">
-                  {t("ecosystemProjects")}
-                </span>
-              </span>
+              <h4 className="text-base font-semibold text-foreground">{way.title}</h4>
+              <p className="text-sm leading-relaxed text-foreground-secondary">{way.description}</p>
             </div>
-            <div className="flex flex-col gap-2">
-              <h3 className="text-xl font-semibold tracking-tight text-foreground">{org}</h3>
-              <p className="text-sm leading-relaxed text-foreground-secondary">{descriptions[org]}</p>
-            </div>
-            <div className="mt-auto flex items-center gap-4 pt-2 text-sm font-semibold">
-              <Link href="/projects" className="group/link inline-flex items-center gap-1.5 text-foreground">
-                <span>{t("viewProjects")}</span>
-                <span aria-hidden className="transition-transform group-hover/link:translate-x-0.5">→</span>
-              </Link>
-              <a
-                href={ORGANIZATION_GITHUB[org]}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-foreground-secondary hover:text-foreground transition-colors"
-              >
-                <span>GitHub</span>
-                <span aria-hidden className="text-[10px]">↗</span>
-              </a>
-            </div>
-          </motion.article>
-        ))}
-      </div>
+          ))}
+        </div>
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
+          <a
+            href={PARTNER_MAILTO}
+            className="group inline-flex items-center gap-2 rounded-xl bg-foreground px-5 py-3 text-sm font-semibold text-background transition-opacity hover:opacity-90"
+          >
+            <span>{t("waysCta")}</span>
+            <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
+          </a>
+          <a href={`mailto:${CONTACT_EMAIL}`} className="text-sm font-medium text-foreground-secondary hover:text-foreground transition-colors">
+            {CONTACT_EMAIL}
+          </a>
+        </div>
+      </motion.div>
     </section>
   );
 }
@@ -368,11 +491,53 @@ function Ecosystem() {
 
 function Community() {
   const t = useTranslations("Team");
-  const roles = [
-    { title: t("r1Title"), count: "10", description: t("r1Desc") },
-    { title: t("r2Title"), count: "70", description: t("r2Desc") },
-    { title: t("r3Title"), count: "160+", description: t("r3Desc") },
-    { title: t("r4Title"), count: "8,000+", description: t("r4Desc") },
+  const roles: { title: string; count: string; description: string; icon: ReactNode }[] = [
+    {
+      title: t("r1Title"),
+      count: "10",
+      description: t("r1Desc"),
+      icon: (
+        <svg {...pillarIcon}>
+          <path d="M12 3 4 7v5c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V7l-8-4Z" />
+        </svg>
+      ),
+    },
+    {
+      title: t("r2Title"),
+      count: "70",
+      description: t("r2Desc"),
+      icon: (
+        <svg {...pillarIcon}>
+          <path d="M22 10 12 5 2 10l10 5 10-5Z" />
+          <path d="M6 12v5c3 2 9 2 12 0v-5" />
+        </svg>
+      ),
+    },
+    {
+      title: t("r3Title"),
+      count: "160+",
+      description: t("r3Desc"),
+      icon: (
+        <svg {...pillarIcon}>
+          <circle cx="6" cy="6" r="2.5" />
+          <circle cx="6" cy="18" r="2.5" />
+          <circle cx="18" cy="8" r="2.5" />
+          <path d="M6 8.5v7M18 10.5c0 4-6 3-11 6" />
+        </svg>
+      ),
+    },
+    {
+      title: t("r4Title"),
+      count: "8,000+",
+      description: t("r4Desc"),
+      icon: (
+        <svg {...pillarIcon}>
+          <circle cx="9" cy="8" r="3.5" />
+          <path d="M2.5 20c.6-3.5 3.3-6 6.5-6s5.9 2.5 6.5 6" />
+          <path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18.5 14.4c1.7.9 2.8 3 3 5.6" />
+        </svg>
+      ),
+    },
   ];
 
   return (
@@ -386,18 +551,16 @@ function Community() {
             transition={{ ...reveal.transition, delay: i * 0.08 }}
             className="group relative flex flex-col gap-4 overflow-hidden rounded-3xl border border-border bg-card p-6 shadow-card transition-colors hover:border-foreground/20"
           >
-            <span className="text-4xl sm:text-5xl font-medium tracking-tight text-foreground tabular-nums">{role.count}</span>
+            <div className="flex items-start justify-between gap-3">
+              <span className="text-4xl sm:text-5xl font-medium tracking-tight text-foreground tabular-nums">{role.count}</span>
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-border bg-background-secondary text-foreground transition-colors duration-300 group-hover:border-heading-highlight group-hover:bg-heading-highlight group-hover:text-brand-dark">
+                {role.icon}
+              </span>
+            </div>
             <div className="flex flex-col gap-1.5">
               <h3 className="text-base font-semibold text-foreground">{role.title}</h3>
               <p className="text-sm leading-relaxed text-foreground-secondary">{role.description}</p>
             </div>
-            {/* Fill bar showing each circle's relative size in the community */}
-            <span aria-hidden className="mt-auto h-1 w-full overflow-hidden rounded-full bg-background-muted">
-              <span
-                className="block h-full origin-left rounded-full bg-heading-highlight transition-transform duration-700 ease-out scale-x-[0.3] group-hover:scale-x-100"
-                style={{ width: `${[18, 38, 62, 100][i]}%` }}
-              />
-            </span>
           </motion.article>
         ))}
       </div>
@@ -412,7 +575,7 @@ export default function AboutPage() {
         <Hero />
         <Pillars />
         <Journey />
-        <Ecosystem />
+        <Partners />
         <Community />
       </div>
     </PageWrapper>
