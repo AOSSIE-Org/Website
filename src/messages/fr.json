@@ -12,7 +12,11 @@
     "selectLanguage": "Choisir la langue",
     "toggleTheme": "Changer de thème",
     "toggleMenu": "Afficher ou masquer le menu de navigation",
-    "logoAlt": "Logo d'AOSSIE"
+    "logoAlt": "Logo d'AOSSIE",
+    "selectTheme": "Choisir le thème",
+    "light": "Clair",
+    "dark": "Sombre",
+    "system": "Système"
   },
   "Hero": {
     "titleLine1": "Des chances égales pour tous",

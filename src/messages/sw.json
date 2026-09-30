@@ -12,7 +12,11 @@
     "selectLanguage": "Chagua Lugha",
     "toggleTheme": "Badilisha mandhari",
     "toggleMenu": "Fungua au funga menyu",
-    "logoAlt": "Nembo ya AOSSIE"
+    "logoAlt": "Nembo ya AOSSIE",
+    "selectTheme": "Chagua mandhari",
+    "light": "Mwanga",
+    "dark": "Giza",
+    "system": "Mfumo"
   },
   "Hero": {
     "titleLine1": "Nafasi Sawa kwa Wote",

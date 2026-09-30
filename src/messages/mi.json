@@ -12,7 +12,11 @@
     "selectLanguage": "Kōwhiria te Reo",
     "toggleTheme": "Huri i te āhua",
     "toggleMenu": "Whakaatu, huna rānei i te tahua whakatere",
-    "logoAlt": "Waitohu AOSSIE"
+    "logoAlt": "Waitohu AOSSIE",
+    "selectTheme": "Kōwhiri āhua",
+    "light": "Māmā",
+    "dark": "Pōuri",
+    "system": "Pūnaha"
   },
   "Hero": {
     "titleLine1": "He Āheinga Tōkeke mō te Katoa",

@@ -12,7 +12,11 @@
     "selectLanguage": "زبان منتخب کریں",
     "toggleTheme": "تھیم تبدیل کریں",
     "toggleMenu": "نیویگیشن مینو کھولیں یا بند کریں",
-    "logoAlt": "AOSSIE کا لوگو"
+    "logoAlt": "AOSSIE کا لوگو",
+    "selectTheme": "تھیم منتخب کریں",
+    "light": "ہلکی",
+    "dark": "گہری",
+    "system": "سسٹم"
   },
   "Hero": {
     "titleLine1": "سب کے لیے برابر موقع",

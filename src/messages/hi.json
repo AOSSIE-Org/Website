@@ -12,7 +12,11 @@
     "selectLanguage": "भाषा चुनें",
     "toggleTheme": "थीम बदलें",
     "toggleMenu": "नेविगेशन मेनू खोलें/बंद करें",
-    "logoAlt": "AOSSIE लोगो"
+    "logoAlt": "AOSSIE लोगो",
+    "selectTheme": "थीम चुनें",
+    "light": "लाइट",
+    "dark": "डार्क",
+    "system": "सिस्टम"
   },
   "Hero": {
     "titleLine1": "सबके लिए निष्पक्ष अवसर",

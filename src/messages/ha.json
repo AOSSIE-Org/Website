@@ -12,7 +12,11 @@
     "selectLanguage": "Zaɓi Harshe",
     "toggleTheme": "Sauya yanayin launi",
     "toggleMenu": "Buɗe ko rufe menu",
-    "logoAlt": "Tambarin AOSSIE"
+    "logoAlt": "Tambarin AOSSIE",
+    "selectTheme": "Zaɓi jigo",
+    "light": "Haske",
+    "dark": "Duhu",
+    "system": "Tsari"
   },
   "Hero": {
     "titleLine1": "Dama Daidai ga Kowa",

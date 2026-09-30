@@ -12,7 +12,11 @@
     "selectLanguage": "Seleccionar idioma",
     "toggleTheme": "Cambiar tema",
     "toggleMenu": "Abrir o cerrar el menú de navegación",
-    "logoAlt": "Logotipo de AOSSIE"
+    "logoAlt": "Logotipo de AOSSIE",
+    "selectTheme": "Seleccionar tema",
+    "light": "Claro",
+    "dark": "Oscuro",
+    "system": "Sistema"
   },
   "Hero": {
     "titleLine1": "Igualdad de oportunidades",

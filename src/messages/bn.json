@@ -12,7 +12,11 @@
     "selectLanguage": "ভাষা নির্বাচন করুন",
     "toggleTheme": "থিম পরিবর্তন করুন",
     "toggleMenu": "নেভিগেশন মেনু খুলুন বা বন্ধ করুন",
-    "logoAlt": "AOSSIE লোগো"
+    "logoAlt": "AOSSIE লোগো",
+    "selectTheme": "থিম নির্বাচন করুন",
+    "light": "হালকা",
+    "dark": "গাঢ়",
+    "system": "সিস্টেম"
   },
   "Hero": {
     "titleLine1": "সবার জন্য সমান সুযোগ",

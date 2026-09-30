@@ -12,7 +12,11 @@
     "selectLanguage": "选择语言",
     "toggleTheme": "切换主题",
     "toggleMenu": "切换导航菜单",
-    "logoAlt": "AOSSIE 标志"
+    "logoAlt": "AOSSIE 标志",
+    "selectTheme": "选择主题",
+    "light": "浅色",
+    "dark": "深色",
+    "system": "跟随系统"
   },
   "Hero": {
     "titleLine1": "人人机会平等",

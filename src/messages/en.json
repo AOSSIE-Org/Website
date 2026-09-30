@@ -12,7 +12,11 @@
     "selectLanguage": "Select Language",
     "toggleTheme": "Toggle theme",
     "toggleMenu": "Toggle navigation menu",
-    "logoAlt": "AOSSIE logo"
+    "logoAlt": "AOSSIE logo",
+    "selectTheme": "Select theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
   },
   "Hero": {
     "titleLine1": "A Fair Go",

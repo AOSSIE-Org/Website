@@ -26,7 +26,11 @@ export default function Navbar() {
   const mounted = useSyncExternalStore(emptySubscribe, () => true, () => false);
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isThemeOpen, setIsThemeOpen] = useState(false);
+  const [isMobileThemeOpen, setIsMobileThemeOpen] = useState(false);
   const langDropdownRef = useRef<HTMLDivElement>(null);
+  const themeDropdownRef = useRef<HTMLDivElement>(null);
+  const mobileThemeDropdownRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLElement>(null);
 
   // Close dropdown when clicking outside
@@ -34,6 +38,15 @@ export default function Navbar() {
     function handleClickOutside(event: MouseEvent) {
       if (langDropdownRef.current && !langDropdownRef.current.contains(event.target as Node)) {
         setIsLangOpen(false);
+      }
+      if (themeDropdownRef.current && !themeDropdownRef.current.contains(event.target as Node)) {
+        setIsThemeOpen(false);
+      }
+      if (
+        mobileThemeDropdownRef.current &&
+        !mobileThemeDropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsMobileThemeOpen(false);
       }
       if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node)) {
         setIsMobileMenuOpen(false);
@@ -45,6 +58,12 @@ export default function Navbar() {
 
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
+  };
+
+  const selectTheme = (mode: "light" | "dark" | "system") => {
+    setTheme(mode);
+    setIsThemeOpen(false);
+    setIsMobileThemeOpen(false);
   };
 
   const selectLanguage = (newLocale: string) => {
@@ -198,21 +217,82 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* Theme Toggle Button */}
+          {/* Theme Toggle + Chevron Selector */}
           {mounted && (
-            <button
-              onClick={toggleTheme}
-              aria-label={tNav("toggleTheme")}
-              className="flex items-center justify-center w-8 h-8 rounded-full border border-border bg-background-secondary hover:bg-hover text-foreground transition-all shadow-xs cursor-pointer"
-            >
-              <Image
-                src={theme === "dark" ? "/brand/icons/sun.svg" : "/brand/icons/moon.svg"}
-                alt=""
-                width={16}
-                height={16}
-                className={theme === "dark" ? "w-4 h-4" : "w-4 h-4 theme-icon-invert"}
-              />
-            </button>
+            <div className="relative" ref={themeDropdownRef}>
+              <div className="flex items-center gap-1">
+                <button
+                  onClick={toggleTheme}
+                  aria-label={tNav("toggleTheme")}
+                  className="flex items-center justify-center w-8 h-8 rounded-full border border-border bg-background-secondary hover:bg-hover text-foreground transition-all shadow-xs cursor-pointer"
+                >
+                  <Image
+                    src={theme === "dark" ? "/brand/icons/sun.svg" : "/brand/icons/moon.svg"}
+                    alt=""
+                    width={16}
+                    height={16}
+                    className={theme === "dark" ? "w-4 h-4" : "w-4 h-4 theme-icon-invert"}
+                  />
+                </button>
+                <button
+                  onClick={() => setIsThemeOpen(!isThemeOpen)}
+                  aria-expanded={isThemeOpen}
+                  aria-haspopup="true"
+                  aria-label={tNav("selectTheme")}
+                  className="flex items-center justify-center w-6 h-8 rounded-full border border-border bg-background-secondary hover:bg-hover text-foreground-muted transition-all shadow-xs cursor-pointer"
+                >
+                  <svg
+                    className={`w-3 h-3 transition-transform duration-200 ${
+                      isThemeOpen ? "rotate-180" : "rotate-0"
+                    }`}
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </button>
+              </div>
+
+              {isThemeOpen && (
+                <div className="absolute end-0 mt-2 w-40 rounded-2xl border border-border bg-background-secondary shadow-xl py-2 z-50 animate-in fade-in-0 zoom-in-95">
+                  <div className="px-3 py-1 text-[10px] font-semibold text-foreground-muted uppercase tracking-wider border-b border-border mb-1">
+                    {tNav("selectTheme")}
+                  </div>
+                  {(
+                    [
+                      { mode: "light", icon: "/brand/icons/sun.svg", iconClass: "invert dark:invert-0" },
+                      { mode: "dark", icon: "/brand/icons/moon.svg", iconClass: "theme-icon-invert" },
+                      { mode: "system", icon: "/brand/icons/window.svg", iconClass: "theme-icon-invert" },
+                    ] as const
+                  ).map((option) => (
+                    <button
+                      key={option.mode}
+                      onClick={() => selectTheme(option.mode)}
+                      className={`w-full flex items-center gap-2 px-3 py-2 text-xs font-medium transition-colors text-start cursor-pointer ${
+                        theme === option.mode
+                          ? "text-heading-highlight font-semibold"
+                          : "text-foreground-secondary hover:bg-hover"
+                      }`}
+                    >
+                      <Image
+                        src={option.icon}
+                        alt=""
+                        width={14}
+                        height={14}
+                        className={`w-3.5 h-3.5 ${option.iconClass}`}
+                      />
+                      <span className="flex-1">{tNav(option.mode)}</span>
+                      {theme === option.mode && <span aria-hidden>✓</span>}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           )}
         </div>
 
@@ -303,21 +383,82 @@ export default function Navbar() {
               ))}
             </div>
 
-            {/* Mobile Theme Toggle Button */}
+            {/* Mobile Theme Toggle + Chevron */}
             {mounted && (
-              <button
-                onClick={toggleTheme}
-                aria-label={tNav("toggleTheme")}
-                className="flex items-center justify-center w-10 h-10 rounded-full border border-border bg-background hover:bg-hover text-foreground transition-all shadow-xs cursor-pointer shrink-0 ml-2"
-              >
-                <Image
-                  src={theme === "dark" ? "/brand/icons/sun.svg" : "/brand/icons/moon.svg"}
-                  alt=""
-                  width={18}
-                  height={18}
-                  className={theme === "dark" ? "w-4.5 h-4.5" : "w-4.5 h-4.5 theme-icon-invert"}
-                />
-              </button>
+              <div className="relative shrink-0 ml-2" ref={mobileThemeDropdownRef}>
+                <div className="flex items-center gap-1">
+                  <button
+                    onClick={toggleTheme}
+                    aria-label={tNav("toggleTheme")}
+                    className="flex items-center justify-center w-10 h-10 rounded-full border border-border bg-background hover:bg-hover text-foreground transition-all shadow-xs cursor-pointer"
+                  >
+                    <Image
+                      src={theme === "dark" ? "/brand/icons/sun.svg" : "/brand/icons/moon.svg"}
+                      alt=""
+                      width={18}
+                      height={18}
+                      className={theme === "dark" ? "w-4.5 h-4.5" : "w-4.5 h-4.5 theme-icon-invert"}
+                    />
+                  </button>
+                  <button
+                    onClick={() => setIsMobileThemeOpen(!isMobileThemeOpen)}
+                    aria-expanded={isMobileThemeOpen}
+                    aria-haspopup="true"
+                    aria-label={tNav("selectTheme")}
+                    className="flex items-center justify-center w-7 h-10 rounded-full border border-border bg-background hover:bg-hover text-foreground-muted transition-all shadow-xs cursor-pointer"
+                  >
+                    <svg
+                      className={`w-3 h-3 transition-transform duration-200 ${
+                        isMobileThemeOpen ? "rotate-180" : "rotate-0"
+                      }`}
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                </div>
+
+                {isMobileThemeOpen && (
+                  <div className="absolute end-0 bottom-12 w-40 rounded-2xl border border-border bg-background-secondary shadow-xl py-2 z-50">
+                    <div className="px-3 py-1 text-[10px] font-semibold text-foreground-muted uppercase tracking-wider border-b border-border mb-1">
+                      {tNav("selectTheme")}
+                    </div>
+                    {(
+                      [
+                        { mode: "light", icon: "/brand/icons/sun.svg", iconClass: "invert dark:invert-0" },
+                        { mode: "dark", icon: "/brand/icons/moon.svg", iconClass: "theme-icon-invert" },
+                        { mode: "system", icon: "/brand/icons/window.svg", iconClass: "theme-icon-invert" },
+                      ] as const
+                    ).map((option) => (
+                      <button
+                        key={option.mode}
+                        onClick={() => selectTheme(option.mode)}
+                        className={`w-full flex items-center gap-2 px-3 py-2 text-xs font-medium text-start cursor-pointer ${
+                          theme === option.mode
+                            ? "text-heading-highlight font-semibold"
+                            : "text-foreground-secondary hover:bg-hover"
+                        }`}
+                      >
+                        <Image
+                          src={option.icon}
+                          alt=""
+                          width={14}
+                          height={14}
+                          className={`w-3.5 h-3.5 ${option.iconClass}`}
+                        />
+                        <span className="flex-1">{tNav(option.mode)}</span>
+                        {theme === option.mode && <span aria-hidden>✓</span>}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
             )}
           </div>
         </div>

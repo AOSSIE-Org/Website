@@ -12,7 +12,11 @@
     "selectLanguage": "اختر اللغة",
     "toggleTheme": "تبديل المظهر",
     "toggleMenu": "فتح قائمة التنقل أو إغلاقها",
-    "logoAlt": "شعار AOSSIE"
+    "logoAlt": "شعار AOSSIE",
+    "selectTheme": "اختر المظهر",
+    "light": "فاتح",
+    "dark": "داكن",
+    "system": "النظام"
   },
   "Hero": {
     "titleLine1": "فرصة عادلة للجميع",
