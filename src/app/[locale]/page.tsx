@@ -77,7 +77,7 @@ export default function Home({
       />
 
       {/* Main Container Bounded to Max Width */}
-      <div className="w-full max-w-[1440px] flex flex-col min-h-screen">
+      <div className="w-full max-w-none flex flex-col min-h-screen">
         
         {/* 1. Navbar Row (Sticky Top, Clean Background, NO Slanted Lines, NO Inner Vertical Lines) */}
         <div className="sticky top-0 z-50 w-full bg-nav-bg backdrop-blur-md border-b border-x border-border">
@@ -99,7 +99,7 @@ export default function Home({
         <div className="flex-1 flex w-full min-w-0">
           
           {/* Left Edge Slanted Lines Column (Visible on mobile with w-5) */}
-          <div className="w-5 sm:w-12 md:w-16 lg:w-20 shrink-0 slanted-bg-pattern border-x border-border" />
+          <div className="hidden" />
 
           {/* Main Center Content Column (Hero + Projects) */}
           <div className="flex-1 min-w-0 bg-background border-r border-border flex flex-col justify-between">

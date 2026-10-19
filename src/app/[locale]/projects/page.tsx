@@ -246,7 +246,7 @@ export default function ProjectsPage() {
 
   return (
     <PageWrapper>
-      <div className="w-full py-12 sm:py-16 px-4 sm:px-10 lg:px-14 max-w-7xl mx-auto flex flex-col gap-10">
+      <div className="w-full py-12 sm:py-16 px-4 sm:px-10 lg:px-14 max-w-none mx-auto flex flex-col gap-10">
         {/* Page Header */}
         <div className="text-center max-w-3xl mx-auto flex flex-col items-center gap-4">
           <motion.h1
