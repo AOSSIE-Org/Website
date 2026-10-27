@@ -57,7 +57,7 @@ export async function generateMetadata({
     notFound();
   }
   setRequestLocale(locale);
-  return generateLocaleMetadata(locale, "Home");
+  return generateLocaleMetadata(locale);
 }
 
 export default async function RootLayout({
