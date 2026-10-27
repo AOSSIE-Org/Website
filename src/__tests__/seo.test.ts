@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, afterEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import fc from 'fast-check';
 import sitemap from '../app/sitemap';
 import { languages, defaultLanguage } from '../config/languages';
@@ -16,6 +16,9 @@ const SITE = 'https://aossie.org';
 const codes = languages.map((l) => l.code);
 const pages = Object.keys(PAGE_META) as PageKey[];
 
+// Clear any preview URL from the environment so the production assertions are deterministic;
+// the override test stubs its own value
+beforeEach(() => vi.stubEnv('NEXT_PUBLIC_SITE_URL', ''));
 afterEach(() => vi.unstubAllEnvs());
 
 describe('generateLocaleMetadata', () => {

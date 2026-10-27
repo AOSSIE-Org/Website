@@ -88,17 +88,18 @@ reviews:
     - label: CI/CD
       instructions: Apply when files in `.github/workflows/` are updated
 
-  # Review instructions that apply to all files
-  instructions: >-
-    - This is AOSSIE's organization website (https://aossie.org): home, projects directory, programs and about pages in 13 languages, including RTL (Arabic, Urdu). It is a Next.js 16 static export deployed to GitHub Pages.
-    - Verify that documentation and comments are free of spelling mistakes
-    - Verify that new logic is covered by tests and that the 90% coverage threshold in vitest.config.ts still holds
-    - Confirm that copyright years are up to date whenever a file is changed
-    - Point out redundant comments that do not add clarity to the code
-    - Look for code duplication
-    - Flag any TODO or FIXME left in code or docs (the project follows a zero-TODO policy)
-
   path_instructions:
+    # Review instructions that apply to all files
+    - path: "**"
+      instructions: |
+        - This is AOSSIE's organization website (https://aossie.org): home, projects directory, programs and about pages in 13 languages, including RTL (Arabic, Urdu). It is a Next.js 16 static export deployed to GitHub Pages.
+        - Verify that documentation and comments are free of spelling mistakes
+        - Verify that new logic is covered by tests and that the 90% coverage threshold in vitest.config.ts still holds
+        - Confirm that copyright years are up to date whenever a file is changed
+        - Point out redundant comments that do not add clarity to the code
+        - Look for code duplication
+        - Flag any TODO or FIXME left in code or docs (the project follows a zero-TODO policy)
+
     - path: "src/**/*.{ts,tsx}"
       instructions: |
         Next.js App Router (v16, output: "export"):

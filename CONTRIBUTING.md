@@ -15,7 +15,7 @@ If you have questions, feedback, or want to discuss ideas before building:
 ## 🛠️ Getting Started
 
 ### 1. Prerequisites
-- **Node.js**: `v22` or higher (matches CI and `engines` in `package.json`)
+- **Node.js**: `v22.13.0` or higher (matches CI and `engines` in `package.json`)
 - **npm**: `v9` or higher
 
 ### 2. Fork & Clone

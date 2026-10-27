@@ -85,7 +85,7 @@
   - *Note:* `[~]` N/A: continuously deployed website from `main`; there are no versioned releases to number or tag. Change history is the merged PR list.
 
 - [-] 🔴 **release_notes_vulns** — Release notes identify every publicly known vulnerability (with CVE) fixed in that release.
-  - *Note:* `[~]` N/A: no publicly known vulnerabilities have been reported or fixed.
+  - *Note:* `[~]` N/A: continuously deployed website from `main`; there are no versioned releases or release notes. Security fixes (e.g. dependency CVEs) are described in the PR that ships them.
 
 ---
 
