@@ -42,8 +42,8 @@
     <img src="https://img.shields.io/badge/Subscribe_to_AOSSIE-red?style=flat&logo=youtube&logoColor=white" alt="Subscribe to AOSSIE"/>
   </a>
   &nbsp;
-  <a href="https://scorecard.dev/viewer/?uri=github.com/AOSSIE-Org/website">
-    <img src="https://api.scorecard.dev/projects/github.com/AOSSIE-Org/website/badge" alt="OpenSSF Scorecard Badge"/>
+  <a href="https://scorecard.dev/viewer/?uri=github.com/AOSSIE-Org/Website">
+    <img src="https://api.scorecard.dev/projects/github.com/AOSSIE-Org/Website/badge" alt="OpenSSF Scorecard Badge"/>
   </a>
   &nbsp;
   <a href="https://www.youtube.com/@StabilityNexus">
@@ -75,7 +75,7 @@ The website is built on **Next.js 16 (App Router)**, **React 19**, **Tailwind CS
 
 ## 💻 Tech Stack
 
-- **Framework:** Next.js 16.2.11 (App Router, Turbopack)
+- **Framework:** Next.js 16.4.3 (App Router, Turbopack)
 - **Library:** React 19
 - **Styling:** Tailwind CSS v4 & PostCSS
 - **Internationalization:** `next-intl`
@@ -83,20 +83,22 @@ The website is built on **Next.js 16 (App Router)**, **React 19**, **Tailwind CS
 
 ---
 
-## 📋 Project Maturity & TODO Checklist
+## 📋 Project Maturity Checklist
 
-In the checklist below, mark the items that have been completed for your project:
+Status of the GSoC / AOSSIE project checklist for this website:
 
 * [x] The project has a logo (`public/brand/icons/aossie_logo.svg`).
 * [x] The project has a favicon (`public/brand/icons/favicon.ico`).
 * [x] The web frontend:
-   - [x] Has proper title and metadata.
-   - [x] Has proper open graph metadata, to ensure that it is shown well when shared in social media.
+   - [x] Has proper title and metadata, with a separate title, description and canonical URL for every page and locale.
+   - [x] Has proper open graph metadata (1200x630 `public/og-image.png`), so it is shown well when shared in social media.
    - [x] Has a footer and header with AOSSIE logos and social handles.
    - [x] Uses React Server Components by default, introducing Client Components (`"use client"`) only when interactivity or client hooks are required.
    - [x] Is deployed to GitHub Pages via a GitHub Workflow (`.github/workflows/nextjs.yml`).
-   - [x] Has automated CI build and lint validation (`.github/workflows/ci.yml`).
-   - [x] Has CodeRabbit automated AI code review (`.coderabbit.yml`).
+   - [x] Has automated CI lint, test (90% coverage gate) and build validation (`.github/workflows/ci.yml`).
+   - [x] Has a `sitemap.xml` and a `robots.txt` that blocks `/pr-preview/`.
+   - [x] Has OpenSSF Scorecard analysis (`.github/workflows/scorecard.yml`) and a security policy (`SECURITY.md`).
+   - [x] Has CodeRabbit automated AI code review tailored to this project (`.coderabbit.yaml`).
    - [x] Has open-source legal compliance (`DCO.md`, `COPYRIGHT.md`, `Contributors.md`).
 
 ---
@@ -179,7 +181,7 @@ All projects displayed on the website are managed through structured data files.
        { fullName: "AOSSIE-Org/My-Project", language: "TypeScript" },
      ],
      discordUrl: aossieChannel("DISCORD_CHANNEL_ID"), // or AOSSIE_DISCORD_INVITE
-     websiteUrl: "https://myproject.aossie.org", // optional
+     websiteUrl: "https://<project>.aossie.org", // optional
    }
    ```
 2. **Add the logo asset (Optional):**
@@ -379,42 +381,23 @@ npm run build
 
 This compiles optimized static pages under the `/[locale]` path and checks all TypeScript configurations.
 
-### Running in Production
+### Testing
 
-Start the optimized server:
 ```bash
-npm run start
+npm test                # run the Vitest suite once
+npm run test:coverage   # with coverage; fails below 90% (same as CI)
 ```
 
----
+Tests in [`src/__tests__/`](src/__tests__/) cover translation-catalog parity for all 13 locales, project data and translations, per-page SEO metadata, the sitemap, and the navbar and language switcher, including [fast-check](https://fast-check.dev) property tests.
 
-## ⚙️ Initial Project Setup Checklist
+### Previewing the Static Export
 
-When bootstrapping a new project from this starter repository, update the following configurations to align with your project's branding, package naming, and hosting domains:
+The site is a static export (`output: "export"`), so `npm run start` is not used. Preview the production build with:
 
-### 1. Project Identity & Header Details
-- **Project Title & Logo ([`README.md`](README.md))**: Update the main project header logo (`public/brand/icons/aossie_logo.svg`), title `<h1>AOSSIE's Website</h1>`, project description, feature list, and tech stack.
-- **AI Agent Context ([`AGENTS.md`](AGENTS.md))**: Update directives and rules for AI coding agents.
-- **LLM Manifest ([`public/llms.txt`](public/llms.txt))**: Update the root LLM crawler policy.
-- **Community & Social Links ([`Contributors.md`](Contributors.md))**: Update Discord and community links.
-
-### 2. Domain Names & Search Engine Crawlers
-- **Sitemap Generator ([`src/app/sitemap.ts`](src/app/sitemap.ts))**: Set the default fallback domain `https://aossie.org` or set the `NEXT_PUBLIC_SITE_URL` environment variable in your production hosting panel.
-- **Search Crawler Rules ([`public/robots.txt`](public/robots.txt))**: Point to your production sitemap URL (`https://aossie.org/sitemap.xml`).
-
-### 3. Branding Guidelines & Assets
-- **Logo & Favicons ([`public/brand/icons/`](public/brand/icons/))**: Maintain official organization logos (`aossie_logo.svg` and `favicon.ico`).
-- **Brand Documentation ([`public/brand/Brand.md`](public/brand/Brand.md))**: Document custom color hex codes, typography selections, and asset paths to guide developers and AI coding agents.
-
-### 4. SEO & i18n Localization Metadata
-- **Schema.org JSON-LD ([`src/app/[locale]/page.tsx`](src/app/[locale]/page.tsx))**: Locate the `jsonLd` object inside the `Home` component and update `publisher.name`, `publisher.url`, and `publisher.logo`.
-- **Translation Catalogs ([`src/messages/`](src/messages/))**: Update the `heading`, `metaTitle`, and `metaDescription` keys with localized titles and descriptions.
-
-### 5. Mobile & AI Platform Configurations
-- **Android App Links ([`public/.well-known/assetlinks.json`](public/.well-known/assetlinks.json))**: Configure package name and Android application certificate SHA-256 fingerprint if applicable.
-- **AI Agent Plugins ([`public/.well-known/ai-plugin.json`](public/.well-known/ai-plugin.json))**: Update host URLs, contact emails, and description text to describe website features to AI agents.
-- **LLM Crawler Rules ([`public/llms.txt`](public/llms.txt))**: Serves the root crawlers policy indicating allowed LLM bot indexing.
-
+```bash
+npm run build
+npx serve out
+```
 
 ---
 

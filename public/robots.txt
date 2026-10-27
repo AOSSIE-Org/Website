@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /_vercel/
+Disallow: /pr-preview/
 
 Sitemap: https://aossie.org/sitemap.xml

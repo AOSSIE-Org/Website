@@ -10,9 +10,11 @@ Project specific context and directives for AI agents.
 
 ## 🛠️ Stack & Commands
 
-- **Stack:** Next.js 16.2.11 App Router (Turbopack), React 19, Tailwind CSS v4, `next-intl` (i18n), `next-themes` (light/dark state manager).
-- **Build:** `npm run build`
+- **Stack:** Next.js 16.4.3 App Router (Turbopack), React 19, Tailwind CSS v4, `next-intl` (i18n), `next-themes` (light/dark state manager).
+- **Build:** `npm run build` (static export to `out/`)
 - **Develop:** `npm run dev`
+- **Lint:** `npm run lint`
+- **Test:** `npm test` · `npm run test:coverage` (90% threshold on SEO, config and project-data modules; enforced in CI)
 
 ---
 
@@ -35,7 +37,9 @@ Project specific context and directives for AI agents.
 ## 📦 Project Boundaries
 
 - **Config Alias Map:** Turbopack and Webpack alias resolvers map `"next-intl/config"` to our local request setup inside [`next.config.ts`](next.config.ts) using `createNextIntlPlugin("./src/i18n/request.ts")`.
-- **Branding Assets:** The official branding logo, favicon, and style specifications reside inside [`public/brand/`](public/brand/).
+- **Branding Assets:** The official branding logo, favicon, and style specifications reside inside [`public/brand/`](public/brand/). The social share image is [`public/og-image.png`](public/og-image.png) (1200x630 PNG; never point Open Graph at an SVG).
+- **Metadata:** the home page uses `generateLocaleMetadata()`; each sub-page (`projects`, `programs`, `about`) has a `layout.tsx` calling `generatePageMetadata()` so it gets its own title, description and canonical. Add new pages to `PAGE_META` in [`src/i18n/metadata.ts`](src/i18n/metadata.ts) and to `PAGES` in [`src/app/sitemap.ts`](src/app/sitemap.ts).
+- **Root route:** [`src/app/(root)/`](src/app/(root)/) serves the bare `/` with the default locale's metadata and a `<meta http-equiv="refresh">` to `/en`. Do not replace it with `redirect()`, which exports an empty error page.
 - **Skills:** Automated skill workflows for synchronizing translations and project metadata live in [`.agents/skills/manage-project-translations/`](.agents/skills/manage-project-translations/SKILL.md).
 
 
