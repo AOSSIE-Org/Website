@@ -232,5 +232,8 @@
     "aiPolicy": "AI ব্যবহারের নীতি",
     "codeOfConduct": "আচরণবিধি",
     "email": "ইমেল"
+  },
+  "ScrollToTop": {
+    "scrollToTop": "উপরে স্ক্রোল করুন"
   }
 }
