@@ -27,6 +27,14 @@ vi.mock('framer-motion', async () => {
 
 import ScrollToTop from '@/components/ScrollToTop';
 
+function setScrollY(value: number) {
+  Object.defineProperty(window, 'scrollY', {
+    writable: true,
+    configurable: true,
+    value,
+  });
+}
+
 describe('ScrollToTop Component', () => {
   const originalScrollTo = window.scrollTo;
 
@@ -34,11 +42,7 @@ describe('ScrollToTop Component', () => {
     window.scrollTo = vi.fn();
     mockUseLenis.mockReturnValue(null);
     mockUseReducedMotion.mockReturnValue(false);
-    Object.defineProperty(window, 'scrollY', {
-      writable: true,
-      configurable: true,
-      value: 0,
-    });
+    setScrollY(0);
   });
 
   afterEach(() => {
@@ -47,7 +51,7 @@ describe('ScrollToTop Component', () => {
   });
 
   it('does not render button when scroll position is at the top', () => {
-    window.scrollY = 0;
+    setScrollY(0);
     render(<ScrollToTop />);
 
     expect(screen.queryByRole('button', { name: /scroll to top/i })).not.toBeInTheDocument();
@@ -57,7 +61,7 @@ describe('ScrollToTop Component', () => {
     render(<ScrollToTop />);
 
     act(() => {
-      window.scrollY = 350;
+      setScrollY(350);
       window.dispatchEvent(new Event('scroll'));
     });
 
@@ -69,7 +73,7 @@ describe('ScrollToTop Component', () => {
     render(<ScrollToTop />);
 
     act(() => {
-      window.scrollY = 500;
+      setScrollY(500);
       window.dispatchEvent(new Event('scroll'));
     });
 
@@ -89,7 +93,7 @@ describe('ScrollToTop Component', () => {
     render(<ScrollToTop />);
 
     act(() => {
-      window.scrollY = 500;
+      setScrollY(500);
       window.dispatchEvent(new Event('scroll'));
     });
 
@@ -108,7 +112,7 @@ describe('ScrollToTop Component', () => {
     render(<ScrollToTop />);
 
     act(() => {
-      window.scrollY = 500;
+      setScrollY(500);
       window.dispatchEvent(new Event('scroll'));
     });
 
@@ -124,7 +128,7 @@ describe('ScrollToTop Component', () => {
     render(<ScrollToTop />);
 
     act(() => {
-      window.scrollY = 500;
+      setScrollY(500);
       window.dispatchEvent(new Event('scroll'));
     });
 
