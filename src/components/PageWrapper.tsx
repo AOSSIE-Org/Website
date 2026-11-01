@@ -3,6 +3,7 @@
 import React from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ScrollToTop from "@/components/ScrollToTop";
 
 interface PageWrapperProps {
   children: React.ReactNode;
@@ -37,6 +38,9 @@ export default function PageWrapper({ children }: PageWrapperProps) {
 
           <div className="w-5 sm:w-12 md:w-16 lg:w-20 shrink-0 slanted-bg-pattern border-r border-border" />
         </div>
+
+        {/* Floating Scroll to Top Button */}
+        <ScrollToTop />
 
       </div>
     </div>

@@ -232,5 +232,8 @@
     "aiPolicy": "Política de uso de IA",
     "codeOfConduct": "Código de Conduta",
     "email": "E-mail"
+  },
+  "ScrollToTop": {
+    "scrollToTop": "Voltar ao topo"
   }
 }

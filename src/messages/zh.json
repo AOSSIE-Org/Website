@@ -232,5 +232,8 @@
     "aiPolicy": "AI 使用政策",
     "codeOfConduct": "行为准则",
     "email": "电子邮件"
+  },
+  "ScrollToTop": {
+    "scrollToTop": "回到顶部"
   }
 }

@@ -232,5 +232,8 @@
     "aiPolicy": "Политика использования ИИ",
     "codeOfConduct": "Кодекс поведения",
     "email": "Электронная почта"
+  },
+  "ScrollToTop": {
+    "scrollToTop": "Наверх"
   }
 }
