@@ -50,7 +50,7 @@ Open [http://localhost:3000](http://localhost:3000) to view the site.
    npm run test:coverage   # Vitest; fails below 90% coverage
    npm run build
    ```
-3. **Tests are required for new logic:** changes to `src/i18n/`, `src/config/`, `src/lib/` or `src/app/sitemap.ts` must add or update tests in `src/__tests__/`. Prefer [fast-check](https://fast-check.dev) property tests where the input space is large.
+3. **Tests are required for new code:** coverage is measured on the whole code base (every file under `src/`; the few exclusions, such as type declarations, are listed with their reasons in `vitest.config.ts`), so any new page, component or helper needs tests in `src/__tests__/` to keep lines, statements, functions and branches at 90% or more. Render components with React Testing Library inside `NextIntlClientProvider` (see `renderWithIntl` in `src/__tests__/test-utils/render.tsx`), assert on behaviour rather than snapshots, and prefer [fast-check](https://fast-check.dev) property tests where the input space is large. Do not add files to the coverage exclusions to meet the threshold.
 4. **Commit Messages:**
    Use clear, descriptive commit messages following Conventional Commits (e.g., `feat: add social share buttons`, `fix: header logo alignment`).
 5. **Developer Certificate of Origin (DCO):**

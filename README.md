@@ -388,7 +388,9 @@ npm test                # run the Vitest suite once
 npm run test:coverage   # with coverage; fails below 90% (same as CI)
 ```
 
-Tests in [`src/__tests__/`](src/__tests__/) cover translation-catalog parity for all 13 locales, project data and translations, per-page SEO metadata, the sitemap, and the navbar and language switcher, including [fast-check](https://fast-check.dev) property tests.
+Coverage is measured on the whole code base: every file under `src/` (pages, layouts, components, providers, config, i18n and data helpers). The only exclusions, each with its reason, are listed in [`vitest.config.ts`](vitest.config.ts): the tests themselves, `*.d.ts` type declarations and one type-only module. CI fails if lines, statements, functions or branches drop below 90%.
+
+Tests in [`src/__tests__/`](src/__tests__/) render every page and component with React Testing Library in jsdom, inside `NextIntlClientProvider` with the real message catalogs, and check text in several locales, links, ARIA state and interaction (menus, theme toggle, language switching, filters, sorting, the stats card stack). They also cover translation-catalog parity for all 13 locales, project data, per-page SEO metadata and the sitemap. [fast-check](https://fast-check.dev) property tests check invariants over generated inputs, such as Markdown parsing, link safety, message formatting in every locale, language switching on every page and project search. Mocks for what jsdom cannot run (framer-motion animation, `next/navigation`, `next/image`, observers, the share dialog) live in [`src/__tests__/setup.ts`](src/__tests__/setup.ts) and [`src/__tests__/test-utils/`](src/__tests__/test-utils/).
 
 ### Previewing the Static Export
 
