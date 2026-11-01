@@ -5,7 +5,7 @@ import PageWrapper from "@/components/PageWrapper";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { getAllProjects, getOrganization, ORGANIZATION_GITHUB, type Organization } from "@/lib/projectsData";
-import { CONTACT_EMAIL, PARTNER_MAILTO } from "@/lib/links";
+import { CONTACT_EMAIL, CONTACT_MAILTO, DJED_URL, GSOC_URL, PARTNER_MAILTO, STABILITY_NEXUS_URL } from "@/config/links";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -174,6 +174,9 @@ function Pillars() {
 /* Journey: sticky year that follows the milestone in view             */
 /* ------------------------------------------------------------------ */
 
+/** A thin band across the middle of the viewport decides the active milestone. */
+const ACTIVE_MILESTONE_ROOT_MARGIN = "-45% 0px -45% 0px";
+
 const MILESTONES = [
   { key: "m1", year: "2011" },
   { key: "m2", year: "2016" },
@@ -195,8 +198,7 @@ function Journey() {
           if (entry.isIntersecting) setActive(Number((entry.target as HTMLElement).dataset.index));
         }
       },
-      // A thin band across the middle of the viewport decides the active milestone
-      { rootMargin: "-45% 0px -45% 0px" }
+      { rootMargin: ACTIVE_MILESTONE_ROOT_MARGIN }
     );
     itemRefs.current.forEach((el) => el && observer.observe(el));
     return () => observer.disconnect();
@@ -312,14 +314,14 @@ const SUPPORTERS: Supporter[] = [
     key: "gsoc",
     logo: "/brand/icons/gsoc_full_logo_light.svg",
     logoDark: "/brand/icons/gsoc_full_logo.svg",
-    website: "https://summerofcode.withgoogle.com/",
+    website: GSOC_URL,
     since: "2016",
   },
   {
     name: "Stability Nexus",
     key: "stability",
     logo: "/brand/icons/stability_nexus_full_logo.svg",
-    website: "https://stability.nexus/",
+    website: STABILITY_NEXUS_URL,
     github: ORGANIZATION_GITHUB["Stability Nexus"],
     organization: "Stability Nexus",
   },
@@ -327,7 +329,7 @@ const SUPPORTERS: Supporter[] = [
     name: "Djed Alliance",
     key: "djed",
     logo: "/brand/project_svgs/djed_alliance_logo.svg",
-    website: "https://djed.one/",
+    website: DJED_URL,
     github: ORGANIZATION_GITHUB["Djed Alliance"],
     organization: "Djed Alliance",
   },
@@ -476,7 +478,7 @@ function Partners() {
             <span>{t("waysCta")}</span>
             <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
           </a>
-          <a href={`mailto:${CONTACT_EMAIL}`} className="text-sm font-medium text-foreground-secondary hover:text-foreground transition-colors">
+          <a href={CONTACT_MAILTO} className="text-sm font-medium text-foreground-secondary hover:text-foreground transition-colors">
             {CONTACT_EMAIL}
           </a>
         </div>

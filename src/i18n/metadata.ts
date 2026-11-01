@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
 import { languages, defaultLanguage, getLanguage } from '@/config/languages';
+import { getSiteUrl } from '@/config/site';
+import { LEGAL_DOCUMENTS } from '@/config/legal';
+import { SUPPORT_PAGE } from '@/config/support';
 import { getMessages } from './messages';
 
 /** Sub-pages with their own title, description and canonical URL. */
@@ -7,16 +10,18 @@ export const PAGE_META = {
   projects: { path: '/projects', namespace: 'ProjectsPage' },
   programs: { path: '/programs', namespace: 'ProgramsPage' },
   about: { path: '/about', namespace: 'AboutPage' },
+  privacy: { path: LEGAL_DOCUMENTS.privacy.path, namespace: 'PrivacyPage' },
+  terms: { path: LEGAL_DOCUMENTS.terms.path, namespace: 'TermsPage' },
+  support: { path: SUPPORT_PAGE.path, namespace: 'SupportPage' },
 } as const;
 
 export type PageKey = keyof typeof PAGE_META;
 
+/** Brand name appended to sub-page titles. */
+export const SITE_NAME = 'AOSSIE';
+
 /** 1200x630 raster share image; Discord, X and LinkedIn do not render SVG previews. */
 export const OG_IMAGE = { path: '/og-image.png', width: 1200, height: 630 } as const;
-
-export function getSiteUrl(): string {
-  return (process.env.NEXT_PUBLIC_SITE_URL || 'https://aossie.org').replace(/\/$/, '');
-}
 
 function buildMetadata(locale: string, path: string, title: string, description: string): Metadata {
   const siteUrl = getSiteUrl();
@@ -64,5 +69,7 @@ export async function generateLocaleMetadata(locale: string): Promise<Metadata> 
 export async function generatePageMetadata(locale: string, page: PageKey): Promise<Metadata> {
   const { path, namespace } = PAGE_META[page];
   const { title, subtitle } = getMessages(locale)[namespace];
-  return buildMetadata(locale, path, `${title} | AOSSIE`, subtitle);
+  // A title that already names the brand ("Support AOSSIE") is not suffixed with it again
+  const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
+  return buildMetadata(locale, path, fullTitle, subtitle);
 }

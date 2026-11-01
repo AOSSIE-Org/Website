@@ -204,10 +204,35 @@
   "ThemeToggle": {
     "toggleTheme": "थीम बदलें"
   },
+  "PrivacyPage": {
+    "title": "गोपनीयता नीति",
+    "subtitle": "AOSSIE वेबसाइट आपकी जानकारी को कैसे संभालती है।"
+  },
+  "TermsPage": {
+    "title": "सेवा की शर्तें",
+    "subtitle": "AOSSIE वेबसाइट के उपयोग की शर्तें।"
+  },
+  "SupportPage": {
+    "title": "AOSSIE का समर्थन करें",
+    "subtitle": "AOSSIE को निःशुल्क और ओपन सोर्स बनाए रखने में मदद करें।",
+    "supportedBy": "समर्थक",
+    "organizationDescription": "AOSSIE एक ऑस्ट्रेलियाई गैर-लाभकारी संगठन है जो ओपन-सोर्स प्रोजेक्ट्स का समर्थन करता है और उन्हें एक साथ लाता है।"
+  },
+  "Legal": {
+    "englishOnly": "यह दस्तावेज़ केवल अंग्रेज़ी में उपलब्ध है।"
+  },
+  "Share": {
+    "trigger": "यह पेज शेयर करें",
+    "share": "शेयर करें",
+    "close": "बंद करें",
+    "copy": "कॉपी करें",
+    "copied": "कॉपी हो गया!",
+    "copyFailed": "विफल",
+    "urlLabel": "शेयर करने का URL"
+  },
   "Footer": {
     "description": "ऑस्ट्रेलियन ओपन सोर्स सॉफ्टवेयर इनोवेशन एंड एजुकेशन",
     "community": "समुदाय",
-    "copyright": "© ऑस्ट्रेलियन ओपन सोर्स सॉफ्टवेयर इनोवेशन एंड एजुकेशन (AOSSIE)।",
     "abnLabel": "ABN:",
     "addressText": "कैनबरा, ACT, ऑस्ट्रेलिया",
     "aboutLink": "हमारे बारे में",
@@ -231,6 +256,9 @@
     "communication": "संचार नियम",
     "aiPolicy": "एआई उपयोग नीति",
     "codeOfConduct": "आचार संहिता",
-    "email": "ईमेल"
+    "email": "ईमेल",
+    "privacyLink": "गोपनीयता नीति",
+    "termsLink": "सेवा की शर्तें",
+    "supportLink": "समर्थन करें"
   }
 }

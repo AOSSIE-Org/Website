@@ -204,10 +204,35 @@
   "ThemeToggle": {
     "toggleTheme": "تھیم تبدیل کریں"
   },
+  "PrivacyPage": {
+    "title": "رازداری کی پالیسی",
+    "subtitle": "AOSSIE ویب سائٹ آپ کی معلومات کو کیسے سنبھالتی ہے۔"
+  },
+  "TermsPage": {
+    "title": "سروس کی شرائط",
+    "subtitle": "AOSSIE ویب سائٹ کے استعمال کی شرائط۔"
+  },
+  "SupportPage": {
+    "title": "AOSSIE کی حمایت کریں",
+    "subtitle": "AOSSIE کو مفت اور اوپن سورس رکھنے میں مدد کریں۔",
+    "supportedBy": "معاونین",
+    "organizationDescription": "AOSSIE ایک آسٹریلوی غیر منافع بخش ادارہ ہے جو اوپن سورس منصوبوں کی مدد کرتا ہے اور انہیں یکجا کرتا ہے۔"
+  },
+  "Legal": {
+    "englishOnly": "یہ دستاویز صرف انگریزی میں دستیاب ہے۔"
+  },
+  "Share": {
+    "trigger": "یہ صفحہ شیئر کریں",
+    "share": "شیئر کریں",
+    "close": "بند کریں",
+    "copy": "کاپی کریں",
+    "copied": "کاپی ہو گیا!",
+    "copyFailed": "ناکام",
+    "urlLabel": "شیئر کرنے کا URL"
+  },
   "Footer": {
     "description": "آسٹریلین اوپن سورس سافٹ ویئر اِنوویشن اینڈ ایجوکیشن",
     "community": "کمیونٹی",
-    "copyright": "© آسٹریلین اوپن سورس سافٹ ویئر اِنوویشن اینڈ ایجوکیشن (AOSSIE)۔",
     "abnLabel": "ABN:",
     "addressText": "کینبرا، ACT، آسٹریلیا",
     "aboutLink": "ہمارا تعارف",
@@ -231,6 +256,9 @@
     "communication": "رابطے کے قواعد",
     "aiPolicy": "AI کے استعمال کی پالیسی",
     "codeOfConduct": "ضابطۂ اخلاق",
-    "email": "ای میل"
+    "email": "ای میل",
+    "privacyLink": "رازداری کی پالیسی",
+    "termsLink": "سروس کی شرائط",
+    "supportLink": "ہماری حمایت کریں"
   }
 }

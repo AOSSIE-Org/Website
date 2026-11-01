@@ -3,6 +3,13 @@
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { motion, AnimatePresence, LayoutGroup, useScroll, type PanInfo } from "framer-motion";
 import { useTranslations } from "next-intl";
+import { GITHUB_URL } from "@/config/links";
+
+/** Share of the section that must be visible before the counters and visuals start. */
+const IN_VIEW_THRESHOLD = 0.2;
+
+/** Scroll progress through the section at which the cards switch from a stack to a grid. */
+const GRID_LAYOUT_SCROLL_PROGRESS = 0.4;
 
 /* ------------------------------------------------------------------ */
 /* Data                                                                */
@@ -295,7 +302,7 @@ function ContributorOrbit({ active: animate }: { active: boolean }) {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={`https://github.com/${a.login}.png?size=64`}
+            src={`${GITHUB_URL}/${a.login}.png?size=64`}
             alt=""
             width={32}
             height={32}
@@ -405,7 +412,7 @@ export default function Stats() {
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
 
   useEffect(() => {
-    const unsubscribe = scrollYProgress.on("change", (latest) => setLayout(latest > 0.4 ? "grid" : "stack"));
+    const unsubscribe = scrollYProgress.on("change", (latest) => setLayout(latest > GRID_LAYOUT_SCROLL_PROGRESS ? "grid" : "stack"));
     return () => unsubscribe();
   }, [scrollYProgress]);
 
@@ -418,7 +425,7 @@ export default function Stats() {
         setInView(true);
         observer.disconnect();
       }
-    }, { threshold: 0.2 });
+    }, { threshold: IN_VIEW_THRESHOLD });
     observer.observe(el);
     return () => observer.disconnect();
   }, [inView]);

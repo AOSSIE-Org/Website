@@ -204,10 +204,35 @@
   "ThemeToggle": {
     "toggleTheme": "تبديل المظهر"
   },
+  "PrivacyPage": {
+    "title": "سياسة الخصوصية",
+    "subtitle": "كيف يتعامل موقع AOSSIE مع معلوماتك."
+  },
+  "TermsPage": {
+    "title": "شروط الخدمة",
+    "subtitle": "شروط استخدام موقع AOSSIE."
+  },
+  "SupportPage": {
+    "title": "ادعم AOSSIE",
+    "subtitle": "ساعد في إبقاء AOSSIE حرة ومفتوحة المصدر.",
+    "supportedBy": "بدعم من",
+    "organizationDescription": "AOSSIE منظمة أسترالية غير ربحية تدعم مشاريع البرمجيات مفتوحة المصدر وتجمعها معًا."
+  },
+  "Legal": {
+    "englishOnly": "هذه الوثيقة متاحة باللغة الإنجليزية فقط."
+  },
+  "Share": {
+    "trigger": "شارك هذه الصفحة",
+    "share": "مشاركة",
+    "close": "إغلاق",
+    "copy": "نسخ",
+    "copied": "تم النسخ!",
+    "copyFailed": "فشل",
+    "urlLabel": "الرابط المراد مشاركته"
+  },
   "Footer": {
     "description": "المنظمة الأسترالية للابتكار والتعليم في البرمجيات مفتوحة المصدر",
     "community": "المجتمع",
-    "copyright": "© المنظمة الأسترالية للابتكار والتعليم في البرمجيات مفتوحة المصدر (AOSSIE).",
     "abnLabel": "ABN:",
     "addressText": "كانبرا، إقليم العاصمة الأسترالية، أستراليا",
     "aboutLink": "من نحن",
@@ -231,6 +256,9 @@
     "communication": "قواعد التواصل",
     "aiPolicy": "سياسة استخدام الذكاء الاصطناعي",
     "codeOfConduct": "مدونة السلوك",
-    "email": "البريد الإلكتروني"
+    "email": "البريد الإلكتروني",
+    "privacyLink": "سياسة الخصوصية",
+    "termsLink": "شروط الخدمة",
+    "supportLink": "ادعمنا"
   }
 }

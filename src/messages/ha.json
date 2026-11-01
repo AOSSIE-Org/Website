@@ -204,10 +204,35 @@
   "ThemeToggle": {
     "toggleTheme": "Sauya yanayin launi"
   },
+  "PrivacyPage": {
+    "title": "Manufar Sirri",
+    "subtitle": "Yadda shafin yanar gizo na AOSSIE ke sarrafa bayananka."
+  },
+  "TermsPage": {
+    "title": "Sharuɗɗan Sabis",
+    "subtitle": "Sharuɗɗan amfani da shafin yanar gizo na AOSSIE."
+  },
+  "SupportPage": {
+    "title": "Tallafa wa AOSSIE",
+    "subtitle": "Taimaka wajen ganin AOSSIE ta ci gaba da kasancewa kyauta kuma mai buɗaɗɗen tushe.",
+    "supportedBy": "Da tallafin",
+    "organizationDescription": "AOSSIE ƙungiya ce mai zaman kanta mara riba ta Ostiraliya, wadda ke tallafa wa ayyukan manhajoji masu buɗaɗɗen tushe tare da haɗa su wuri ɗaya."
+  },
+  "Legal": {
+    "englishOnly": "Wannan takarda tana samuwa da Turanci kawai."
+  },
+  "Share": {
+    "trigger": "Raba wannan shafi",
+    "share": "Raba",
+    "close": "Rufe",
+    "copy": "Kwafi",
+    "copied": "An kwafa!",
+    "copyFailed": "Ya kasa",
+    "urlLabel": "Adireshin URL da za a raba"
+  },
   "Footer": {
     "description": "Ƙirƙira da Ilimin Manhajar Buɗaɗɗen Tushe ta Ostiraliya",
     "community": "Alʼumma",
-    "copyright": "© Ƙirƙira da Ilimin Manhajar Buɗaɗɗen Tushe ta Ostiraliya (AOSSIE).",
     "abnLabel": "ABN:",
     "addressText": "Canberra, ACT, Ostiraliya",
     "aboutLink": "Game da Mu",
@@ -231,6 +256,9 @@
     "communication": "Dokokin sadarwa",
     "aiPolicy": "Manufar amfani da AI",
     "codeOfConduct": "Ƙaʼidojin Ɗabiʼa",
-    "email": "Imel"
+    "email": "Imel",
+    "privacyLink": "Manufar Sirri",
+    "termsLink": "Sharuɗɗan Sabis",
+    "supportLink": "Tallafa mana"
   }
 }
