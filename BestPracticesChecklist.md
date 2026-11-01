@@ -140,7 +140,7 @@
   - *Evidence URL:* `npm test` / `npm run test:coverage` (https://github.com/AOSSIE-Org/Website/blob/main/package.json)
 
 - [x] 🔵 **test_most** — The test suite covers most code branches and functionality. *(SUGGESTED)*
-  - *Evidence URL:* https://github.com/AOSSIE-Org/Website/blob/main/vitest.config.ts (coverage measured on the whole of `src/`, every page, layout, component, provider, config and helper, with 90% line, statement, function and branch thresholds enforced in CI; exclusions are only tests, `*.d.ts` files and one type-only module, each listed with its reason)
+  - *Evidence URL:* https://github.com/AOSSIE-Org/Website/blob/main/vitest.config.ts (coverage measured on all TypeScript and TSX source files under `src/` (`src/**/*.{ts,tsx}`): every page, layout, component, provider, config and helper, with 90% line, statement, function and branch thresholds enforced in CI; exclusions are only tests, `*.d.ts` files and one type-only module, each listed with its reason)
   - *Note:* render tests for every page and component (React Testing Library, real message catalogs) plus fast-check property tests in https://github.com/AOSSIE-Org/Website/tree/main/src/__tests__
 
 ### New Functionality Testing Policy
