@@ -14,7 +14,7 @@ Project specific context and directives for AI agents.
 - **Build:** `npm run build` (static export to `out/`)
 - **Develop:** `npm run dev`
 - **Lint:** `npm run lint`
-- **Test:** `npm test` · `npm run test:coverage` (90% threshold on SEO, config and project-data modules; enforced in CI)
+- **Test:** `npm test` · `npm run test:coverage` (90% lines/statements/functions/branches on the whole of `src/`, enforced in CI; exclusions and reasons in `vitest.config.ts`). Render tests use `renderWithIntl` and the shared mocks in `src/__tests__/setup.ts`.
 
 ---
 
@@ -38,8 +38,9 @@ Project specific context and directives for AI agents.
 
 - **Config Alias Map:** Turbopack and Webpack alias resolvers map `"next-intl/config"` to our local request setup inside [`next.config.ts`](next.config.ts) using `createNextIntlPlugin("./src/i18n/request.ts")`.
 - **Branding Assets:** The official branding logo, favicon, and style specifications reside inside [`public/brand/`](public/brand/). The social share image is [`public/og-image.png`](public/og-image.png) (1200x630 PNG; never point Open Graph at an SVG).
+- **Links & Constants:** External links live in [`src/config/links.ts`](src/config/links.ts) (site origin in [`src/config/site.ts`](src/config/site.ts)); never hard-code URLs in components.
 - **Metadata:** the home page uses `generateLocaleMetadata()`; each sub-page (`projects`, `programs`, `about`) has a `layout.tsx` calling `generatePageMetadata()` so it gets its own title, description and canonical. Add new pages to `PAGE_META` in [`src/i18n/metadata.ts`](src/i18n/metadata.ts) and to `PAGES` in [`src/app/sitemap.ts`](src/app/sitemap.ts).
-- **Root route:** [`src/app/(root)/`](src/app/(root)/) serves the bare `/` with the default locale's metadata and a `<meta http-equiv="refresh">` to `/en`. Do not replace it with `redirect()`, which exports an empty error page.
+- **Root route:** [`src/app/(root)/`](src/app/(root)/) serves the bare `/` with the default locale's metadata and an inline `location.replace("/en")` that runs as soon as it is parsed (the `<meta http-equiv="refresh">` and link are only a no-JS fallback; keep the `(root)` layout free of stylesheets so nothing delays it). Do not replace it with `redirect()`, which exports an empty error page.
 - **Skills:** Automated skill workflows for synchronizing translations and project metadata live in [`.agents/skills/manage-project-translations/`](.agents/skills/manage-project-translations/SKILL.md).
 
 

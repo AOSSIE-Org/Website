@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
+import { COMMUNITY_MAILTO, SOCIAL_LINKS } from "@/config/links";
 
 const HubDiagram3D = dynamic(() => import("./HubDiagram3D"), {
   loading: () => (
@@ -78,7 +79,7 @@ export default function Hero() {
         {/* Floating "Join Our Community →" Pill Button (positioned close to title & subtitle) */}
         <div className="relative z-20 mt-2 animate-hero-badge">
           <a
-            href="https://discord.gg/hjUhu33uAn"
+            href={SOCIAL_LINKS.discord}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border-2 border-border bg-background hover:bg-hover hover:scale-105 text-md font-semibold text-foreground transition-all shadow-md hover:shadow-lg cursor-pointer group"
@@ -101,7 +102,7 @@ export default function Hero() {
       <div className="px-4 sm:px-10 lg:px-14 w-full flex items-center justify-center py-6 animate-hero-footer">
         <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
           <a
-            href="https://discord.gg/hjUhu33uAn"
+            href={SOCIAL_LINKS.discord}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Discord"
@@ -110,7 +111,7 @@ export default function Hero() {
             <Image src="/brand/icons/discord.svg" alt="" width={20} height={20} className="theme-icon-invert" />
           </a>
           <a
-            href="https://x.com/aossie_org"
+            href={SOCIAL_LINKS.x}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="X (Twitter)"
@@ -120,7 +121,7 @@ export default function Hero() {
           </a>
 
           <a
-            href="https://www.linkedin.com/company/aossie/"
+            href={SOCIAL_LINKS.linkedin}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
@@ -130,7 +131,7 @@ export default function Hero() {
           </a>
 
           <a
-            href="https://github.com/AOSSIE-Org"
+            href={SOCIAL_LINKS.github}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
@@ -140,7 +141,7 @@ export default function Hero() {
           </a>
 
           <a
-            href="https://www.youtube.com/@AOSSIE-Org"
+            href={SOCIAL_LINKS.youtube}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="YouTube"
@@ -150,7 +151,7 @@ export default function Hero() {
           </a>
 
           <a
-            href="mailto:aossie.oss@gmail.com"
+            href={COMMUNITY_MAILTO}
             aria-label={t("emailLabel")}
             className="w-9 h-9 rounded-lg border border-border bg-background hover:bg-hover hover:scale-105 flex items-center justify-center transition-all shadow-xs"
           >

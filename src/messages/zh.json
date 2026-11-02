@@ -204,10 +204,35 @@
   "ThemeToggle": {
     "toggleTheme": "切换主题"
   },
+  "PrivacyPage": {
+    "title": "隐私政策",
+    "subtitle": "AOSSIE 网站如何处理您的信息。"
+  },
+  "TermsPage": {
+    "title": "服务条款",
+    "subtitle": "使用 AOSSIE 网站的条款。"
+  },
+  "SupportPage": {
+    "title": "支持 AOSSIE",
+    "subtitle": "帮助 AOSSIE 保持自由开源。",
+    "supportedBy": "支持者",
+    "organizationDescription": "AOSSIE 是一家澳大利亚非营利组织，致力于支持和联合开源项目。"
+  },
+  "Legal": {
+    "englishOnly": "本文档仅提供英文版本。"
+  },
+  "Share": {
+    "trigger": "分享此页面",
+    "share": "分享",
+    "close": "关闭",
+    "copy": "复制",
+    "copied": "已复制！",
+    "copyFailed": "失败",
+    "urlLabel": "要分享的网址"
+  },
   "Footer": {
     "description": "澳大利亚开源软件创新与教育组织",
     "community": "社区",
-    "copyright": "© 澳大利亚开源软件创新与教育组织（AOSSIE）。",
     "abnLabel": "ABN：",
     "addressText": "澳大利亚首都领地堪培拉",
     "aboutLink": "关于我们",
@@ -231,6 +256,9 @@
     "communication": "沟通规范",
     "aiPolicy": "AI 使用政策",
     "codeOfConduct": "行为准则",
-    "email": "电子邮件"
+    "email": "电子邮件",
+    "privacyLink": "隐私政策",
+    "termsLink": "服务条款",
+    "supportLink": "支持我们"
   }
 }

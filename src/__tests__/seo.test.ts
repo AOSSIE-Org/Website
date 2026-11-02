@@ -6,11 +6,12 @@ import { MESSAGES } from '../i18n/messages';
 import {
   generateLocaleMetadata,
   generatePageMetadata,
-  getSiteUrl,
   OG_IMAGE,
   PAGE_META,
+  SITE_NAME,
   type PageKey,
 } from '../i18n/metadata';
+import { getSiteUrl } from '../config/site';
 
 const SITE = 'https://aossie.org';
 const codes = languages.map((l) => l.code);
@@ -59,10 +60,18 @@ describe('generatePageMetadata', () => {
   it.each(pages)('gives /%s its own title, description and canonical', async (page) => {
     const { path, namespace } = PAGE_META[page];
     const meta = await generatePageMetadata('en', page);
-    expect(meta.title).toBe(`${MESSAGES.en[namespace].title} | AOSSIE`);
+    const { title } = MESSAGES.en[namespace];
+    expect(meta.title).toBe(title.includes(SITE_NAME) ? title : `${title} | AOSSIE`);
     expect(meta.description).toBe(MESSAGES.en[namespace].subtitle);
     expect(meta.alternates?.canonical).toBe(`${SITE}/en${path}`);
     expect(meta.openGraph).toMatchObject({ url: `${SITE}/en${path}` });
+  });
+
+  it.each(codes)('names the brand once in the %s support page title', async (code) => {
+    const meta = await generatePageMetadata(code, 'support');
+    expect(meta.title).toBe(MESSAGES[code].SupportPage.title);
+    expect((meta.title as string).split(SITE_NAME)).toHaveLength(2);
+    expect(meta.alternates?.canonical).toBe(`${SITE}/${code}/support`);
   });
 
   it('never reuses the home page canonical or title for a sub-page', async () => {

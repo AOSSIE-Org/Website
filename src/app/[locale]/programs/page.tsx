@@ -5,7 +5,7 @@ import PageWrapper from "@/components/PageWrapper";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { AOSSIE_DISCORD_INVITE } from "@/lib/projectsData";
-import { GSOC_APPLY_URL } from "@/lib/links";
+import { CONTACT_MAILTO, GSOC_APPLY_URL } from "@/config/links";
 
 interface ProgramAction {
   label: string;
@@ -95,7 +95,7 @@ export default function ProgramsPage() {
       description: t("awocDesc"),
       badge: t("awocBadge"),
       icon: <SnowflakeIcon />,
-      actions: [{ label: t("awocCta"), href: "mailto:contact@aossie.org", primary: true }],
+      actions: [{ label: t("awocCta"), href: CONTACT_MAILTO, primary: true }],
     },
   ];
 

@@ -11,6 +11,7 @@
  */
 
 import { REPO_STATS } from "./repoStats";
+import { DISCORD_INVITE_URL, GITHUB_ORG_URL, GITHUB_URL } from "@/config/links";
 
 export const TOPICS =["Blockchain", "Artificial Intelligence", "Mobile"] as const;
 export type Topic = (typeof TOPICS)[number];
@@ -22,7 +23,7 @@ export const ORGANIZATIONS = ["AOSSIE", "Stability Nexus", "Djed Alliance"] as c
 export type Organization = (typeof ORGANIZATIONS)[number];
 
 export const ORGANIZATION_GITHUB: Record<Organization, string> = {
-  AOSSIE: "https://github.com/AOSSIE-Org",
+  AOSSIE: GITHUB_ORG_URL,
   "Stability Nexus": "https://github.com/StabilityNexus",
   "Djed Alliance": "https://github.com/DjedAlliance",
 };
@@ -60,7 +61,7 @@ export interface Project {
 
 const AOSSIE_GUILD = "https://discord.com/channels/1022871757289422898";
 const STABILITY_NEXUS_GUILD = "https://discord.com/channels/995968619034984528";
-export const AOSSIE_DISCORD_INVITE = "https://discord.gg/hjUhu33uAn";
+export const AOSSIE_DISCORD_INVITE = DISCORD_INVITE_URL;
 export const STABILITY_NEXUS_DISCORD_INVITE = "https://discord.gg/fuuWX4AbJt";
 
 const aossieChannel = (id: string) => `${AOSSIE_GUILD}/${id}`;
@@ -1000,7 +1001,7 @@ export const PROJECTS_DATA: Project[] = [
 ];
 
 export function githubUrl(repo: Repository): string {
-  return `https://github.com/${repo.fullName}`;
+  return `${GITHUB_URL}/${repo.fullName}`;
 }
 
 /** The GitHub organization that hosts a project's primary repository. */

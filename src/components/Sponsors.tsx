@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { PARTNER_MAILTO } from "@/lib/links";
+import { GSOC_URL, PARTNER_MAILTO, STABILITY_NEXUS_URL } from "@/config/links";
 
 interface Partner {
   name: string;
@@ -18,7 +18,7 @@ interface Partner {
 const PARTNERS: Partner[] = [
   {
     name: "Google Summer of Code",
-    href: "https://summerofcode.withgoogle.com/",
+    href: GSOC_URL,
     logo: "/brand/icons/gsoc_full_logo_light.svg",
     logoDark: "/brand/icons/gsoc_full_logo.svg",
     width: 205,
@@ -26,7 +26,7 @@ const PARTNERS: Partner[] = [
   },
   {
     name: "Stability Nexus",
-    href: "https://stability.nexus/",
+    href: STABILITY_NEXUS_URL,
     logo: "/brand/icons/stability_nexus_full_logo.svg",
     width: 340,
     height: 131,

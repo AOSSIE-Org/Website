@@ -204,10 +204,35 @@
   "ThemeToggle": {
     "toggleTheme": "Huri i te āhua"
   },
+  "PrivacyPage": {
+    "title": "Kaupapa Here Tūmataiti",
+    "subtitle": "Te āhua o te whakahaere a te paetukutuku o AOSSIE i ō mōhiohio."
+  },
+  "TermsPage": {
+    "title": "Ngā Ture Ratonga",
+    "subtitle": "Ngā ture mō te whakamahi i te paetukutuku o AOSSIE."
+  },
+  "SupportPage": {
+    "title": "Tautokohia a AOSSIE",
+    "subtitle": "Āwhinatia kia noho wātea, kia tuwhera tonu a AOSSIE.",
+    "supportedBy": "Nā te tautoko o",
+    "organizationDescription": "He whakahaere kore-whai-hua o Ahitereiria a AOSSIE e tautoko ana, e whakakotahi ana hoki i ngā kaupapa pūmanawa tuwhera."
+  },
+  "Legal": {
+    "englishOnly": "Kei te reo Pākehā anake tēnei tuhinga."
+  },
+  "Share": {
+    "trigger": "Tohaina tēnei whārangi",
+    "share": "Tohaina",
+    "close": "Katia",
+    "copy": "Tāruatia",
+    "copied": "Kua tāruatia!",
+    "copyFailed": "I rahua",
+    "urlLabel": "Te URL hei tohatoha"
+  },
   "Footer": {
     "description": "Te Auahatanga me te Mātauranga Pūmanawa Tuwhera o Ahitereiria",
     "community": "Hapori",
-    "copyright": "© Te Auahatanga me te Mātauranga Pūmanawa Tuwhera o Ahitereiria (AOSSIE).",
     "abnLabel": "ABN:",
     "addressText": "Kānapera, ACT, Ahitereiria",
     "aboutLink": "Mō Mātou",
@@ -231,6 +256,9 @@
     "communication": "Ngā ture whakawhitiwhiti kōrero",
     "aiPolicy": "Kaupapa here whakamahi AI",
     "codeOfConduct": "Tikanga Whanonga",
-    "email": "Īmēra"
+    "email": "Īmēra",
+    "privacyLink": "Kaupapa Here Tūmataiti",
+    "termsLink": "Ngā Ture Ratonga",
+    "supportLink": "Tautokohia mātou"
   }
 }

@@ -4,10 +4,11 @@ import type { PointerEvent, ReactNode } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { GSOC_APPLY_URL } from "@/lib/links";
+import { CONTACT_MAILTO, GSOC_APPLY_URL, INFO_REPO_URL, SOCIAL_LINKS } from "@/config/links";
+import { LEGAL_DOCUMENTS } from "@/config/legal";
+import { SUPPORT_PAGE } from "@/config/support";
 import FooterCta from "@/components/FooterCta";
-
-const INFO_REPO = "https://github.com/AOSSIE-Org/Info/blob/main";
+import SiteShareButton from "@/components/SiteShareButton";
 
 interface Social {
   /** Brand names stay as-is; `labelKey` marks labels that need translating. */
@@ -28,14 +29,18 @@ const TelegramIcon = () => (
 );
 
 const SOCIALS: Social[] = [
-  { label: "Discord", href: "https://discord.gg/hjUhu33uAn", icon: <IconImage src="/brand/icons/discord.svg" size={20} /> },
-  { label: "GitHub", href: "https://github.com/AOSSIE-Org", icon: <IconImage src="/brand/icons/github.svg" /> },
-  { label: "X (Twitter)", href: "https://x.com/aossie_org", icon: <IconImage src="/brand/icons/twitter.svg" size={15} /> },
-  { label: "LinkedIn", href: "https://www.linkedin.com/company/aossie/", icon: <IconImage src="/brand/icons/linkedin.svg" /> },
-  { label: "YouTube", href: "https://www.youtube.com/@AOSSIE-Org", icon: <IconImage src="/brand/icons/youtube.svg" size={20} /> },
-  { label: "Telegram", href: "https://t.me/+bMWGzaMTMa8xN2Ex", icon: <TelegramIcon /> },
-  { label: "Email", labelKey: "email", href: "mailto:contact@aossie.org", icon: <IconImage src="/brand/icons/mail.svg" size={20} /> },
+  { label: "Discord", href: SOCIAL_LINKS.discord, icon: <IconImage src="/brand/icons/discord.svg" size={20} /> },
+  { label: "GitHub", href: SOCIAL_LINKS.github, icon: <IconImage src="/brand/icons/github.svg" /> },
+  { label: "X (Twitter)", href: SOCIAL_LINKS.x, icon: <IconImage src="/brand/icons/twitter.svg" size={15} /> },
+  { label: "LinkedIn", href: SOCIAL_LINKS.linkedin, icon: <IconImage src="/brand/icons/linkedin.svg" /> },
+  { label: "YouTube", href: SOCIAL_LINKS.youtube, icon: <IconImage src="/brand/icons/youtube.svg" size={20} /> },
+  { label: "Telegram", href: SOCIAL_LINKS.telegram, icon: <TelegramIcon /> },
+  { label: "Email", labelKey: "email", href: CONTACT_MAILTO, icon: <IconImage src="/brand/icons/mail.svg" size={20} /> },
 ];
+
+/** Small links in the legal bar (Privacy, Terms, Support) and the share button beside them. */
+const LEGAL_BAR_LINK =
+  "rounded-sm transition-colors hover:text-foreground focus-visible:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-heading-highlight";
 
 interface FooterLink {
   label: string;
@@ -99,19 +104,24 @@ export default function Footer() {
         { label: t("aboutLink"), href: "/about" },
         { label: t("projectsLink"), href: "/projects" },
         { label: t("programsLink"), href: "/programs" },
-        { label: t("brandKit"), href: `${INFO_REPO}/Brand.md` },
+        { label: t("brandKit"), href: `${INFO_REPO_URL}/Brand.md` },
       ],
     },
     {
       title: t("contribute"),
       links: [
         { label: t("applyLink"), href: GSOC_APPLY_URL },
-        { label: t("contributing"), href: `${INFO_REPO}/Rules/Contribution.md` },
-        { label: t("communication"), href: `${INFO_REPO}/Rules/Communication.md` },
-        { label: t("aiPolicy"), href: `${INFO_REPO}/Rules/AI.md` },
-        { label: t("codeOfConduct"), href: `${INFO_REPO}/CODE_OF_CONDUCT.md` },
+        { label: t("contributing"), href: `${INFO_REPO_URL}/Rules/Contribution.md` },
+        { label: t("communication"), href: `${INFO_REPO_URL}/Rules/Communication.md` },
+        { label: t("aiPolicy"), href: `${INFO_REPO_URL}/Rules/AI.md` },
+        { label: t("codeOfConduct"), href: `${INFO_REPO_URL}/CODE_OF_CONDUCT.md` },
       ],
     },
+  ];
+
+  const legalLinks: FooterLink[] = [
+    { label: t("privacyLink"), href: LEGAL_DOCUMENTS.privacy.path },
+    { label: t("termsLink"), href: LEGAL_DOCUMENTS.terms.path },
   ];
 
   return (
@@ -192,15 +202,32 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* 4. Legal bar */}
-      <div className="px-4 sm:px-10 lg:px-14 py-5 border-t border-border flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-foreground-muted">
-        <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-4 gap-y-1 text-center md:text-left">
-          <span>{t("copyright")}</span>
-          <span>
-            {t("abnLabel")} <strong className="font-mono font-medium text-foreground-secondary">32 743 493 466</strong>
+      {/*
+        4. Legal bar. From xl up: [ABN | links | address], with equal side columns so the links stay
+        centred on the page (also in RTL). Below xl the three parts stack, each centred.
+      */}
+      <div className="px-4 sm:px-10 lg:px-14 py-5 border-t border-border flex flex-col items-center gap-3 xl:grid xl:grid-cols-[1fr_auto_1fr] xl:gap-x-8 text-xs text-foreground-muted">
+        <div className="flex flex-wrap items-center justify-center xl:justify-start xl:justify-self-start gap-x-4 gap-y-1 text-center xl:text-start">
+          {/* Never wraps: the organization name and its ABN read as one item */}
+          <span className="whitespace-nowrap">
+            © AOSSIE {t("abnLabel")} <strong className="font-mono font-medium text-foreground-secondary">32 743 493 466</strong>
           </span>
         </div>
-        <address className="not-italic text-center md:text-right">{t("addressText")}</address>
+        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-center">
+          {legalLinks.map((link) => (
+            <Link key={link.href} href={link.href} className={LEGAL_BAR_LINK}>
+              {link.label}
+            </Link>
+          ))}
+          {/* Kept together so the share button never wraps onto a line of its own */}
+          <span className="inline-flex items-center gap-x-4">
+            <Link href={SUPPORT_PAGE.path} className={LEGAL_BAR_LINK}>
+              <span aria-hidden>♥</span> {t("supportLink")}
+            </Link>
+            <SiteShareButton className={`inline-flex cursor-pointer items-center ${LEGAL_BAR_LINK}`} />
+          </span>
+        </div>
+        <address className="not-italic text-center xl:justify-self-end xl:text-end">{t("addressText")}</address>
       </div>
     </footer>
   );

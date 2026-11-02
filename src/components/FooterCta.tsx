@@ -4,10 +4,9 @@ import type { PointerEvent, ReactNode } from "react";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { PARTNER_MAILTO } from "@/lib/links";
+import { DISCORD_INVITE_URL, PARTNER_MAILTO } from "@/config/links";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
-const DISCORD_URL = "https://discord.gg/hjUhu33uAn";
 
 // Moves a card's spotlight with CSS variables only, so nothing re-renders
 function trackPointer(e: PointerEvent<HTMLElement>) {
@@ -156,7 +155,7 @@ export default function FooterCta() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5">
         <PathCard index="01" label={t("ctaContributeLabel")} description={t("ctaContributeText")} delay={0.08}>
-          <a href={DISCORD_URL} target="_blank" rel="noopener noreferrer" className={primaryClass}>
+          <a href={DISCORD_INVITE_URL} target="_blank" rel="noopener noreferrer" className={primaryClass}>
             <PrimaryContent label={t("ctaDiscord")} />
           </a>
           <Link href="/projects" className={secondaryClass}>

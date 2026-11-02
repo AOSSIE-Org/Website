@@ -12,7 +12,7 @@ import {
   type Project,
 } from '../lib/projectsData';
 import { REPO_STATS } from '../lib/repoStats';
-import { GSOC_APPLY_URL, PARTNER_MAILTO, CONTACT_EMAIL } from '../lib/links';
+import { GSOC_APPLY_URL, PARTNER_MAILTO, CONTACT_EMAIL } from '../config/links';
 
 const projects = getAllProjects();
 

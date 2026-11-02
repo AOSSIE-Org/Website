@@ -204,10 +204,35 @@
   "ThemeToggle": {
     "toggleTheme": "Cambiar tema"
   },
+  "PrivacyPage": {
+    "title": "Política de privacidad",
+    "subtitle": "Cómo trata tu información el sitio web de AOSSIE."
+  },
+  "TermsPage": {
+    "title": "Términos del servicio",
+    "subtitle": "Los términos de uso del sitio web de AOSSIE."
+  },
+  "SupportPage": {
+    "title": "Apoya a AOSSIE",
+    "subtitle": "Ayuda a que AOSSIE siga siendo libre y de código abierto.",
+    "supportedBy": "Con el apoyo de",
+    "organizationDescription": "AOSSIE es una organización australiana sin ánimo de lucro que apoya y reúne proyectos de código abierto."
+  },
+  "Legal": {
+    "englishOnly": "Este documento solo está disponible en inglés."
+  },
+  "Share": {
+    "trigger": "Compartir esta página",
+    "share": "Compartir",
+    "close": "Cerrar",
+    "copy": "Copiar",
+    "copied": "¡Copiado!",
+    "copyFailed": "Error",
+    "urlLabel": "URL para compartir"
+  },
   "Footer": {
     "description": "Innovación y Educación Australiana en Software de Código Abierto",
     "community": "Comunidad",
-    "copyright": "© Australian Open Source Software Innovation and Education (AOSSIE).",
     "abnLabel": "ABN:",
     "addressText": "Canberra, ACT, Australia",
     "aboutLink": "Sobre nosotros",
@@ -231,6 +256,9 @@
     "communication": "Normas de comunicación",
     "aiPolicy": "Política de uso de IA",
     "codeOfConduct": "Código de conducta",
-    "email": "Correo electrónico"
+    "email": "Correo electrónico",
+    "privacyLink": "Política de privacidad",
+    "termsLink": "Términos del servicio",
+    "supportLink": "Apóyanos"
   }
 }

@@ -204,10 +204,35 @@
   "ThemeToggle": {
     "toggleTheme": "থিম পরিবর্তন করুন"
   },
+  "PrivacyPage": {
+    "title": "গোপনীয়তা নীতি",
+    "subtitle": "AOSSIE ওয়েবসাইট কীভাবে আপনার তথ্য পরিচালনা করে।"
+  },
+  "TermsPage": {
+    "title": "পরিষেবার শর্তাবলি",
+    "subtitle": "AOSSIE ওয়েবসাইট ব্যবহারের শর্তাবলি।"
+  },
+  "SupportPage": {
+    "title": "AOSSIE-কে সহায়তা করুন",
+    "subtitle": "AOSSIE-কে মুক্ত ও ওপেন-সোর্স রাখতে সাহায্য করুন।",
+    "supportedBy": "সহায়তায়",
+    "organizationDescription": "AOSSIE একটি অস্ট্রেলীয় অলাভজনক প্রতিষ্ঠান, যা ওপেন-সোর্স প্রকল্পগুলোকে সহায়তা করে এবং একত্রিত করে।"
+  },
+  "Legal": {
+    "englishOnly": "এই নথিটি শুধুমাত্র ইংরেজিতে উপলব্ধ।"
+  },
+  "Share": {
+    "trigger": "এই পেজটি শেয়ার করুন",
+    "share": "শেয়ার করুন",
+    "close": "বন্ধ করুন",
+    "copy": "কপি করুন",
+    "copied": "কপি হয়েছে!",
+    "copyFailed": "ব্যর্থ",
+    "urlLabel": "শেয়ার করার URL"
+  },
   "Footer": {
     "description": "অস্ট্রেলিয়ান ওপেন সোর্স সফটওয়্যার উদ্ভাবন ও শিক্ষা",
     "community": "কমিউনিটি",
-    "copyright": "© অস্ট্রেলিয়ান ওপেন সোর্স সফটওয়্যার উদ্ভাবন ও শিক্ষা (AOSSIE)।",
     "abnLabel": "ABN:",
     "addressText": "ক্যানবেরা, ACT, অস্ট্রেলিয়া",
     "aboutLink": "আমাদের সম্পর্কে",
@@ -231,6 +256,9 @@
     "communication": "যোগাযোগের নিয়মাবলি",
     "aiPolicy": "AI ব্যবহারের নীতি",
     "codeOfConduct": "আচরণবিধি",
-    "email": "ইমেল"
+    "email": "ইমেল",
+    "privacyLink": "গোপনীয়তা নীতি",
+    "termsLink": "পরিষেবার শর্তাবলি",
+    "supportLink": "আমাদের সহায়তা করুন"
   }
 }

@@ -204,10 +204,35 @@
   "ThemeToggle": {
     "toggleTheme": "Badilisha mandhari"
   },
+  "PrivacyPage": {
+    "title": "Sera ya Faragha",
+    "subtitle": "Jinsi tovuti ya AOSSIE inavyoshughulikia taarifa zako."
+  },
+  "TermsPage": {
+    "title": "Masharti ya Huduma",
+    "subtitle": "Masharti ya kutumia tovuti ya AOSSIE."
+  },
+  "SupportPage": {
+    "title": "Iunge mkono AOSSIE",
+    "subtitle": "Saidia AOSSIE iendelee kuwa huria na ya bure.",
+    "supportedBy": "Inaungwa mkono na",
+    "organizationDescription": "AOSSIE ni shirika lisilo la kibiashara la Australia linalounga mkono na kuunganisha miradi ya programu huria."
+  },
+  "Legal": {
+    "englishOnly": "Hati hii inapatikana kwa Kiingereza pekee."
+  },
+  "Share": {
+    "trigger": "Shiriki ukurasa huu",
+    "share": "Shiriki",
+    "close": "Funga",
+    "copy": "Nakili",
+    "copied": "Imenakiliwa!",
+    "copyFailed": "Imeshindikana",
+    "urlLabel": "URL ya kushiriki"
+  },
   "Footer": {
     "description": "Ubunifu na Elimu ya Programu Huria ya Australia",
     "community": "Jumuiya",
-    "copyright": "© Ubunifu na Elimu ya Programu Huria ya Australia (AOSSIE).",
     "abnLabel": "ABN:",
     "addressText": "Canberra, ACT, Australia",
     "aboutLink": "Kuhusu Sisi",
@@ -231,6 +256,9 @@
     "communication": "Kanuni za mawasiliano",
     "aiPolicy": "Sera ya matumizi ya AI",
     "codeOfConduct": "Kanuni za Maadili",
-    "email": "Barua pepe"
+    "email": "Barua pepe",
+    "privacyLink": "Sera ya Faragha",
+    "termsLink": "Masharti ya Huduma",
+    "supportLink": "Tuunge mkono"
   }
 }

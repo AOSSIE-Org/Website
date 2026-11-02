@@ -8,6 +8,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Sponsors from "@/components/Sponsors";
 import Footer from "@/components/Footer";
+import { SITE_URL } from "@/config/site";
 
 function ProjectsSkeleton() {
   return (
@@ -61,8 +62,8 @@ export default function Home({
     "publisher": {
       "@type": "Organization",
       "name": "AOSSIE",
-      "url": "https://aossie.org",
-      "logo": "https://aossie.org/brand/icons/aossie_logo.svg",
+      "url": SITE_URL,
+      "logo": `${SITE_URL}/brand/icons/aossie_logo.svg`,
     },
     "inLanguage": locale,
   };

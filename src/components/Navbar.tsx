@@ -6,6 +6,7 @@ import { Link, useRouter, usePathname } from "@/i18n/navigation";
 import { useTheme } from "next-themes";
 import { useEffect, useState, useRef, useSyncExternalStore } from "react";
 import { languages } from "@/config/languages";
+import { GITHUB_ORG_URL } from "@/config/links";
 import { motion } from "framer-motion";
 
 const emptySubscribe = () => () => {};
@@ -126,7 +127,7 @@ export default function Navbar() {
             );
           })}
           <a
-            href="https://github.com/AOSSIE-Org"
+            href={GITHUB_ORG_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="px-3.5 py-1.5 hover:text-foreground transition-colors inline-flex items-center gap-1 group"
@@ -263,7 +264,7 @@ export default function Navbar() {
               );
             })}
             <a
-              href="https://github.com/AOSSIE-Org"
+              href={GITHUB_ORG_URL}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsMobileMenuOpen(false)}

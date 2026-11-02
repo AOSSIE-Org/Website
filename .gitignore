@@ -367,3 +367,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# unremediated security review reports (never commit)
+unremediated-security-reviews/
