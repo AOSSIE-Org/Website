@@ -1,6 +1,7 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
+import { useTheme } from 'next-themes';
 import ThemeToggle from '@/components/ThemeToggle';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import ProjectLogo from '@/components/ProjectLogo';
@@ -100,6 +101,31 @@ describe('ThemeProvider', () => {
     expect(screen.getByText('content')).toBeInTheDocument();
     // jsdom reports a light system preference
     expect(document.documentElement).toHaveClass('light');
+  });
+
+  it('switches theme colours with transitions disabled (disableTransitionOnChange)', async () => {
+    function SwitchToDark() {
+      const { setTheme } = useTheme();
+      return <button type="button" onClick={() => setTheme('dark')}>dark</button>;
+    }
+    render(
+      <ThemeProvider>
+        <SwitchToDark />
+      </ThemeProvider>,
+    );
+    await act(async () => {});
+    const appendChild = vi.spyOn(document.head, 'appendChild');
+    try {
+      await act(async () => {
+        fireEvent.click(screen.getByRole('button', { name: 'dark' }));
+      });
+      // next-themes adds a short-lived `transition:none` style while it swaps the theme class
+      const added = appendChild.mock.calls.map(([node]) => node.textContent ?? '');
+      expect(added.some((css) => css.includes('transition:none'))).toBe(true);
+      expect(document.documentElement).toHaveClass('dark');
+    } finally {
+      appendChild.mockRestore();
+    }
   });
 
   it('accepts overrides such as a forced theme', async () => {
