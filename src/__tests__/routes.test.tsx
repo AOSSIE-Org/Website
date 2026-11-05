@@ -64,6 +64,7 @@ describe('Locale root layout', () => {
     // The theme is applied from <head>, before <body> exists, so the first paint is never the wrong theme
     const [head, body] = html.props.children;
     expect(head.type).toBe('head');
+    expect(head.props.children.type).toBe('script');
     expect(head.props.children.props.dangerouslySetInnerHTML.__html).toBe(themeInitScript);
 
     // The body provides that locale's messages, the theme and smooth scrolling to the page

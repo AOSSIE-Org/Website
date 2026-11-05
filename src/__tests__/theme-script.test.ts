@@ -47,11 +47,12 @@ describe('theme head script', () => {
     expect(root.getAttribute('style')).toBeNull();
   });
 
-  it('does not throw when storage is blocked', () => {
+  it('falls back to the default (system) theme when storage is blocked', () => {
     vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
       throw new Error('blocked');
     });
-    expect(() => run({})).not.toThrow();
-    expect(root.className).toBe('');
+    expect(() => run({ systemDark: true })).not.toThrow();
+    expect(root.className).toBe('dark');
+    expect(root.style.colorScheme).toBe('dark');
   });
 });

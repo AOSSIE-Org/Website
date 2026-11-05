@@ -10,9 +10,8 @@ export const DEFAULT_THEME = "system";
  * body in the wrong theme before that script arrives, which flashes white on
  * every load in dark mode. Running it in `<head>` means the first paint
  * already has the right theme. next-themes still takes over after hydration.
+ * If localStorage is blocked, the default theme applies.
  */
-export const themeInitScript = `(function(){try{var d=document.documentElement,t=localStorage.getItem(${JSON.stringify(
+export const themeInitScript = `(function(){var d=document.documentElement,t;try{t=localStorage.getItem(${JSON.stringify(
   THEME_STORAGE_KEY,
-)})||${JSON.stringify(
-  DEFAULT_THEME,
-)};if(t==="system")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";if(t!=="light"&&t!=="dark")return;d.classList.remove("light","dark");d.classList.add(t);d.style.colorScheme=t}catch(e){}})()`;
+)})}catch(e){}t=t||${JSON.stringify(DEFAULT_THEME)};try{if(t==="system")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";if(t!=="light"&&t!=="dark")return;d.classList.remove("light","dark");d.classList.add(t);d.style.colorScheme=t}catch(e){}})()`;
