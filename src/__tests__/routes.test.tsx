@@ -25,6 +25,7 @@ import { GITHUB_SPONSORS_URL, GSOC_URL, STABILITY_NEXUS_URL } from '@/config/lin
 import { SUPPORTERS } from '@/config/support';
 import { messages, renderWithIntl } from './test-utils/render';
 import { notFound } from './test-utils/next-navigation';
+import { themeInitScript } from '@/components/providers/theme-script';
 
 const params = (locale: string) => ({ params: Promise.resolve({ locale }) });
 const codes = languages.map((l) => l.code);
@@ -50,7 +51,7 @@ describe('Locale root layout', () => {
       lang: string;
       dir: string;
       className: string;
-      children: ReactElement<{ children: ReactNode }>;
+      children: [ReactElement<{ children: ReactElement<{ dangerouslySetInnerHTML: { __html: string } }> }>, ReactElement<{ children: ReactNode }>];
     }>;
     expect(html.type).toBe('html');
     expect(html.props.lang).toBe(locale);
@@ -60,8 +61,13 @@ describe('Locale root layout', () => {
     }
     expect(setRequestLocale).toHaveBeenCalledWith(locale);
 
+    // The theme is applied from <head>, before <body> exists, so the first paint is never the wrong theme
+    const [head, body] = html.props.children;
+    expect(head.type).toBe('head');
+    expect(head.props.children.type).toBe('script');
+    expect(head.props.children.props.dangerouslySetInnerHTML.__html).toBe(themeInitScript);
+
     // The body provides that locale's messages, the theme and smooth scrolling to the page
-    const body = html.props.children;
     expect(body.type).toBe('body');
     render(<>{body.props.children}</>);
     expect(screen.getByTestId('probe')).toHaveTextContent(MESSAGES[locale as keyof typeof MESSAGES].Navbar.home);
