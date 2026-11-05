@@ -8,6 +8,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "@/i18n/messages";
 import { getLanguage } from "@/config/languages";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { themeInitScript } from "@/components/providers/theme-script";
 import { LenisProvider } from "@/components/providers/lenis-provider";
 import "./globals.css";
 
@@ -88,6 +89,10 @@ export default async function RootLayout({
       className={`${inter.variable} ${devanagari.variable} ${bengali.variable} ${arabic.variable} h-full antialiased`}
       suppressHydrationWarning
     >
+      <head>
+        {/* Sets the theme class before <body> is parsed, so the first paint is never the wrong theme */}
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="min-h-full flex flex-col bg-background text-foreground" suppressHydrationWarning>
         <NextIntlClientProvider locale={locale} messages={messages} timeZone="UTC">
           <ThemeProvider>
