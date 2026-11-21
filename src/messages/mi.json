@@ -260,5 +260,8 @@
     "privacyLink": "Kaupapa Here Tūmataiti",
     "termsLink": "Ngā Ture Ratonga",
     "supportLink": "Tautokohia mātou"
+  },
+  "ScrollToTop": {
+    "label": "Scroll to top"
   }
 }

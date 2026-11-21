@@ -260,5 +260,8 @@
     "privacyLink": "গোপনীয়তা নীতি",
     "termsLink": "পরিষেবার শর্তাবলি",
     "supportLink": "আমাদের সহায়তা করুন"
+  },
+  "ScrollToTop": {
+    "label": "Scroll to top"
   }
 }
