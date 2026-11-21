@@ -260,5 +260,8 @@
     "privacyLink": "隐私政策",
     "termsLink": "服务条款",
     "supportLink": "支持我们"
+  },
+  "ScrollToTop": {
+    "label": "回到顶部"
   }
 }

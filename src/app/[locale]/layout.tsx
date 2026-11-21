@@ -9,6 +9,7 @@ import { getMessages } from "@/i18n/messages";
 import { getLanguage } from "@/config/languages";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { LenisProvider } from "@/components/providers/lenis-provider";
+import ScrollToTop from "@/components/ScrollToTop";
 import "./globals.css";
 
 // Latin extended covers Hausa and te reo Māori; Cyrillic covers Russian.
@@ -93,6 +94,7 @@ export default async function RootLayout({
           <ThemeProvider>
             <LenisProvider>
               {children}
+              <ScrollToTop />
             </LenisProvider>
           </ThemeProvider>
         </NextIntlClientProvider>

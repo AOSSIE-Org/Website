@@ -260,5 +260,8 @@
     "privacyLink": "गोपनीयता नीति",
     "termsLink": "सेवा की शर्तें",
     "supportLink": "समर्थन करें"
+  },
+  "ScrollToTop": {
+    "label": "ऊपर जाएँ"
   }
 }

@@ -260,5 +260,8 @@
     "privacyLink": "Política de Privacidade",
     "termsLink": "Termos de Serviço",
     "supportLink": "Apoie-nos"
+  },
+  "ScrollToTop": {
+    "label": "Voltar ao topo"
   }
 }
