@@ -1,12 +1,14 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { useLenis } from "lenis/react";
 import { useEffect, useState } from "react";
 
 const VISIBILITY_THRESHOLD = 350;
 
 export default function ScrollToTop() {
   const t = useTranslations("ScrollToTop");
+  const lenis = useLenis();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -18,6 +20,10 @@ export default function ScrollToTop() {
 
   const scrollToTop = () => {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (lenis && !reducedMotion) {
+      lenis.scrollTo(0);
+      return;
+    }
     window.scrollTo({ top: 0, behavior: reducedMotion ? "auto" : "smooth" });
   };
 
@@ -29,7 +35,7 @@ export default function ScrollToTop() {
       onClick={scrollToTop}
       aria-label={t("label")}
       title={t("label")}
-      className="fixed bottom-6 right-6 z-50 flex h-11 w-11 items-center justify-center rounded-full border border-border-default bg-background-secondary text-foreground-primary shadow-lg transition-colors hover:bg-background-primary focus:outline-none focus:ring-2 focus:ring-foreground-primary cursor-pointer"
+      className="fixed bottom-6 right-6 z-50 flex h-11 w-11 items-center justify-center rounded-full border border-default bg-background-secondary text-foreground shadow-lg hover:bg-background focus:outline-none focus:ring-2 focus:ring-foreground cursor-pointer"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
